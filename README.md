@@ -31,3 +31,62 @@ Anyone who wants to provide a service related to agriculture to another user can
 
 - Can remove a user،
 - can delete, add and edit any post or comment.
+
+<a name="wireframe"></a>
+
+## Wireframes:
+
+
+
+<a name="comp"></a>
+
+## Components:
+* Login         
+* Register        
+* Forget        
+* Reset         
+* Home          
+* Profile      
+* Problems and solutions  
+* Products    
+* Cart
+* Tips
+
+<a name="frontRoutes"></a>
+
+## Routes:
+Component     |     Path               |  Permissions
+------------- | ---------------        | ------------
+Login         | `/`                    | User
+Register        | `/register`              | Guest
+Forget        | `/forgetPass`      | User
+Reset         | `/resetpass`       | User
+Home          | `/home`                | Guest  
+Profile       | `/profile`             | User
+Problems   | `/problems`         | Guest 
+Products     | `/products`               | Guest
+Cart   | `/cart`         | User
+Tips          | `/tips`       | Guest
+
+<a name="frontUml"></a>
+
+## UML diagrm:
+![Untitled Diagram drawio(2)](https://user-images.githubusercontent.com/92247904/146694914-c4fd609d-3843-4d05-ad3f-b1e67da7a4b3.png)
+
+## dependencies
+- axios
+- react-redux
+- react-icons
+- @mui/material
+
+<a name="slid"></a>
+
+
+## for more information
+- [ Slides. ](#slid) 
+- [ Frontend Deployed Link. ](#slid)
+- [ Backend Deployed Link. ](#slid)
+- [ Backend Repo ]()
+- [ Trello ]()
+
+
