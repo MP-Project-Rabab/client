@@ -88,6 +88,6 @@ Tips          | `/tips`       | Guest
 - [ Frontend Deployed Link. ](#slid)
 - [ Backend Deployed Link. ](#slid)
 - [ Backend Repo ](https://github.com/MP-Project-Rabab/server)
-- [ Trello ]()
+- [ Trello ](https://trello.com/b/6MWA3WsS/frontend)
 
 
