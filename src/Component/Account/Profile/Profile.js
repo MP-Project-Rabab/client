@@ -1,8 +1,6 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
-import { useDispatch, useSelector } from "react-redux";
-import Nav from "../../Header/Nav";
-import Header from "../../Header/Header";
+import { useSelector } from "react-redux";
 // import { logIn } from "../../../reducers/login";
 import "./style.css";
 
@@ -36,8 +34,6 @@ const Profile = () => {
   console.log(userInfo);
   return (
     <>
-    <Header />
-      <Nav />
       <img src={userInfo.avatar} alt="" className="avatar" />
       <h1>user name: </h1>
       <h2>{userInfo.userName}</h2>
