@@ -1,16 +1,25 @@
-.nav nav {
+.header header {
     display: flex;
     justify-content: space-around;
     align-items: center;
     background: #69bac0;
-    width: 100%;
+    width: 100vw;
     height: 4rem;
     padding: 10px;
-}
-
-
-a {
+  }
+  
+  a {
     text-decoration: none;
     color: white;
     font-size: 30px;
-}
+  }
+  
+  .avatar {
+    cursor: pointer;
+  }
+  
+  .cart {
+    font-size: 1.7rem;
+    cursor: pointer;
+  }
+  
