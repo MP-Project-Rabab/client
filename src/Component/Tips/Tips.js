@@ -67,8 +67,8 @@ const Tips = () => {
       const result = await axios.put(
         `${process.env.REACT_APP_BASE_URL}/posts/update`,
         {
-            title: tip.title,
-            _id: id
+          title: tip.title,
+          _id: id,
         },
         {
           headers: {
@@ -78,14 +78,13 @@ const Tips = () => {
       );
 
       dispatch(UpdatePost(result.data));
-     
     } catch (error) {
       console.log(error);
     }
     allTip();
   };
 
-// Delete Tip function
+  // Delete Tip function
   const deleteTip = async (id) => {
     try {
       const result = await axios.delete(
@@ -100,7 +99,6 @@ const Tips = () => {
       );
 
       dispatch(delPost(result.data));
-     
     } catch (error) {
       console.log(error);
     }
