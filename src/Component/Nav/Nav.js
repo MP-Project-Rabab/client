@@ -1,13 +1,12 @@
 import React, { useState, useEffect } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { ImHome } from "react-icons/im";
-// import {Avatar , AvatarGroup} from 'rsuite';
 import Avatar from "@mui/material/Avatar";
 import "./style.css";
 
 const Nav = () => {
   const [isLog, setIsLog] = useState();
-  const [user, setUser] = useState();
+  const [user, setUser] = useState("");
   const navigate = useNavigate();
   useEffect(() => {
     let userid = localStorage.getItem("id");
@@ -24,11 +23,12 @@ const Nav = () => {
     localStorage.clear();
     navigate("/");
   };
+  console.log(user);
   return (
     <div className="nav">
       {user ? (
         <nav>
-          <Link to="/posts" onClick={() =>  navigate("/posts")}>
+          <Link to="/" onClick={() =>  navigate("/")}>
             <ImHome />
           </Link>
           <Link to="/" onClick={logOut}>
