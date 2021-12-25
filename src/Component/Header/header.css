@@ -1,0 +1,25 @@
+.header header {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    background: #69bac0;
+    
+    height: 4rem;
+    padding: 10px;
+  }
+  
+  a {
+    text-decoration: none;
+    color: white;
+    font-size: 30px;
+  }
+  
+  .avatar {
+    cursor: pointer;
+  }
+  
+  .cart {
+    font-size: 1.7rem;
+    cursor: pointer;
+  }
+  

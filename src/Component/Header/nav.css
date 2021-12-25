@@ -1,0 +1,14 @@
+.nav {
+display: inline-block;
+background: rgb(228, 179, 179);
+width: 100%;
+
+
+}
+
+
+.nav a {
+    color: black;
+    margin: 10px;
+    font-size: medium;
+}

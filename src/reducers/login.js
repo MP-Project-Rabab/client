@@ -1,5 +1,5 @@
 const initialState = {
-    user: null,
+    user: {},
     token: "",
   };
   
@@ -10,7 +10,7 @@ const initialState = {
         const { user, token } = payload;
         localStorage.setItem("token", token);
         localStorage.setItem("id", user._id);
-        console.log(user);
+      console.log(token);
         return { user, token };
       case "LOGOUT":
         localStorage.clear();
@@ -18,7 +18,7 @@ const initialState = {
       default:
         let getToken = localStorage.getItem("token");
         let getId = localStorage.getItem("id");
-        if (getToken) return { token: getToken, id: getId };
+        if (getToken) return { token: getToken, id: getId, };
         else return state;
        
     }
