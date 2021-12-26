@@ -32,10 +32,11 @@ const NotApproved = () => {
     }
   };
 
-  const approved = async () => {
+  const approved = async (id) => {
     try {
       const result = await axios.put(
         `${process.env.REACT_APP_BASE_URL}/products/approved`,
+        {isApproved: true, _id: id},
 
         {
           headers: {
