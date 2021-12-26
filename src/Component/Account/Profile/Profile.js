@@ -35,7 +35,7 @@ const Profile = () => {
   return (
     <>
       <img src={userInfo.avatar} alt="" className="avatar" />
-      <h1>user name: </h1>
+      <h1>اسم المستخدم: </h1>
       <h2>{userInfo.userName}</h2>
     </>
   );

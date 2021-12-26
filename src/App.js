@@ -12,6 +12,7 @@ import Nav from './Component/Header/Nav';
 import Header from './Component/Header/Header';
 import Products from './Component/Products/Products';
 import Problems from './Component/Probs&solution/Problems';
+import User from './Component/Account/User/User';
 
 function App() {
   return (
@@ -28,6 +29,7 @@ function App() {
         <Route exact path="/tips" element={<Tips />} />
         <Route exact path="/products" element={<Products />} />
         <Route exact path="/problems" element={<Problems />} />
+        <Route exact path="/users" element={<User />} />
       </Routes>
     </div>
   );

@@ -1,0 +1,15 @@
+.users {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-evenly;
+}
+
+.user-card {
+  width: 10rem;
+  border: 2px solid;
+}
+
+.user-card img {
+  width: 130px;
+  border-radius: 66px;
+}

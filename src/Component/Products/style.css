@@ -1,0 +1,14 @@
+.products {
+  padding: 30px;
+}
+
+.products-card {
+  width: fit-content;
+  height: fit-content;
+  border: 2px solid black;
+}
+
+.products-card img {
+  width: 27rem;
+  height: 28rem;
+}
