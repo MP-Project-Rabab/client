@@ -36,6 +36,7 @@ const Header = () => {
             تسجيل الخروج
           </Link>
           <Link to="/users">Users</Link>
+          <Link to="/approve">approve</Link>
           <Avatar
             className="avatar"
             alt="avatar"
