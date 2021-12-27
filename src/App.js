@@ -13,7 +13,8 @@ import Header from "./Component/Header/Header";
 import Products from "./Component/Products/Products";
 import Problems from "./Component/Probs&solution/Problems";
 import User from "./Component/Account/User/User";
-import NotApproved from "./Component/notApproved/NotApproved"
+import NotApproved from "./Component/notApproved/NotApproved";
+import NoApproved from "./Component/Posts/NoApproved";
 
 function App() {
   return (
@@ -31,7 +32,8 @@ function App() {
         <Route exact path="/products" element={<Products />} />
         <Route exact path="/problems" element={<Problems />} />
         <Route exact path="/users" element={<User />} />
-        <Route exact path="/approve" element={<NotApproved />} />
+        <Route exact path="/productsApprove" element={<NotApproved />} />
+        <Route exact path="/postsApprove" element={<NoApproved />} />
       </Routes>
     </div>
   );

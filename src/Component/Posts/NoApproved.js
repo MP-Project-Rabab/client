@@ -1,23 +1,21 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
 import { useSelector } from "react-redux";
-import "./style.css";
 
-const NotApproved = () => {
+const NoApproved = () => {
   useEffect(() => {
-    allNonApproved();
+    postNotApproved();
   }, []);
   const [approve, setApprove] = useState({});
 
   const state = useSelector((state) => {
     return state;
   });
-
-  // Get All Products Is not Approvedfunction
-  const allNonApproved = async () => {
+  //  Get All Posts Is not Approved function
+  const postNotApproved = async () => {
     try {
       const result = await axios.get(
-        `${process.env.REACT_APP_BASE_URL}/products/notAprove`,
+        `${process.env.REACT_APP_BASE_URL}/posts/notAprove`,
 
         {
           headers: {
@@ -31,11 +29,12 @@ const NotApproved = () => {
       console.log(error);
     }
   };
-  // Approved All Products function
-  const approved = async (id) => {
+
+  // Approved All Posts function
+  const postApprove = async (id) => {
     try {
       const result = await axios.put(
-        `${process.env.REACT_APP_BASE_URL}/products/approved`,
+        `${process.env.REACT_APP_BASE_URL}/posts/approved`,
         { isApproved: true, _id: id },
 
         {
@@ -48,20 +47,18 @@ const NotApproved = () => {
     } catch (error) {
       console.log(error);
     }
-    allNonApproved();
+    postNotApproved();
   };
-
   return (
-    <div className="users">
+    <div>
       <h1>Approved</h1>
       {approve.length &&
         approve.map((item) => {
           return (
             <div key={approve._id} className="user-card">
               <img src={item.img} alt="" />
-              <h2>{item.name}</h2>
               <h2>{item.title}</h2>
-              <button onClick={() => approved(item._id)}>يعتمد</button>
+              <button onClick={() => postApprove(item._id)}>يعتمد</button>
             </div>
           );
         })}
@@ -69,4 +66,4 @@ const NotApproved = () => {
   );
 };
 
-export default NotApproved;
+export default NoApproved;
