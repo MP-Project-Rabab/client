@@ -13,7 +13,7 @@ import Header from "./Component/Header/Header";
 import Products from "./Component/Products/Products";
 import Problems from "./Component/Probs&solution/Problems";
 import User from "./Component/Account/User/User";
-import NotApproved from "./Component/notApproved/NotApproved";
+import NotApproved from "./Component/notApproved/notApproved";
 import NoApproved from "./Component/Posts/NoApproved";
 
 function App() {

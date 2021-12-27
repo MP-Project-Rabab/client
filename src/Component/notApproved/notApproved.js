@@ -4,10 +4,10 @@ import { useSelector } from "react-redux";
 import "./style.css";
 
 const NotApproved = () => {
+  const [approve, setApprove] = useState({});
   useEffect(() => {
     allNonApproved();
   }, []);
-  const [approve, setApprove] = useState({});
 
   const state = useSelector((state) => {
     return state;
@@ -57,10 +57,10 @@ const NotApproved = () => {
       {approve.length &&
         approve.map((item) => {
           return (
-            <div key={approve._id} className="user-card">
+            <div key={approve._id} className="products-card">
               <img src={item.img} alt="" />
               <h2>{item.name}</h2>
-              <h2>{item.title}</h2>
+              <h4>{item.price}</h4>
               <button onClick={() => approved(item._id)}>يعتمد</button>
             </div>
           );

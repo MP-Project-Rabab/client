@@ -1,14 +1,35 @@
 .products {
   padding: 30px;
+  display: grid;
+  grid-template-columns: auto auto auto;
 }
 
 .products-card {
   width: fit-content;
   height: fit-content;
-  border: 2px solid black;
+  box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+  padding: 5px;
+  border-radius: 12px;
 }
 
 .products-card img {
-  width: 27rem;
-  height: 28rem;
+ 
+  height: 17rem;
+}
+
+
+.products-card h2 {
+font-size: 13px;
+font-weight: bold;
+word-wrap: break-word;
+
+}
+
+
+.add {
+  font-size: 3.5rem;
+  position: fixed;
+  left: 3%;
+  top: 77%;
+  cursor: pointer;
 }

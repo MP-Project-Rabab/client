@@ -45,7 +45,7 @@ const Header = () => {
             sx={{ width: 56, height: 56 }}
             onClick={() => navigate("/profile")}
           />
-          <BsCart4 className="cart" />
+          <BsCart4 className="cart" onClick={() => navigate("/cart")}/>
         </header>
       ) : (
         <header>
