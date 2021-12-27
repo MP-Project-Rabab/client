@@ -1,12 +1,13 @@
-import React, { useState, useEffect }  from 'react';
+import React, { useState, useEffect } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { ImHome } from "react-icons/im";
 import Avatar from "@mui/material/Avatar";
 import { BsCart4 } from "react-icons/bs";
 import "./header.css";
 const Header = () => {
-    const [isLog, setIsLog] = useState();
+  const [isLog, setIsLog] = useState();
   const [user, setUser] = useState("");
+
   const navigate = useNavigate();
   useEffect(() => {
     let userid = localStorage.getItem("id");
@@ -21,11 +22,11 @@ const Header = () => {
 
   const logOut = () => {
     localStorage.clear();
-    navigate("/");
+    navigate("/login");
   };
-    return (
-        <div className='header'>
-            {user ? (
+  return (
+    <div className="header">
+      {isLog ? (
         <header>
           <h1 className="logo">logo</h1>
           <Link to="/" onClick={() => navigate("/")}>
@@ -34,6 +35,9 @@ const Header = () => {
           <Link to="/" onClick={logOut}>
             تسجيل الخروج
           </Link>
+          <Link to="/users">Users</Link>
+          <Link to="/productsApprove">productsApprove</Link>
+          <Link to="/postsApprove">postsApprove</Link>
           <Avatar
             className="avatar"
             alt="avatar"
@@ -45,13 +49,16 @@ const Header = () => {
         </header>
       ) : (
         <header>
-           <h1 className="logo">logo</h1>
+          <h1 className="logo">logo</h1>
           <Link to="/register">تسجيل جديد؟</Link>
           <Link to="/login">تسجيل الدخول</Link>
+          <Link to="/" onClick={() => navigate("/")}>
+            <ImHome />
+          </Link>
         </header>
-      )} 
-        </div>
-    )
-}
+      )}
+    </div>
+  );
+};
 
-export default Header
+export default Header;

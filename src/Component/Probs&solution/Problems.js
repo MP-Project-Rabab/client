@@ -119,7 +119,9 @@ const Problems = () => {
                   type="text"
                   name=""
                   id=""
-                  onChange={(ev) => setProblem({ ...problem, title: ev.target.value })}
+                  onChange={(ev) =>
+                    setProblem({ ...problem, title: ev.target.value })
+                  }
                 />
                 <button onClick={() => update(info._id)}>Update</button>
               </h2>

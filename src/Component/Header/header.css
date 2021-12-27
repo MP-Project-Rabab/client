@@ -2,7 +2,7 @@
     display: flex;
     justify-content: space-around;
     align-items: center;
-    background: #69bac0;
+    background: #ffee00;
     
     height: 4rem;
     padding: 10px;
@@ -10,7 +10,7 @@
   
   a {
     text-decoration: none;
-    color: white;
+    color: black;
     font-size: 30px;
   }
   
