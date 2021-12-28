@@ -33,3 +33,7 @@ word-wrap: break-word;
   top: 77%;
   cursor: pointer;
 }
+
+.rate {
+  direction: ltr;
+}

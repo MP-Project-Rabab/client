@@ -1,12 +1,18 @@
 import React, { useState, useEffect } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { ImHome } from "react-icons/im";
-import Avatar from "@mui/material/Avatar";
+import { Avatar, Badge, IconButton, Collapse, Box } from "@mui/material/";
 import { BsCart4 } from "react-icons/bs";
+import { useDispatch, useSelector } from "react-redux";
+import { FaEllipsisV } from "react-icons/fa";
 import "./header.css";
 const Header = () => {
+  const state = useSelector((state) => {
+    return state;
+  });
   const [isLog, setIsLog] = useState();
   const [user, setUser] = useState("");
+  const [open, setOpen] = useState(false);
 
   const navigate = useNavigate();
   useEffect(() => {
@@ -24,6 +30,7 @@ const Header = () => {
     localStorage.clear();
     navigate("/login");
   };
+  console.log(state);
   return (
     <div className="header">
       {isLog ? (
@@ -32,12 +39,16 @@ const Header = () => {
           <Link to="/" onClick={() => navigate("/")}>
             <ImHome />
           </Link>
-          <Link to="/" onClick={logOut}>
-            تسجيل الخروج
-          </Link>
-          <Link to="/users">Users</Link>
-          <Link to="/productsApprove">productsApprove</Link>
-          <Link to="/postsApprove">postsApprove</Link>
+          <Collapse in={open} timeout="auto" unmountOnExit>
+            <Box>
+              <Link to="/users">Users</Link>
+              <Link to="/productsApprove">productsApprove</Link>
+              <Link to="/postsApprove">postsApprove</Link>
+            </Box>
+          </Collapse>
+          <IconButton onClick={() => setOpen(!open)}>
+            <FaEllipsisV />
+          </IconButton>
           <Avatar
             className="avatar"
             alt="avatar"
@@ -45,7 +56,12 @@ const Header = () => {
             sx={{ width: 56, height: 56 }}
             onClick={() => navigate("/profile")}
           />
-          <BsCart4 className="cart" onClick={() => navigate("/cart")}/>
+          <Badge badgeContent={1} color="success">
+            <BsCart4 className="cart" onClick={() => navigate("/cart")} />
+          </Badge>
+          <Link to="/" onClick={logOut}>
+            تسجيل الخروج
+          </Link>
         </header>
       ) : (
         <header>

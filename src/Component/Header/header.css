@@ -1,25 +1,22 @@
 .header header {
-    display: flex;
-    justify-content: space-around;
-    align-items: center;
-    background: #ffee00;
-    
-    height: 4rem;
-    padding: 10px;
-  }
-  
-  a {
-    text-decoration: none;
-    color: black;
-    font-size: 30px;
-  }
-  
-  .avatar {
-    cursor: pointer;
-  }
-  
-  .cart {
-    font-size: 1.7rem;
-    cursor: pointer;
-  }
-  
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  height: 4rem;
+  padding: 10px;
+}
+
+a {
+  text-decoration: none;
+  color: black;
+  font-size: 30px;
+}
+
+.avatar {
+  cursor: pointer;
+}
+
+.cart {
+  font-size: 1.7rem;
+  cursor: pointer;
+}

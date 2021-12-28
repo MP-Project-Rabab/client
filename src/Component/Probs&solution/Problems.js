@@ -2,6 +2,15 @@ import React, { useEffect, useState } from "react";
 import axios from "axios";
 import { useDispatch, useSelector } from "react-redux";
 import { getPost, newPost, UpdatePost, delPost } from "../../reducers/post";
+import {
+  TextField,
+  Button,
+  DialogContent,
+  DialogActions,
+  Dialog,
+} from "@mui/material";
+import { BsPatchPlus } from "react-icons/bs";
+
 import "./style.css";
 
 const Problems = () => {
@@ -130,20 +139,27 @@ const Problems = () => {
             </div>
           );
         })}
-      <input
+
+      <TextField
+        margin="dense"
+        id="name"
+        name="name"
+        label="عنوان المشكلة:"
         type="text"
-        name=""
-        id=""
+        variant="standard"
+        // value={product.name}
         onChange={(ev) => setProblem({ ...problem, title: ev.target.value })}
       />
-      <textarea
-        name=""
-        id=""
-        cols="30"
-        rows="10"
+
+      <TextField
+        id="standard-textarea"
+        label="اكتب مشكلتك هنا:"
+        placeholder="Placeholder"
+        multiline
+        variant="standard"
         onChange={(ev) => setProblem({ ...problem, desc: ev.target.value })}
-      ></textarea>
-      <button onClick={newProblem}>Add</button>
+      />
+      <Button onClick={newProblem}>ADD</Button>
     </div>
   );
 };
