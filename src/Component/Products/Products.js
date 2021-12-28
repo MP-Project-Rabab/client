@@ -13,6 +13,8 @@ import {
   DialogContent,
   DialogActions,
   Dialog,
+  Rating,
+  Chip,
 } from "@mui/material";
 import { BsPatchPlus } from "react-icons/bs";
 import FileBase from "react-file-base64";
@@ -22,8 +24,14 @@ const Products = () => {
   const state = useSelector((state) => {
     return state;
   });
-  
+
   const [open, setOpen] = useState(false);
+  const [rates, setRates] = useState({
+    rate: 0,
+    productId: "",
+    byUser: state.signIn.id,
+    toUser: "",
+  });
   const [product, setProduct] = useState({
     seller: state.signIn.id,
     img: "",
@@ -53,7 +61,6 @@ const Products = () => {
         products: result.data,
       };
       dispatch(getProducts(data));
-      console.log(result.data);
     } catch (error) {
       console.log(error);
     }
@@ -97,6 +104,25 @@ const Products = () => {
     allProducts();
   };
 
+  // Add New Products function
+  const addRate = async () => {
+    try {
+      const result = await axios.post(
+        `${process.env.REACT_APP_BASE_URL}/rates/add`,
+        rates,
+
+        {
+          headers: {
+            Authorization: `Bearer ${state.signIn.token}`,
+          },
+        }
+      );
+      dispatch(newProducts({ products: result.data }));
+    } catch (error) {
+      console.log(error);
+    }
+    allProducts();
+  };
   const handleAddProduct = () => {
     addProducts();
     setOpen(false);
@@ -108,7 +134,7 @@ const Products = () => {
   const handleClose = () => {
     setOpen(false);
   };
-
+console.log(state);
   return (
     <div className="products">
       {state.productsReducer.products.length &&
@@ -116,10 +142,16 @@ const Products = () => {
           return (
             <div key={info._id} className="products-card">
               <img src={info.img} alt="" />
+              <Rating
+                name="half-rating"
+                defaultValue={0}
+                precision={0.5}
+                className="rate"
+              />
               <h2>{info.name}</h2>
               <h5>متوفر:{info.Quantity} </h5>
               <h4>{info.price} ر.س</h4>
-              <button>اضف للسله</button>
+              <Chip label="اضف للسله" variant="outlined" clickable />
             </div>
           );
         })}
@@ -134,6 +166,13 @@ const Products = () => {
               setProduct({ ...product, img: base64 })
             }
           />
+
+          {/* <input
+            type="file"
+            name=""
+            id=""
+            onChange={(ev) => setProduct({ ...product, img: ev.target.files[0]})}
+          /> */}
           <TextField
             margin="dense"
             id="name"

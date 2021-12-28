@@ -47,6 +47,7 @@ const Login = () => {
         user: result.data.result,
       };
       dispatch(logIn(data));
+      console.log(result.data);
       navigate("/");
       console.log(state);
     } catch (error) {

@@ -15,6 +15,7 @@ import Problems from "./Component/Probs&solution/Problems";
 import User from "./Component/Account/User/User";
 import NotApproved from "./Component/notApproved/notApproved";
 import NoApproved from "./Component/Posts/NoApproved";
+import Cart from "./Component/Cart/Cart";
 
 function App() {
   return (
@@ -34,6 +35,7 @@ function App() {
         <Route exact path="/users" element={<User />} />
         <Route exact path="/productsApprove" element={<NotApproved />} />
         <Route exact path="/postsApprove" element={<NoApproved />} />
+        <Route exact path="/cart" element={<Cart />} />
       </Routes>
     </div>
   );

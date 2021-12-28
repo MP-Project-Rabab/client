@@ -1,6 +1,6 @@
 .nav {
 display: inline-block;
-background: rgb(255, 94, 0);
+background: rgb(16, 126, 71);
 width: 100%;
 
 
@@ -8,7 +8,7 @@ width: 100%;
 
 
 .nav a {
-    color: black;
+    color: #fff;
     margin: 10px;
     font-size: medium;
 }
