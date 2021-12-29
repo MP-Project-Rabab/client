@@ -36,9 +36,6 @@ const Header = () => {
       {isLog ? (
         <header>
           <h1 className="logo">أوراقي</h1>
-          <Link to="/" onClick={() => navigate("/")}>
-            <ImHome />
-          </Link>
           <Collapse in={open} timeout="auto" unmountOnExit>
             <Box>
               <Link to="/users">Users</Link>

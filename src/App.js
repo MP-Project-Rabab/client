@@ -37,6 +37,7 @@ function App() {
         <Route exact path="/postsApprove" element={<NoApproved />} />
         <Route exact path="/cart" element={<Cart />} />
       </Routes>
+      <img src="" alt="" />
     </div>
   );
 }
