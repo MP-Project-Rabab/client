@@ -4,7 +4,7 @@ import { useSelector } from "react-redux";
 import "./style.css";
 
 const User = () => {
-  const [users, setUsers] = useState([]);
+  const [users, setUsers] = useState({});
   useEffect(() => {
     allUser();
   }, []);
@@ -56,6 +56,7 @@ const User = () => {
             <div key={user._id} className="user-card">
               <img src={user.avatar} alt="" />
               <h2>{user.userName}</h2>
+              <h3> نوع المستخدم: {user.userType}</h3>
               <button onClick={() => deleteUser(user._id)}>حذف</button>
             </div>
           );

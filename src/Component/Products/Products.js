@@ -134,7 +134,7 @@ const Products = () => {
   const handleClose = () => {
     setOpen(false);
   };
-console.log(state);
+  console.log(state);
   return (
     <div className="products">
       {state.productsReducer.products.length &&
@@ -166,13 +166,6 @@ console.log(state);
               setProduct({ ...product, img: base64 })
             }
           />
-
-          {/* <input
-            type="file"
-            name=""
-            id=""
-            onChange={(ev) => setProduct({ ...product, img: ev.target.files[0]})}
-          /> */}
           <TextField
             margin="dense"
             id="name"

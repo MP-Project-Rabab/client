@@ -35,7 +35,7 @@ const Header = () => {
     <div className="header">
       {isLog ? (
         <header>
-          <h1 className="logo">logo</h1>
+          <h1 className="logo">أوراقي</h1>
           <Link to="/" onClick={() => navigate("/")}>
             <ImHome />
           </Link>
