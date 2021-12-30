@@ -62,7 +62,7 @@ const Header = () => {
         </header>
       ) : (
         <header>
-          <h1 className="logo">logo</h1>
+          <h1 className="logo">أوراقي</h1>
           <Link to="/register">تسجيل جديد؟</Link>
           <Link to="/login">تسجيل الدخول</Link>
           <Link to="/" onClick={() => navigate("/")}>
