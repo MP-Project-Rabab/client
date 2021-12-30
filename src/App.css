@@ -1,0 +1,20 @@
+.App {
+    /* background-image: url(./img/pexels-scott-webb-1048035-removebg-preview.png); */
+    /* background-repeat: no-repeat;
+    background-size: contain; */
+    height: 100%;
+    width: 100vw;
+   background: #fff1e6;
+}
+
+.leaf {
+   
+  height: 50rem;
+  
+  /* width: 100vw; */
+}
+
+.leaf2 {
+ position: absolute;
+    right: 71.7%;
+}

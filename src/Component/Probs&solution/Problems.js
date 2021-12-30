@@ -134,7 +134,7 @@ const Problems = () => {
                 />
                 <button onClick={() => update(info._id)}>Update</button>
               </h2>
-              <h6>بواسطة:</h6>
+              <h6>بواسطة: {info.user.userName}</h6>
               <button onClick={() => deleteProblem(info._id)}>حذف</button>
             </div>
           );

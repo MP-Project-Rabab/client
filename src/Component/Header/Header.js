@@ -35,10 +35,7 @@ const Header = () => {
     <div className="header">
       {isLog ? (
         <header>
-          <h1 className="logo">logo</h1>
-          <Link to="/" onClick={() => navigate("/")}>
-            <ImHome />
-          </Link>
+          <h1 className="logo">أوراقي</h1>
           <Collapse in={open} timeout="auto" unmountOnExit>
             <Box>
               <Link to="/users">Users</Link>
@@ -65,7 +62,7 @@ const Header = () => {
         </header>
       ) : (
         <header>
-          <h1 className="logo">logo</h1>
+          <h1 className="logo">أوراقي</h1>
           <Link to="/register">تسجيل جديد؟</Link>
           <Link to="/login">تسجيل الدخول</Link>
           <Link to="/" onClick={() => navigate("/")}>

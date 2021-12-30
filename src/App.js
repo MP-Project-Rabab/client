@@ -16,10 +16,13 @@ import User from "./Component/Account/User/User";
 import NotApproved from "./Component/notApproved/notApproved";
 import NoApproved from "./Component/Posts/NoApproved";
 import Cart from "./Component/Cart/Cart";
+import pexels2 from "./img/pexels2.png"
+import green2 from "./img/green2.png"
 
 function App() {
   return (
     <div className="App">
+        <img src={green2} alt="" className="leaf2"/>
       <Header />
       <Nav />
       <Routes>
@@ -37,6 +40,8 @@ function App() {
         <Route exact path="/postsApprove" element={<NoApproved />} />
         <Route exact path="/cart" element={<Cart />} />
       </Routes>
+      <img src={pexels2} alt="" className="leaf"/>
+    
     </div>
   );
 }

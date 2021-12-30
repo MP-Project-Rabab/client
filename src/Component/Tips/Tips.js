@@ -112,6 +112,7 @@ const Tips = () => {
         state.postReducer.posts.map((info) => {
           return (
             <div key={info._id} className="tips-card">
+              <img src={info.img} alt="" />
               <h2>
                 {info.title}
                 <input
