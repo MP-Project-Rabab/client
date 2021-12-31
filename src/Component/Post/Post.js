@@ -37,7 +37,7 @@ const Post = () => {
   return (
     <div>
       <h1>one post</h1>
-      <img src={state.postReducer.img} alt="" />
+      <img src={state.postReducer.img} alt="" className="post-img"/>
       <h1>{state.postReducer.title}</h1>
       <p>{state.postReducer.desc}</p>
     </div>
