@@ -14,10 +14,11 @@ import Products from "./Component/Products/Products";
 import Problems from "./Component/Probs&solution/Problems";
 import User from "./Component/Account/User/User";
 import NotApproved from "./Component/notApproved/notApproved";
-import NoApproved from "./Component/Posts/NoApproved";
+import NoApproved from "./Component/Post/NoApproved";
 import Cart from "./Component/Cart/Cart";
 import pexels2 from "./img/pexels2.png"
 import green2 from "./img/green2.png"
+import Post from "./Component/Post/Post";
 
 function App() {
   return (
@@ -39,6 +40,7 @@ function App() {
         <Route exact path="/productsApprove" element={<NotApproved />} />
         <Route exact path="/postsApprove" element={<NoApproved />} />
         <Route exact path="/cart" element={<Cart />} />
+        <Route exact path="/post/:id" element={<Post />} />
       </Routes>
       <img src={pexels2} alt="" className="leaf"/>
     

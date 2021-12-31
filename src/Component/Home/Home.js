@@ -1,13 +1,17 @@
-import React from 'react'
-import green from "../../img/green.jpg"
-import './style.css'
+import React from "react";
+import "./style.css";
 const Home = () => {
-    return (
-        <div>
-        <h1>Home Component</h1>
-        {/* <img src={green} alt="" className="leaf"/> */}
-        </div>
-    )
-}
+  return (
+    <div>
+      <h1 className="h1"> إملاء المكان بالنباتات</h1>
+      <p className="p1">
+        نحن عشاق النباتات!  نقدم لك مجموعة منتقاة بعناية من النباتات الداخلية
+        والخارجية والسلع من الموزع المفضل لدينا ونقدمها
+        لك. سنشارك جميع نصائحنا الخاصة بالعناية من المبتدئين إلى المحترفين. نقوم
+        أيضًا بتصميم مكان عملك حتى يشعر المتعاونون معك بالراحة أثناء العمل
+      </p>
+    </div>
+  );
+};
 
-export default Home
+export default Home;

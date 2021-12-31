@@ -1,3 +1,14 @@
+.profile {
+  margin: auto;
+  padding-top: 10em;
+  position: relative;
+  height: 10vh;
+  text-align: center;
+}
+
+
+
+
 .avatar {
   width: 130px;
   border-radius: 66px;

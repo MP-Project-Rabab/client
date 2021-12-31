@@ -1,0 +1,21 @@
+@import url("https://fonts.googleapis.com/css2?family=Josefin+Sans:wght@300&family=Reem+Kufi:wght@600&display=swap");
+@import url('https://fonts.googleapis.com/css2?family=Harmattan&display=swap');
+.h1 {
+  margin: 5% 12%;
+  margin-top: 16%;
+  font-size: 9em;
+  font-family: "Reem Kufi", sans-serif;
+  width: 60rem;
+  /* background: #000; */
+  text-decoration: underline;
+  color: #6b705c;
+}
+
+.p1 {
+  /* background: #000; */
+  color: #68af17;
+  width: 40rem;
+  margin: 0 12%;
+  font-size: 30px;
+  font-family: 'Harmattan', sans-serif;
+}

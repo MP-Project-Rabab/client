@@ -2,11 +2,12 @@
   display: flex;
   flex-wrap: wrap;
   justify-content: space-evenly;
+  position: relative;
 }
 
 .user-card {
   width: 10rem;
-  border: 2px solid;
+  /* border: 2px solid; */
 }
 
 .user-card img {

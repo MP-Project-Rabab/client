@@ -1,22 +1,28 @@
 .header header {
+  padding: 15px 0;
   display: flex;
-  justify-content: space-around;
+  justify-content: space-between;
   align-items: center;
-
+  /* background: #000; */
   height: 6rem;
+  position: relative;
 }
 
 a {
   text-decoration: none;
-  color: black;
+  color: #b7b7a4;
   font-size: 30px;
 }
 
-.avatar {
+/* .avatar {
+  cursor: pointer;
+} */
+
+.cart {
+  font-size: 2.5rem;
   cursor: pointer;
 }
 
-.cart {
-  font-size: 1.7rem;
-  cursor: pointer;
+.logo {
+  width: 15rem;
 }
