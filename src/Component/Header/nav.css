@@ -1,14 +1,16 @@
 .nav {
 display: inline-block;
-background: rgb(16, 126, 71);
+/* background: rgb(16, 126, 71); */
 width: 100%;
+position: relative;
 
 
 }
 
 
 .nav a {
-    color: #fff;
+    color: #b7b7a4;
     margin: 10px;
     font-size: medium;
+    font-weight: bold;
 }

@@ -4,20 +4,14 @@ import { useSelector } from "react-redux";
 import FileBase from "react-file-base64";
 import {
   IconButton,
-  styled,
-  Chip,
   TextField,
   DialogContent,
   DialogActions,
   Dialog,
   Button,
 } from "@mui/material/";
-import { BsFillCameraFill } from "react-icons/bs";
 import { FaUserEdit } from "react-icons/fa";
 import "./style.css";
-const Input = styled("input")({
-  display: "none",
-});
 
 const Profile = () => {
   const [userInfo, setUserInfo] = useState({

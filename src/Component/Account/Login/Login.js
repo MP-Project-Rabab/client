@@ -87,7 +87,7 @@ const Login = () => {
             Login
           </Button>
           <Link to="/forget" className="register">
-            Forgot password?
+           نسيت كلمة المرور؟
           </Link>
 
       <h3>
@@ -95,9 +95,9 @@ const Login = () => {
         Log in with google
       </h3>
       <h4>
-        Dosn't have an account?
+       ليس لديك حساب؟
         <Link to="/register" className="register">
-          Register
+          تسجيل جديد
         </Link>
       </h4>
         </Stack>

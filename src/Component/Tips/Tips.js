@@ -3,7 +3,9 @@ import axios from "axios";
 import { useDispatch, useSelector } from "react-redux";
 import { getPost, newPost, UpdatePost, delPost } from "../../reducers/post";
 import "./style.css";
+import { Link, useParams } from "react-router-dom";
 const Tips = () => {
+ 
   useEffect(() => {
     allTip();
   }, []);
@@ -114,7 +116,9 @@ const Tips = () => {
             <div key={info._id} className="tips-card">
               <img src={info.img} alt="" />
               <h2>
+                <Link to={`/post/${info._id}`}>
                 {info.title}
+                </Link>
                 <input
                   type="text"
                   name=""

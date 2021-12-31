@@ -1,16 +1,40 @@
 import React, { useState, useEffect } from "react";
 import { Link, useNavigate } from "react-router-dom";
-import { ImHome } from "react-icons/im";
-import { Avatar, Badge, IconButton, Collapse, Box } from "@mui/material/";
-import { BsCart4 } from "react-icons/bs";
-import { useDispatch, useSelector } from "react-redux";
+import { GiFlowerPot } from "react-icons/gi";
+import {
+  Avatar,
+  Badge,
+  IconButton,
+  Collapse,
+  Box,
+  Menu,
+  MenuItem,
+} from "@mui/material/";
+import { useSelector } from "react-redux";
 import { FaEllipsisV } from "react-icons/fa";
 import "./header.css";
+import logo from "../../img/logo.png";
+
 const Header = () => {
   const state = useSelector((state) => {
     return state;
   });
-  const [isLog, setIsLog] = useState();
+
+  //  MUI AppBar
+
+  const [anchorElUser, setAnchorElUser] = useState(null);
+  const handleOpenUserMenu = (event) => {
+    setAnchorElUser(event.currentTarget);
+  };
+  const handleCloseUserMenu = () => {
+    setAnchorElUser(null);
+  };
+  const handleClose = () => {
+    setAnchorElUser(null);
+  };
+
+  // ////////////////////////////
+  const [isLog, setIsLog] = useState(false);
   const [user, setUser] = useState("");
   const [open, setOpen] = useState(false);
 
@@ -21,21 +45,21 @@ const Header = () => {
       setIsLog(true);
       setUser(userid);
     } else {
+
       setIsLog(false);
-      navigate("/");
+      navigate("/login");
     }
   }, []);
 
   const logOut = () => {
     localStorage.clear();
-    navigate("/login");
   };
   console.log(state);
   return (
     <div className="header">
       {isLog ? (
         <header>
-          <h1 className="logo">أوراقي</h1>
+          <img src={logo} alt="" className="logo" />
           <Collapse in={open} timeout="auto" unmountOnExit>
             <Box>
               <Link to="/users">Users</Link>
@@ -46,28 +70,52 @@ const Header = () => {
           <IconButton onClick={() => setOpen(!open)}>
             <FaEllipsisV />
           </IconButton>
-          <Avatar
-            className="avatar"
-            alt="avatar"
-            src="/static/images/avatar/1.jpg"
-            sx={{ width: 56, height: 56 }}
-            onClick={() => navigate("/profile")}
-          />
           <Badge badgeContent={1} color="success">
-            <BsCart4 className="cart" onClick={() => navigate("/cart")} />
+            <GiFlowerPot className="cart" onClick={() => navigate("/cart")}/>
           </Badge>
-          <Link to="/" onClick={logOut}>
-            تسجيل الخروج
-          </Link>
+          <Box sx={{ flexGrow: 0 }}>
+            <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
+              <Avatar
+                className="avatar"
+                alt="avatar"
+                src="/static/images/avatar/1.jpg"
+                sx={{ width: 56, height: 56 }}
+              />
+            </IconButton>
+            <Menu
+              sx={{ mt: "45px" }}
+              id="menu-appbar"
+              anchorEl={anchorElUser}
+              anchorOrigin={{
+                vertical: "top",
+                horizontal: "right",
+              }}
+              keepMounted
+              transformOrigin={{
+                vertical: "top",
+                horizontal: "right",
+              }}
+              open={Boolean(anchorElUser)}
+              onClose={handleCloseUserMenu}
+            >
+              <MenuItem onClick={handleClose}>
+                <Link to="/profile">البروفايل</Link>
+              </MenuItem>
+              <MenuItem onClick={handleClose}>
+                <Link to="/" onClick={logOut}>
+                  تسجيل الخروج
+                </Link>
+              </MenuItem>
+            </Menu>
+          </Box>
         </header>
       ) : (
         <header>
-          <h1 className="logo">أوراقي</h1>
+          <img src={logo} alt="" className="logo" />
+          <div className="acut"> 
           <Link to="/register">تسجيل جديد؟</Link>
           <Link to="/login">تسجيل الدخول</Link>
-          <Link to="/" onClick={() => navigate("/")}>
-            <ImHome />
-          </Link>
+          </div>
         </header>
       )}
     </div>

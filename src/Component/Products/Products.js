@@ -14,13 +14,15 @@ import {
   DialogActions,
   Dialog,
   Rating,
-  Chip,
 } from "@mui/material";
-import { BsPatchPlus } from "react-icons/bs";
+import { BsPatchPlus, BsCartPlusFill } from "react-icons/bs";
 import FileBase from "react-file-base64";
 
 import "./style.css";
 const Products = () => {
+  useEffect(() => {
+    allProducts();
+  }, []);
   const state = useSelector((state) => {
     return state;
   });
@@ -30,7 +32,7 @@ const Products = () => {
     rate: 0,
     productId: "",
     byUser: state.signIn.id,
-    toUser: "",
+   
   });
   const [product, setProduct] = useState({
     seller: state.signIn.id,
@@ -40,9 +42,7 @@ const Products = () => {
     Quantity: 0,
   });
 
-  useEffect(() => {
-    allProducts();
-  }, []);
+  
   const dispatch = useDispatch();
 
   // Get All Products function
@@ -85,6 +85,25 @@ const Products = () => {
     allProducts();
   };
   // delete Product function
+  const updateProducts = async () => {
+    try {
+      const result = await axios.delete(
+        `${process.env.REACT_APP_BASE_URL}/products/update`,
+        product,
+
+        {
+          headers: {
+            Authorization: `Bearer ${state.signIn.token}`,
+          },
+        }
+      );
+      dispatch(UpdateProducts({ products: result.data }));
+    } catch (error) {
+      console.log(error);
+    }
+    allProducts();
+  };
+  // delete Product function
   const deleteProducts = async () => {
     try {
       const result = await axios.delete(
@@ -117,7 +136,8 @@ const Products = () => {
           },
         }
       );
-      dispatch(newProducts({ products: result.data }));
+      setRates(result.data)
+      console.log(result.data);
     } catch (error) {
       console.log(error);
     }
@@ -147,11 +167,16 @@ const Products = () => {
                 defaultValue={0}
                 precision={0.5}
                 className="rate"
+                onClick={() => addRate(info._id)}
+                onChange={(ev) => setRates({ ...rates, rate: ev.target.defaultValue })}
               />
               <h2>{info.name}</h2>
               <h5>متوفر:{info.Quantity} </h5>
               <h4>{info.price} ر.س</h4>
-              <Chip label="اضف للسله" variant="outlined" clickable />
+              <button className="bttn">
+              <BsCartPlusFill />
+              اضف للسله
+              </button>
             </div>
           );
         })}
