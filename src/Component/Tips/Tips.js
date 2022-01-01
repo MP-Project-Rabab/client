@@ -2,8 +2,10 @@ import React, { useEffect, useState } from "react";
 import axios from "axios";
 import { useDispatch, useSelector } from "react-redux";
 import { getPost, newPost, UpdatePost, delPost } from "../../reducers/post";
+import { Link } from "react-router-dom";
+import FileBase from "react-file-base64";
+
 import "./style.css";
-import { Link, useParams } from "react-router-dom";
 const Tips = () => {
  
   useEffect(() => {

@@ -31,8 +31,7 @@ const Products = () => {
   const [rates, setRates] = useState({
     rate: 0,
     productId: "",
-    byUser: state.signIn.id,
-   
+    byUser: "",
   });
   const [product, setProduct] = useState({
     seller: state.signIn.id,
@@ -42,7 +41,6 @@ const Products = () => {
     Quantity: 0,
   });
 
-  
   const dispatch = useDispatch();
 
   // Get All Products function
@@ -124,11 +122,15 @@ const Products = () => {
   };
 
   // Add New Products function
-  const addRate = async () => {
+  const addRate = async (id) => {
     try {
       const result = await axios.post(
         `${process.env.REACT_APP_BASE_URL}/rates/add`,
-        rates,
+        {
+          rate: 0,
+          productId: id,
+          byUser: state.signIn.id,
+        },
 
         {
           headers: {
@@ -136,7 +138,7 @@ const Products = () => {
           },
         }
       );
-      setRates(result.data)
+      setRates(result.data);
       console.log(result.data);
     } catch (error) {
       console.log(error);
@@ -168,14 +170,16 @@ const Products = () => {
                 precision={0.5}
                 className="rate"
                 onClick={() => addRate(info._id)}
-                onChange={(ev) => setRates({ ...rates, rate: ev.target.defaultValue })}
+                onChange={(ev) =>
+                  setRates({ ...rates, rate: ev.target.defaultValue })
+                }
               />
               <h2>{info.name}</h2>
               <h5>متوفر:{info.Quantity} </h5>
               <h4>{info.price} ر.س</h4>
               <button className="bttn">
-              <BsCartPlusFill />
-              اضف للسله
+                <BsCartPlusFill />
+                اضف للسله
               </button>
             </div>
           );

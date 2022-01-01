@@ -10,6 +10,8 @@ import {
   Dialog,
 } from "@mui/material";
 import { BsPatchPlus } from "react-icons/bs";
+import FileBase from "react-file-base64";
+import { Link } from "react-router-dom";
 
 import "./style.css";
 
@@ -123,7 +125,7 @@ const Problems = () => {
           return (
             <div key={info._id} className="tips-card">
               <h2>
-                {info.title}
+                <Link to={`/post/${info._id}`}>{info.title}</Link>
                 <input
                   type="text"
                   name=""
@@ -139,7 +141,13 @@ const Problems = () => {
             </div>
           );
         })}
-
+      <FileBase
+        type="file"
+        multiple={false}
+        onDone={({ base64, base64: string }) =>
+          setProblem({ ...problem, img: base64 })
+        }
+      />
       <TextField
         margin="dense"
         id="name"
