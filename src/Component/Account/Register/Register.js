@@ -34,14 +34,14 @@ const Register = () => {
   };
   return (
     <div className="registe">
-         <h1>Creat an Account</h1>
+         <h1>تسجيل حساب جديد</h1>
       <Container>
       <Stack spacing={5} className="register-form">
           {/* User Name Field */}
           <TextField
             required
             id="standard-required"
-            label="User Name"
+            label="اسم المستخدم"
            
             variant="standard"
             value={register.userName}
@@ -54,7 +54,7 @@ const Register = () => {
           <TextField
             required
             id="standard-required"
-            label="Email"
+            label="الإيميل"
            
             type="email"
             variant="standard"
@@ -68,7 +68,7 @@ const Register = () => {
           <TextField
             required
             id="standard-password-input"
-            label="Password"
+            label="كلمة السر"
           
             type="password"
             autoComplete="current-password"
@@ -80,7 +80,7 @@ const Register = () => {
           />
 
         <Button appearance="primary" onClick={creatUser}>
-          Register
+         تسجيل
         </Button>
       </Stack>
       </Container>

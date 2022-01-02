@@ -1,5 +1,5 @@
 import React from "react";
-import { Routes, Route } from "react-router-dom";
+import { Routes, Route, useNavigate, Navigate } from "react-router-dom";
 import Home from "./Component/Home/Home";
 import Register from "./Component/Account/Register/Register";
 import Login from "./Component/Account/Login/Login";
@@ -21,15 +21,19 @@ import green2 from "./img/green2.png"
 import Post from "./Component/Post/Post";
 
 function App() {
+  const user = true
+  const navigate = useNavigate();
+
   return (
     <div className="App">
         <img src={green2} alt="" className="leaf2"/>
       <Header />
       <Nav />
+      {/* {user ? return <Navigate to="/" replace /> : <Login />} */}
       <Routes>
         <Route exact path="/" element={<Home />} />
         <Route exact path="/register" element={<Register />} />
-        <Route exact path="/login" element={<Login />} />
+        <Route exact path="/login" element={<Login />}/>
         <Route exact path="/forget" element={<Forget />} />
         <Route exact path="/reset-pass/:id" element={<ResetPass />} />
         <Route exact path="/profile" element={<Profile />} />
