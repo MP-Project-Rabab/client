@@ -23,19 +23,7 @@ const Login = () => {
     email: "",
     password: "",
   });
-  //   A handle function to login with google
-  const handleGoogle = async () => {
-    try {
-      const result = await axios.get(
-        `${process.env.REACT_APP_BASE_URL}/user/auth/google`
-      );
-      console.log(result);
-    } catch (error) {
-      console.log(error);
-    }
-  };
-
-  //
+  
   const userLog = async () => {
     try {
       const result = await axios.post(
@@ -57,14 +45,14 @@ const Login = () => {
   
 
   return (
-    <div>
+    <div className="login">
       <Container>
         <Stack spacing={5} className="register-form">
           {/* Email Field */}
           <TextField
             required
             id="standard-required"
-            label="Email"
+            label="الإيميل"
             type="email"
             variant="standard"
             value={log.email}
@@ -75,7 +63,7 @@ const Login = () => {
           <TextField
             required
             id="standard-password-input"
-            label="Password"
+            label="كلمة المرور"
             type="password"
             autoComplete="current-password"
             variant="standard"
@@ -84,16 +72,11 @@ const Login = () => {
           />
 
           <Button appearance="primary" onClick={userLog}>
-            Login
+           تسجيل الدخول
           </Button>
           <Link to="/forget" className="register">
            نسيت كلمة المرور؟
           </Link>
-
-      <h3>
-        <FcGoogle className="icon" onClick={handleGoogle} />
-        Log in with google
-      </h3>
       <h4>
        ليس لديك حساب؟
         <Link to="/register" className="register">

@@ -28,6 +28,7 @@ const Products = () => {
   });
 
   const [open, setOpen] = useState(false);
+  const [cart, setCart] = useState();
   const [rates, setRates] = useState({
     rate: 0,
     productId: "",
@@ -82,7 +83,7 @@ const Products = () => {
     }
     allProducts();
   };
-  // delete Product function
+  // update Product function
   const updateProducts = async () => {
     try {
       const result = await axios.delete(
@@ -121,7 +122,7 @@ const Products = () => {
     allProducts();
   };
 
-  // Add New Products function
+  // Add rate to product function
   const addRate = async (id) => {
     try {
       const result = await axios.post(
@@ -145,6 +146,24 @@ const Products = () => {
     }
     allProducts();
   };
+  const addToCart = async (id) => {
+    try {
+      const result = await axios.put(
+        `${process.env.REACT_APP_BASE_URL}/products/one`,{_id:id, user:state.signIn.id},
+
+        {
+          headers: {
+            Authorization: `Bearer ${state.signIn.token}`,
+          },
+        }
+      );
+      setCart(result.data);
+      // console.log(result.data);
+    } catch (error) {
+      console.log(error);
+    }
+  };
+  console.log(cart);
   const handleAddProduct = () => {
     addProducts();
     setOpen(false);
@@ -155,6 +174,9 @@ const Products = () => {
 
   const handleClose = () => {
     setOpen(false);
+  };
+  const handleCart = (id) => {
+   console.log(id);
   };
   console.log(state);
   return (
@@ -177,7 +199,7 @@ const Products = () => {
               <h2>{info.name}</h2>
               <h5>متوفر:{info.Quantity} </h5>
               <h4>{info.price} ر.س</h4>
-              <button className="bttn">
+              <button className="bttn" onClick={() => addToCart(info._id)}>
                 <BsCartPlusFill />
                 اضف للسله
               </button>
