@@ -3,7 +3,6 @@ import axios from "axios";
 import { useSelector } from "react-redux";
 import {
   IconButton,
-  Chip,
   TextField,
   DialogContent,
   DialogActions,
@@ -15,6 +14,7 @@ import "./style.css";
 
 const User = () => {
   const [users, setUsers] = useState({});
+  const [type, setType] = useState({});
   useEffect(() => {
     allUser();
   }, []);
@@ -58,12 +58,10 @@ const User = () => {
     allUser();
   };
   const updateUserType = async (id) => {
+    console.log(id);
     try {
       const result = await axios.put(
-        `${process.env.REACT_APP_BASE_URL}/user/user-type`,
-        {userType: users.userType,
-          _id: id
-        },
+        `${process.env.REACT_APP_BASE_URL}/user/user-type`,type,
 
         {
           headers: {
@@ -71,16 +69,18 @@ const User = () => {
           },
         }
       );
-      setUsers(result.data);
+      setType(result.data);
+      console.log(result.data);
     } catch (error) {
       console.log(error);
     }
-   
+
     setOpen(false);
   };
 
   const handleClickOpen = () => {
     setOpen(true);
+    
   };
 
   const handleClose = () => {
@@ -89,7 +89,6 @@ const User = () => {
   };
   console.log(users);
   return (
-    
     <div className="users">
       {users.length &&
         users.map((user) => {
@@ -100,7 +99,7 @@ const User = () => {
                 color="primary"
                 aria-label="upload picture"
                 component="span"
-                onClick={handleClickOpen}
+                onClick={() => handleClickOpen(user._id)}
               >
                 <FiEdit3 />
               </IconButton>
@@ -109,30 +108,30 @@ const User = () => {
               <h3> نوع المستخدم: {user.userType}</h3>
               <button onClick={() => deleteUser(user._id)}>حذف</button>
             </div>
-          );
+          )          
         })}
         <Dialog open={open} onClose={handleClose}>
-        <DialogContent>
-          <TextField
-            margin="dense"
-            id="name"
-            name="name"
-            label="تغيير نوع المستخدم"
-            type="text"
-            fullWidth
-            variant="standard"
-            onChange={(ev) =>
-              setUsers({ ...users, userType: ev.target.value })
-            }
-          />
+            <DialogContent>
+              <TextField
+                margin="dense"
+                id="name"
+                name="userType"
+                label="تغيير نوع المستخدم"
+                type="text"
+                fullWidth
+                variant="standard"
+                onChange={(ev) => setType({userType:ev.target.value})}
+              />
 
-
-          <DialogActions>
-            <Button onClick={handleClose}>تراجع</Button>
-            <Button onClick={updateUserType}>حفظ</Button>
-          </DialogActions>
-        </DialogContent>
-      </Dialog>
+              <DialogActions>
+                <Button onClick={handleClose}>تراجع</Button>
+                <Button onClick={updateUserType}>
+                  حفظ
+                </Button>
+              </DialogActions>
+            </DialogContent>
+          </Dialog>
+       
     </div>
   );
 };

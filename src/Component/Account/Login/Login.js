@@ -23,7 +23,7 @@ const Login = () => {
     email: "",
     password: "",
   });
-  
+
   const userLog = async () => {
     try {
       const result = await axios.post(
@@ -35,14 +35,15 @@ const Login = () => {
         user: result.data.result,
       };
       dispatch(logIn(data));
-      console.log(result.data);
-      navigate("/");
+      setTimeout(() => {
+        console.log(result.data);
+        navigate("/");
+      },1000);
       console.log(state);
     } catch (error) {
       console.log(error);
     }
   };
-  
 
   return (
     <div className="login">
@@ -72,17 +73,17 @@ const Login = () => {
           />
 
           <Button appearance="primary" onClick={userLog}>
-           تسجيل الدخول
+            تسجيل الدخول
           </Button>
           <Link to="/forget" className="register">
-           نسيت كلمة المرور؟
+            نسيت كلمة المرور؟
           </Link>
-      <h4>
-       ليس لديك حساب؟
-        <Link to="/register" className="register">
-          تسجيل جديد
-        </Link>
-      </h4>
+          <h4>
+            ليس لديك حساب؟
+            <Link to="/register" className="register">
+              تسجيل جديد
+            </Link>
+          </h4>
         </Stack>
       </Container>
     </div>

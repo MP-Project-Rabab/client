@@ -21,9 +21,7 @@ import green2 from "./img/green2.png"
 import Post from "./Component/Post/Post";
 
 function App() {
-  const user = true
-  const navigate = useNavigate();
-
+ 
   return (
     <div className="App">
         <img src={green2} alt="" className="leaf2"/>
@@ -36,7 +34,7 @@ function App() {
         <Route exact path="/login" element={<Login />}/>
         <Route exact path="/forget" element={<Forget />} />
         <Route exact path="/reset-pass/:id" element={<ResetPass />} />
-        <Route exact path="/profile" element={<Profile />} />
+        <Route exact path="/profile/:id" element={<Profile />} />
         <Route exact path="/tips" element={<Tips />} />
         <Route exact path="/products" element={<Products />} />
         <Route exact path="/problems" element={<Problems />} />

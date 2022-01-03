@@ -1,9 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { Link, useNavigate, Navigate } from "react-router-dom";
 import axios from "axios";
-import {
-  getinfo
-} from "../../reducers/user";
 import { GiFlowerPot } from "react-icons/gi";
 import {
   Avatar,
@@ -20,10 +17,11 @@ import "./header.css";
 import logo from "../../img/logo.png";
 
 const Header = () => {
+  const [cart, setCart] = useState([]);
+
   const state = useSelector((state) => {
     return state;
   });
-  const dispatch = useDispatch();
 
   //  MUI AppBar
   const [anchorElUser, setAnchorElUser] = useState(null);
@@ -41,30 +39,25 @@ const Header = () => {
   const [isLog, setIsLog] = useState(false);
   const [user, setUser] = useState("");
   const [open, setOpen] = useState(false);
-  const [info, setInfo] = useState([
-    // products: [],
-    // quantity: 0,
-    // total: 0
-  ]);
+  const [info, setInfo] = useState([]);
 
   const navigate = useNavigate();
   useEffect(() => {
-    userInfo()
+    userInfo();
     let userid = localStorage.getItem("id");
     if (userid) {
       setIsLog(true);
       setUser(userid);
     } else {
-
       setIsLog(false);
       navigate("/login");
     }
-  },[]);
+  }, []);
 
   const logOut = () => {
     localStorage.clear();
   };
-  const userInfo= async () => {
+  const userInfo = async () => {
     try {
       const result = await axios.get(
         `${process.env.REACT_APP_BASE_URL}/user/profile?_id=${state.signIn.id}`,
@@ -75,19 +68,18 @@ const Header = () => {
           },
         }
       );
-      dispatch(getinfo(result.data));
+      console.log(result.data);
+      setInfo(result.data);
+      setCart(result.data.cart);
     } catch (error) {
       console.log(error);
     }
   };
-  
-  console.log(state.userReducer.cart);
+
   return (
     <div className="header">
       {isLog ? (
         <header>
-          {/* {info.cart.map((el) => <h4>{el._id}</h4>)} */}
-          {/* <h4>{info.cart._id}</h4> */}
           <img src={logo} alt="" className="logo" />
           <Collapse in={open} timeout="auto" unmountOnExit>
             <Box>
@@ -99,15 +91,15 @@ const Header = () => {
           <IconButton onClick={() => setOpen(!open)}>
             <FaEllipsisV />
           </IconButton>
-          <Badge badgeContent={0} color="success">
-            <GiFlowerPot className="cart" onClick={() => navigate("/cart")}/>
+          <Badge badgeContent={cart.length} color="success">
+            <GiFlowerPot className="cart" onClick={() => navigate("/cart")} />
           </Badge>
           <Box sx={{ flexGrow: 0 }}>
             <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
               <Avatar
                 className="avatar"
                 alt="avatar"
-                src={state.userReducer.avatar}
+                src={info.avatar}
                 sx={{ width: 56, height: 56 }}
               />
             </IconButton>
@@ -128,7 +120,7 @@ const Header = () => {
               onClose={handleCloseUserMenu}
             >
               <MenuItem onClick={handleClose}>
-                <Link to="/profile">البروفايل</Link>
+                <Link to={`/profile/${state.signIn.id}`}>البروفايل</Link>
               </MenuItem>
               <MenuItem onClick={handleClose}>
                 <Link to="/" onClick={logOut}>
@@ -138,13 +130,12 @@ const Header = () => {
             </Menu>
           </Box>
         </header>
-      
       ) : (
         <header>
           <img src={logo} alt="" className="logo" />
-          <div className="acut"> 
-          {/* <Link to="/register">تسجيل جديد؟</Link> */}
-          <Link to="/login">تسجيل الدخول</Link>
+          <div className="acut">
+            {/* <Link to="/register">تسجيل جديد؟</Link> */}
+            <Link to="/login">تسجيل الدخول</Link>
           </div>
         </header>
       )}

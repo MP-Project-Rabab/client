@@ -9,11 +9,15 @@ import {
   DialogActions,
   Dialog,
   Button,
+  Rating,
 } from "@mui/material/";
 import { FaUserEdit } from "react-icons/fa";
+import { useParams } from "react-router-dom";
+
 import "./style.css";
 
 const Profile = () => {
+  let { id } = useParams();
   const [userInfo, setUserInfo] = useState({
     userName: "",
     avatar: "",
@@ -31,7 +35,7 @@ const Profile = () => {
   const userProfile = async () => {
     try {
       const result = await axios.get(
-        `${process.env.REACT_APP_BASE_URL}/user/profile?_id=${state.signIn.id}`,
+        `${process.env.REACT_APP_BASE_URL}/user/profile?_id=${id}`,
 
         {
           headers: {
@@ -73,6 +77,7 @@ const Profile = () => {
     userProfile();
     setOpen(false);
   };
+  // console.log(userInfo.userType);
   return (
     <div className="profile">
       <IconButton
@@ -124,17 +129,20 @@ const Profile = () => {
           </DialogActions>
         </DialogContent>
       </Dialog>
-      {/* <label htmlFor="icon-button-file">
-        <Input
-          accept="image/*"
-          id="icon-button-file"
-          type="file"
-          onChange={(ev) =>
-            setUserInfo({ ...userInfo, avatar: ev.target.files[0] })
-          }
-          />
-      
-      </label> */}
+      {userInfo.userType == "seller" ? (
+        <Rating
+          name="half-rating"
+          defaultValue={0}
+          precision={0.5}
+          className="rate"
+          // onClick={() => addRate(info._id)}
+          // onChange={(ev) =>
+          //   setRates({ ...rates, rate: ev.target.defaultValue })
+          // }
+        />
+      ) : (
+        <></>
+      )}
       <h1>اسم المستخدم: </h1>
       <h2>{userInfo.userName} </h2>
       <h1>الموقع:</h1>

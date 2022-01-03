@@ -26,7 +26,7 @@ const Products = () => {
   const state = useSelector((state) => {
     return state;
   });
-
+  const [msg, setMsg] = useState("");
   const [open, setOpen] = useState(false);
   const [cart, setCart] = useState();
   const [rates, setRates] = useState({
@@ -149,7 +149,8 @@ const Products = () => {
   const addToCart = async (id) => {
     try {
       const result = await axios.put(
-        `${process.env.REACT_APP_BASE_URL}/products/one`,{_id:id, user:state.signIn.id},
+        `${process.env.REACT_APP_BASE_URL}/products/one`,
+        { _id: id, user: state.signIn.id },
 
         {
           headers: {
@@ -158,12 +159,13 @@ const Products = () => {
         }
       );
       setCart(result.data);
-      // console.log(result.data);
+      {result.status == 200? (setMsg("تم إضافته للسله")) : 
+      (setMsg("لم تتم اضافته للسله") )}
+      console.log(result.data);
     } catch (error) {
       console.log(error);
     }
   };
-  console.log(cart);
   const handleAddProduct = () => {
     addProducts();
     setOpen(false);
@@ -175,10 +177,8 @@ const Products = () => {
   const handleClose = () => {
     setOpen(false);
   };
-  const handleCart = (id) => {
-   console.log(id);
-  };
-  console.log(state);
+  
+ 
   return (
     <div className="products">
       {state.productsReducer.products.length &&
@@ -206,7 +206,12 @@ const Products = () => {
             </div>
           );
         })}
-      <BsPatchPlus className="add" onClick={handleClickOpen} />
+      {state.userType == "seller" ? (
+        <BsPatchPlus className="add" onClick={handleClickOpen} />
+      ) : (
+        <></>
+      )}
+
       <Dialog open={open} onClose={handleClose}>
         <DialogContent>
           <FileBase
@@ -260,6 +265,7 @@ const Products = () => {
           </DialogActions>
         </DialogContent>
       </Dialog>
+      <h1>{msg}</h1>
     </div>
   );
 };
