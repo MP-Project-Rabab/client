@@ -1,17 +1,21 @@
-import React,{useEffect} from "react";
+import React,{useEffect,useState} from "react";
 import axios from "axios";
-import { useSelector, useDispatch } from "react-redux";
-import { getinfo } from "../../reducers/user";
+import { useSelector} from "react-redux";
+
 import "./style.css";
 
 const Cart = () => {
+    const [cart, setCart] = useState([])
     useEffect(() => {
         userInfo();
       }, []);
-  const dispatch = useDispatch();
   const state = useSelector((state) => {
     return state;
   });
+
+
+
+
   const userInfo = async () => {
     try {
       const result = await axios.get(
@@ -23,17 +27,23 @@ const Cart = () => {
           },
         }
       );
-      dispatch(getinfo(result.data));
+
+      console.log(result.data.cart);
+      setCart(result.data.cart)
     } catch (error) {
       console.log(error);
     }
   };
-  console.log(state);
+
   return (
     <div>
       <h1>Cart Component</h1>
-      {state.userReducer.cart.length &&
-        state.userReducer.cart.map((info) => {})}
+      {cart.length &&
+        cart.map((info,i) => {
+            return (
+                <h4 key={i}>{info.name}</h4>
+            )
+        })}
     </div>
   );
 };

@@ -24,9 +24,11 @@ const Register = () => {
         `${process.env.REACT_APP_BASE_URL}/user/register`,
         register
       );
-      console.log(result.data);
-      navigate("/")
-      setMsg("Active your Email");
+      console.log(result);
+      
+      {result.status == 210? (setMsg("ادخل كلمة سر قويه")) : 
+      (setMsg("Active your Email") )}
+      // navigate("/")
      
     } catch (error) {
       console.log(error);

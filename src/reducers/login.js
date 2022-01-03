@@ -12,6 +12,7 @@ const initialState = {
         localStorage.setItem("token", token);
         localStorage.setItem("id", user._id);
         localStorage.setItem("userType", user.userType);
+        localStorage.setItem("cart", user.cart);
         return { user, token };
       
         case "LOGOUT":
@@ -21,8 +22,9 @@ const initialState = {
             let getToken = localStorage.getItem("token");
             let getId = localStorage.getItem("id");
             let userType = localStorage.getItem("userType");
+            let cart = localStorage.getItem("cart");
         
-        if (getToken) return { token: getToken, id: getId, userType:userType};
+        if (getToken) return { token: getToken, id: getId, userType:userType, cart: cart};
         else return state;
        
     }

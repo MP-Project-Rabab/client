@@ -48,6 +48,7 @@ const Problems = () => {
         posts: result.data,
       };
       dispatch(getPost(data));
+      
     } catch (error) {
       console.log(error);
     }
@@ -136,7 +137,10 @@ const Problems = () => {
                 />
                 <button onClick={() => update(info._id)}>Update</button>
               </h2>
+              <Link to={`/profile/${info.user._id}`}>
+
               <h6>بواسطة: {info.user.userName}</h6>
+              </Link>
               <button onClick={() => deleteProblem(info._id)}>حذف</button>
             </div>
           );
