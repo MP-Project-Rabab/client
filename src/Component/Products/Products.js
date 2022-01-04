@@ -17,8 +17,15 @@ import {
 } from "@mui/material";
 import { BsPatchPlus, BsCartPlusFill } from "react-icons/bs";
 import FileBase from "react-file-base64";
+import SwipeableViews from 'react-swipeable-views';
+import { autoPlay } from 'react-swipeable-views-utils';
+// End of import all dependencies
+import f3 from '../../img/f3.jpg'
+import g5 from '../../img/g5.jpg'
+import f2 from '../../img/f2.jpg'
 
 import "./style.css";
+///////////////////////////
 const Products = () => {
   useEffect(() => {
     allProducts();
@@ -41,8 +48,18 @@ const Products = () => {
     price: 0,
     Quantity: 0,
   });
-
-  const dispatch = useDispatch();
+const dispatch = useDispatch();
+// Swipe image handle
+const AutoPlaySwipeableViews = autoPlay(SwipeableViews);
+const MyComponent = () => (
+  <AutoPlaySwipeableViews className="Swipe">
+    <img src={f3} alt="" className="b1"/>
+    <img src={g5} alt="" className="b2"/>
+    <img src={f2} alt="" className="b3"/>
+   
+    
+  </AutoPlaySwipeableViews>
+);
 
   // Get All Products function
   const allProducts = async () => {
@@ -180,6 +197,8 @@ const Products = () => {
   
  
   return (
+    <>
+      {MyComponent()}
     <div className="products">
       {state.productsReducer.products.length &&
         state.productsReducer.products.map((info) => {
@@ -267,6 +286,7 @@ const Products = () => {
       </Dialog>
       <h1>{msg}</h1>
     </div>
+    </>
   );
 };
 

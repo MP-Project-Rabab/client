@@ -1,15 +1,22 @@
 .profile {
   margin: auto;
-  padding-top: 10em;
-  position: relative;
-  height: 10vh;
+  padding: 2em;
+  top: 30%;
+  left: 25%;
+  position: absolute;
+  /* height: 10vh; */
+  width: 40rem;
   text-align: center;
+  box-shadow: rgb(38, 57, 77) 0px 20px 30px -10px;
+  border-radius: 12px;
+  color: #cb997e;
+  background: #d8e2dc;
 }
 
 
 
 
-.avatar {
+.avatar2 {
   width: 130px;
   border-radius: 66px;
 }

@@ -3,7 +3,7 @@
   display: grid;
   grid-template-columns: auto auto auto;
   background: #fff;
-  width: 70rem;
+  width: 80rem;
   margin: auto;
   margin-top: 10em;
   box-shadow: rgb(38, 57, 77) 0px 20px 30px -10px;
@@ -54,4 +54,27 @@
   font-size: 14px;
   border: 1px solid #000;
   cursor: pointer;
+}
+
+.Swipe {
+  margin-top: 5em;
+  margin-left: 9em;
+}
+
+.b1{
+background: rgb(28, 218, 224);
+height: 33rem;
+width: 90%;
+}
+.b2{
+background: rgb(164, 226, 47);
+height: 33rem;
+width: 90%;
+
+}
+.b3{
+background: rgb(219, 21, 21);
+height: 33rem;
+width: 90%;
+
 }

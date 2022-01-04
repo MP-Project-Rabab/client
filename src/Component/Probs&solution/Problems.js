@@ -12,7 +12,7 @@ import {
 import { BsPatchPlus } from "react-icons/bs";
 import FileBase from "react-file-base64";
 import { Link } from "react-router-dom";
-
+// End of import all dependencies
 import "./style.css";
 
 const Problems = () => {
@@ -48,7 +48,6 @@ const Problems = () => {
         posts: result.data,
       };
       dispatch(getPost(data));
-      
     } catch (error) {
       console.log(error);
     }
@@ -138,8 +137,7 @@ const Problems = () => {
                 <button onClick={() => update(info._id)}>Update</button>
               </h2>
               <Link to={`/profile/${info.user._id}`}>
-
-              <h6>بواسطة: {info.user.userName}</h6>
+                <h6>بواسطة: {info.user.userName}</h6>
               </Link>
               <button onClick={() => deleteProblem(info._id)}>حذف</button>
             </div>

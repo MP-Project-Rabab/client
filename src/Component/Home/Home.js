@@ -1,4 +1,5 @@
 import React from "react";
+// End of import all dependencies
 import "./style.css";
 const Home = () => {
   return (

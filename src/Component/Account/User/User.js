@@ -14,7 +14,8 @@ import "./style.css";
 
 const User = () => {
   const [users, setUsers] = useState({});
-  const [type, setType] = useState({});
+  const [userId, setUserId] = useState("");
+  const [type, setType] = useState("");
   useEffect(() => {
     allUser();
   }, []);
@@ -57,11 +58,12 @@ const User = () => {
     }
     allUser();
   };
-  const updateUserType = async (id) => {
-    console.log(id);
+  
+  const updateUserType = async () => {
+    // console.log(id);
     try {
       const result = await axios.put(
-        `${process.env.REACT_APP_BASE_URL}/user/user-type`,type,
+        `${process.env.REACT_APP_BASE_URL}/user/user-type`,{_id:userId,userType:type},
 
         {
           headers: {
@@ -70,24 +72,23 @@ const User = () => {
         }
       );
       setType(result.data);
-      console.log(result.data);
     } catch (error) {
       console.log(error);
     }
 
     setOpen(false);
+    allUser()
   };
 
-  const handleClickOpen = () => {
+  const handleClickOpen = (id) => {
     setOpen(true);
-    
+    setUserId(id)
   };
 
   const handleClose = () => {
     allUser();
     setOpen(false);
   };
-  console.log(users);
   return (
     <div className="users">
       {users.length &&
@@ -120,7 +121,7 @@ const User = () => {
                 type="text"
                 fullWidth
                 variant="standard"
-                onChange={(ev) => setType({userType:ev.target.value})}
+                onChange={(ev) => setType(ev.target.value)}
               />
 
               <DialogActions>

@@ -1,0 +1,36 @@
+/* .cart-Component {
+    margin-top: 7px;
+    padding: 7px;
+    padding-top: 7em;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between; 
+    background: rgb(241, 62, 62);
+    height: fit-content;
+} */
+
+.continue {
+    width: 10rem;
+    border-radius: 10px;
+    /* background: #000; */
+}
+
+
+.cart-card {
+display: flex;
+justify-content: space-evenly;
+/* background: rgb(216, 33, 33); */
+width: 40rem;
+}
+
+
+.cart-card img {
+    width: 7rem;
+    height: 8rem;
+}
+
+.delete-icon {
+    font-size: 1.7rem;
+    padding-top: 0.6em;
+    cursor: pointer;
+}

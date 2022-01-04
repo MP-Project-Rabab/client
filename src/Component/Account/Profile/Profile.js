@@ -13,7 +13,7 @@ import {
 } from "@mui/material/";
 import { FaUserEdit } from "react-icons/fa";
 import { useParams } from "react-router-dom";
-
+// End of import all dependencies
 import "./style.css";
 
 const Profile = () => {
@@ -67,7 +67,6 @@ const Profile = () => {
     }
     userProfile();
   };
-  console.log(userInfo);
 
   const handleClickOpen = () => {
     setOpen(true);
@@ -77,7 +76,7 @@ const Profile = () => {
     userProfile();
     setOpen(false);
   };
-  // console.log(userInfo.userType);
+
   return (
     <div className="profile">
       <IconButton
@@ -88,7 +87,7 @@ const Profile = () => {
       >
         <FaUserEdit />
       </IconButton>
-      <img src={userInfo.avatar} alt="" className="avatar" />
+      <img src={userInfo.avatar} alt="" className="avatar2" />
       <Dialog open={open} onClose={handleClose}>
         <DialogContent>
           <FileBase
@@ -145,7 +144,7 @@ const Profile = () => {
       )}
       <h1>اسم المستخدم: </h1>
       <h2>{userInfo.userName} </h2>
-      <h1>الموقع:</h1>
+      <h1>موقعي:</h1>
       <h3>{userInfo.location} </h3>
     </div>
   );
