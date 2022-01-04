@@ -1,18 +1,19 @@
 import React, { useState, useEffect } from "react";
-import { Link, useNavigate, Navigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import axios from "axios";
 import { GiFlowerPot } from "react-icons/gi";
+import { MdOutlineLogout, MdLogin } from "react-icons/md";
 import {
   Avatar,
   Badge,
   IconButton,
-  Collapse,
+  Button,
   Box,
   Menu,
   MenuItem,
 } from "@mui/material/";
-import { useSelector, useDispatch } from "react-redux";
-import { FaEllipsisV } from "react-icons/fa";
+import { useSelector } from "react-redux";
+// End of import all dependencies
 import "./header.css";
 import logo from "../../img/logo.png";
 
@@ -23,7 +24,17 @@ const Header = () => {
     return state;
   });
 
-  //  MUI AppBar
+  // Dashboard Bar
+  const [anchorEl, setAnchorEl] = useState(null);
+  const open = Boolean(anchorEl);
+  const handleClick = (event) => {
+    setAnchorEl(event.currentTarget);
+  };
+  const handleDashboardClose = () => {
+    setAnchorEl(null);
+  };
+
+  // user  MUI AppBar
   const [anchorElUser, setAnchorElUser] = useState(null);
   const handleOpenUserMenu = (event) => {
     setAnchorElUser(event.currentTarget);
@@ -38,24 +49,27 @@ const Header = () => {
   // ////////////////////////////
   const [isLog, setIsLog] = useState(false);
   const [user, setUser] = useState("");
-  const [open, setOpen] = useState(false);
-  const [info, setInfo] = useState([]);
 
+  const [info, setInfo] = useState([]);
+  let userType = localStorage.getItem("userType");
   const navigate = useNavigate();
   useEffect(() => {
     userInfo();
-    let userid = localStorage.getItem("id");
+    log();
+  }, []);
+
+  let userid = localStorage.getItem("id");
+  const log = () => {
     if (userid) {
       setIsLog(true);
       setUser(userid);
     } else {
       setIsLog(false);
-      navigate("/login");
     }
-  }, []);
-
+  };
   const logOut = () => {
     localStorage.clear();
+    navigate("/login");
   };
   const userInfo = async () => {
     try {
@@ -81,41 +95,59 @@ const Header = () => {
       {isLog ? (
         <header>
           <img src={logo} alt="" className="logo" />
-          <Collapse in={open} timeout="auto" unmountOnExit>
-            <Box>
-              <Link to="/users">Users</Link>
-              <Link to="/productsApprove">productsApprove</Link>
+
+          {/* Dashboard bar */}
+          {userType == "admin" ? (
+            <Button
+              id="basic-button"
+              aria-controls={open ? "basic-menu" : undefined}
+              aria-haspopup="true"
+              aria-expanded={open ? "true" : undefined}
+              onClick={handleClick}
+            >
+              Dashboard
+            </Button>
+          ) : (
+            <></>
+          )}
+          <Menu
+            id="basic-menu"
+            anchorEl={anchorEl}
+            open={open}
+            onClose={handleDashboardClose}
+            MenuListProps={{
+              "aria-labelledby": "basic-button",
+            }}
+          >
+            <MenuItem onClick={handleDashboardClose}>
+              <Link to="/users">المستخدمين</Link>
+            </MenuItem>
+            <MenuItem onClick={handleDashboardClose}>
+              {" "}
+              <Link to="/productsApprove">منتجات تحتاج للتأكيد</Link>
+            </MenuItem>
+            <MenuItem onClick={handleDashboardClose}>
               <Link to="/postsApprove">postsApprove</Link>
-            </Box>
-          </Collapse>
-          <IconButton onClick={() => setOpen(!open)}>
-            <FaEllipsisV />
-          </IconButton>
-          <Badge badgeContent={cart.length} color="success">
-            <GiFlowerPot className="cart" onClick={() => navigate("/cart")} />
-          </Badge>
+            </MenuItem>
+          </Menu>
+          <h4 className="nav-cart">
+            <Badge badgeContent={cart.length} color="success">
+              <GiFlowerPot className="cart" onClick={() => navigate("/cart")} />
+            </Badge>
+            السلة
+          </h4>
           <Box sx={{ flexGrow: 0 }}>
             <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
               <Avatar
                 className="avatar"
                 alt="avatar"
                 src={info.avatar}
-                sx={{ width: 56, height: 56 }}
+                sx={{ width: 90, height: 90 }}
               />
             </IconButton>
             <Menu
-              sx={{ mt: "45px" }}
-              id="menu-appbar"
+              id="basic-menu"
               anchorEl={anchorElUser}
-              anchorOrigin={{
-                vertical: "top",
-                horizontal: "right",
-              }}
-              keepMounted
-              transformOrigin={{
-                vertical: "top",
-                horizontal: "right",
-              }}
               open={Boolean(anchorElUser)}
               onClose={handleCloseUserMenu}
             >
@@ -125,6 +157,7 @@ const Header = () => {
               <MenuItem onClick={handleClose}>
                 <Link to="/" onClick={logOut}>
                   تسجيل الخروج
+                  <MdOutlineLogout />
                 </Link>
               </MenuItem>
             </Menu>
@@ -135,7 +168,7 @@ const Header = () => {
           <img src={logo} alt="" className="logo" />
           <div className="acut">
             {/* <Link to="/register">تسجيل جديد؟</Link> */}
-            <Link to="/login">تسجيل الدخول</Link>
+            <Link to="/login">تسجيل الدخول <MdLogin /> </Link>
           </div>
         </header>
       )}

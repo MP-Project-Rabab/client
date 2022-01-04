@@ -1,5 +1,4 @@
-@import url("https://fonts.googleapis.com/css2?family=Josefin+Sans:wght@300&family=Reem+Kufi:wght@600&display=swap");
-@import url('https://fonts.googleapis.com/css2?family=Harmattan&display=swap');
+
 .h1 {
   margin: 5% 12%;
   margin-top: 16%;
@@ -13,7 +12,7 @@
 
 .p1 {
   /* background: #000; */
-  color: #68af17;
+  color: #5dcc7e;
   width: 40rem;
   margin: 0 12%;
   font-size: 30px;

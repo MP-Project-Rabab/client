@@ -1,3 +1,21 @@
+.one-post {
+    padding: 30px;
+  display: flex;
+ flex-direction: column;
+  width: 70rem;
+  margin: auto;
+  margin-top: 10em;
+  box-shadow: rgb(38, 57, 77) 0px 20px 30px -10px;
+  border-radius: 12px;
+  position: relative;
+  background: #d8e2dc;
+}
+
+
+
+
+
 .post-img {
     width: 19rem;
+    border: 2px solid #a5a58d;
 }

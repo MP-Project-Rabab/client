@@ -16,15 +16,15 @@ import User from "./Component/Account/User/User";
 import NotApproved from "./Component/notApproved/notApproved";
 import NoApproved from "./Component/Post/NoApproved";
 import Cart from "./Component/Cart/Cart";
-import pexels2 from "./img/pexels2.png"
-import green2 from "./img/green2.png"
+import f1 from "./img/f1.png"
+
 import Post from "./Component/Post/Post";
 
 function App() {
  
   return (
     <div className="App">
-        <img src={green2} alt="" className="leaf2"/>
+      
       <Header />
       <Nav />
       {/* {user ? return <Navigate to="/" replace /> : <Login />} */}
@@ -44,7 +44,7 @@ function App() {
         <Route exact path="/cart" element={<Cart />} />
         <Route exact path="/post/:id" element={<Post />} />
       </Routes>
-      <img src={pexels2} alt="" className="leaf"/>
+      <img src={f1} alt="" className="leaf"/>
     
     </div>
   );

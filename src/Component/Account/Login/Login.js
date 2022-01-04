@@ -35,10 +35,10 @@ const Login = () => {
         user: result.data.result,
       };
       dispatch(logIn(data));
-      setTimeout(() => {
-        console.log(result.data);
+      // setTimeout(() => {
+      //   console.log(result.data);
+      // },1000);
         navigate("/");
-      },1000);
       console.log(state);
     } catch (error) {
       console.log(error);

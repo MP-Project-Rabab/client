@@ -4,7 +4,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { getPost, newPost, UpdatePost, delPost } from "../../reducers/post";
 import { Link } from "react-router-dom";
 import FileBase from "react-file-base64";
-
+// End of import all dependencies
 import "./style.css";
 const Tips = () => {
  

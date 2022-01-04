@@ -1,12 +1,15 @@
+@import url("https://fonts.googleapis.com/css2?family=Josefin+Sans:wght@300&family=Reem+Kufi:wght@600&display=swap");
+@import url('https://fonts.googleapis.com/css2?family=Harmattan&display=swap');
 .App {
  position: relative;
   height: 100%;
   width: 100vw;
-  background: #eddcd2;
+  /* background: #b98b6e; */
 }
 
 .leaf {
-  height: 70rem;
+  height: 50rem;
+  width: 100%;
 }
 
 .leaf2 {
