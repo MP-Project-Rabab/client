@@ -1,17 +1,15 @@
-
-
 header {
   /* padding: 15px 15px; */
 
-  margin: 8px;
+  /* margin: 8px; */
   display: flex;
   justify-content: left;
   align-items: center;
-  /* background: #000; */
   height: 6rem;
-  right: 72%;
-  position: fixed;
+  /* right: 72%; */
+  /* position: fixed; */
   z-index: 1;
+  width: 100%;
 }
 
 a {
@@ -36,7 +34,16 @@ a {
 }
 
 .logo {
-  left: 340%;
-  position: absolute;
+  /* left: 340%;
+  position: absolute; */
   width: 15rem;
 }
+
+.nav a {
+  color:#5dcc7e;
+  /* margin-right: 2px; */
+  font-size: 23px;
+  font-weight: 900;
+  font-family: 'Harmattan', sans-serif;
+}
+

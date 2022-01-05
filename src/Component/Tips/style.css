@@ -1,12 +1,29 @@
 .tips {
-    padding: 10px;
-
-  
+  padding: 10em;
+  /* border: 2px solid black;
+  box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+  border-radius: 5px; */
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap;
 }
 
 .tips-card {
-    width: 40rem;
-  box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
-  border: 2px solid black;
-  border-radius: 5px;
+  /* background: #000; */
+  width: max-content;
+  display: flex;
+  flex-direction: column;
+  flex-wrap: wrap;
+
+}
+
+.tips-card img {
+  height: 20rem;
+  width: 17rem;
+  border-radius: 9px;
+  
+}
+
+.tips-card button {
+  width: 3.4rem;
 }

@@ -1,6 +1,7 @@
 .one-post {
     padding: 30px;
   display: flex;
+  /* align-items: center; */
  flex-direction: column;
   width: 70rem;
   margin: auto;
@@ -11,11 +12,35 @@
   background: #d8e2dc;
 }
 
+.post-img {
+  margin-top: 5em;
+}
 
 
+.textarea {
+  width: 22rem;
+}
 
+.comment-bttn {
+  width: 5rem;
+}
 
+.avatar2 {
+  width: 4rem;
+  height: 5rem;
+  padding-left: 12px;
+}
+
+.user {
+  display: inline-flex;
+  padding: 9px;
+}
 .post-img {
     width: 19rem;
     border: 2px solid #a5a58d;
+}
+
+
+.edit {
+  cursor: pointer;
 }

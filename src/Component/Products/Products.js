@@ -14,15 +14,18 @@ import {
   DialogActions,
   Dialog,
   Rating,
+  IconButton,
 } from "@mui/material";
+import { FiEdit3 } from "react-icons/fi";
 import { BsPatchPlus, BsCartPlusFill } from "react-icons/bs";
+import { CgCloseO } from "react-icons/cg";
 import FileBase from "react-file-base64";
-import SwipeableViews from 'react-swipeable-views';
-import { autoPlay } from 'react-swipeable-views-utils';
+import SwipeableViews from "react-swipeable-views";
+import { autoPlay } from "react-swipeable-views-utils";
 // End of import all dependencies
-import f3 from '../../img/f3.jpg'
-import g5 from '../../img/g5.jpg'
-import f2 from '../../img/f2.jpg'
+import f3 from "../../img/f3.jpg";
+import g5 from "../../img/g5.jpg";
+import f2 from "../../img/f2.jpg";
 
 import "./style.css";
 ///////////////////////////
@@ -35,7 +38,9 @@ const Products = () => {
   });
   const [msg, setMsg] = useState("");
   const [open, setOpen] = useState(false);
+  const [update, setUpdate] = useState(false);
   const [cart, setCart] = useState();
+  const [productId, setProductId] = useState("");
   const [rates, setRates] = useState({
     rate: 0,
     productId: "",
@@ -43,23 +48,22 @@ const Products = () => {
   });
   const [product, setProduct] = useState({
     seller: state.signIn.id,
-    img: "",
-    name: "",
-    price: 0,
-    Quantity: 0,
+    img: state.productsReducer.products.img,
+    name: state.productsReducer.products.name,
+    price: state.productsReducer.products.price,
+    Quantity: state.productsReducer.products.Quantity,
   });
-const dispatch = useDispatch();
-// Swipe image handle
-const AutoPlaySwipeableViews = autoPlay(SwipeableViews);
-const MyComponent = () => (
-  <AutoPlaySwipeableViews className="Swipe">
-    <img src={f3} alt="" className="b1"/>
-    <img src={g5} alt="" className="b2"/>
-    <img src={f2} alt="" className="b3"/>
-   
-    
-  </AutoPlaySwipeableViews>
-);
+
+  const dispatch = useDispatch();
+  // Swipe image handle
+  const AutoPlaySwipeableViews = autoPlay(SwipeableViews);
+  const MyComponent = () => (
+    <AutoPlaySwipeableViews className="Swipe">
+      <img src={f3} alt="" className="b1" />
+      <img src={g5} alt="" className="b2" />
+      <img src={f2} alt="" className="b3" />
+    </AutoPlaySwipeableViews>
+  );
 
   // Get All Products function
   const allProducts = async () => {
@@ -81,6 +85,7 @@ const MyComponent = () => (
       console.log(error);
     }
   };
+  console.log(state.productsReducer.products);
   // Add New Products function
   const addProducts = async () => {
     try {
@@ -103,9 +108,9 @@ const MyComponent = () => (
   // update Product function
   const updateProducts = async () => {
     try {
-      const result = await axios.delete(
+      const result = await axios.put(
         `${process.env.REACT_APP_BASE_URL}/products/update`,
-        product,
+        { _id: productId, ...product },
 
         {
           headers: {
@@ -113,18 +118,19 @@ const MyComponent = () => (
           },
         }
       );
+      console.log(result.data);
       dispatch(UpdateProducts({ products: result.data }));
     } catch (error) {
       console.log(error);
     }
     allProducts();
+    setUpdate(false);
   };
   // delete Product function
-  const deleteProducts = async () => {
+  const deleteProducts = async (id) => {
     try {
       const result = await axios.delete(
-        `${process.env.REACT_APP_BASE_URL}/products/delete`,
-        product,
+        `${process.env.REACT_APP_BASE_URL}/products/delete?_id=${id}&adminId=${state.signIn.id}`,
 
         {
           headers: {
@@ -176,8 +182,11 @@ const MyComponent = () => (
         }
       );
       setCart(result.data);
-      {result.status == 200? (setMsg("تم إضافته للسله")) : 
-      (setMsg("لم تتم اضافته للسله") )}
+      {
+        result.status == 200
+          ? setMsg("تم إضافته للسله")
+          : setMsg("لم تتم اضافته للسله");
+      }
       console.log(result.data);
     } catch (error) {
       console.log(error);
@@ -190,102 +199,177 @@ const MyComponent = () => (
   const handleClickOpen = () => {
     setOpen(true);
   };
-
   const handleClose = () => {
     setOpen(false);
   };
-  
- 
+  const handleUpdateOpen = (id) => {
+    setUpdate(true);
+    setProductId(id);
+  };
+  const handleUpdateClose = () => {
+    setUpdate(false);
+  };
+
   return (
     <>
       {MyComponent()}
-    <div className="products">
-      {state.productsReducer.products.length &&
-        state.productsReducer.products.map((info) => {
-          return (
-            <div key={info._id} className="products-card">
-              <img src={info.img} alt="" />
-              <Rating
-                name="half-rating"
-                defaultValue={0}
-                precision={0.5}
-                className="rate"
-                onClick={() => addRate(info._id)}
-                onChange={(ev) =>
-                  setRates({ ...rates, rate: ev.target.defaultValue })
-                }
-              />
-              <h2>{info.name}</h2>
-              <h5>متوفر:{info.Quantity} </h5>
-              <h4>{info.price} ر.س</h4>
-              <button className="bttn" onClick={() => addToCart(info._id)}>
-                <BsCartPlusFill />
-                اضف للسله
-              </button>
-            </div>
-          );
-        })}
-      {state.userType == "seller" ? (
-        <BsPatchPlus className="add" onClick={handleClickOpen} />
-      ) : (
-        <></>
-      )}
+      <div className="products">
+        {state.productsReducer.products.length &&
+          state.productsReducer.products.map((info) => {
+            return (
+              <div key={info._id} className="products-card">
+                <CgCloseO onClick={() => deleteProducts(info._id)} />
+                <img src={info.img} alt="" />
+                <IconButton
+                  color="primary"
+                  aria-label="upload picture"
+                  component="span"
+                  onClick={() => handleUpdateOpen(info._id)}
+                >
+                  <FiEdit3 />
+                </IconButton>
+                <Rating
+                  name="half-rating"
+                  defaultValue={0}
+                  precision={0.5}
+                  className="rate"
+                  onClick={() => addRate(info._id)}
+                  onChange={(ev) =>
+                    setRates({ ...rates, rate: ev.target.defaultValue })
+                  }
+                />
+                <h2>{info.name}</h2>
+                <h5>متوفر:{info.Quantity} </h5>
+                <h4>{info.price} ر.س</h4>
+                <button className="bttn" onClick={() => addToCart(info._id)}>
+                  <BsCartPlusFill />
+                  اضف للسله
+                </button>
+              </div>
+            );
+          })}
+        {state.signIn.userType == "seller" ? (
+          <BsPatchPlus className="add" onClick={handleClickOpen} />
+        ) : (
+          <></>
+        )}
+        {/* For updating a product */}
+        <Dialog open={update} onClose={handleUpdateClose}>
+          <DialogContent>
+            <FileBase
+              type="file"
+              label="تحديث صورة"
+              multiple={false}
+              onDone={({ base64, base64: string }) =>
+                setProduct({ ...product, img: base64 })
+              }
+            />
+            <TextField
+              margin="dense"
+              id="name"
+              name="name"
+              label="تحديث اسم النتج"
+              type="text"
+              fullWidth
+              variant="standard"
+              value={product.name}
+              onChange={(ev) =>
+                setProduct({ ...product, name: ev.target.value })
+              }
+            />
+            <TextField
+              id="standard-number"
+              label="تحديث السعر"
+              type="number"
+              fullWidth
+              InputLabelProps={{
+                shrink: true,
+              }}
+              variant="standard"
+              onChange={(ev) =>
+                setProduct({ ...product, price: ev.target.value })
+              }
+            />
+            <TextField
+              id="standard-number"
+              label="تحديث الكميه"
+              type="number"
+              fullWidth
+              InputLabelProps={{
+                shrink: true,
+              }}
+              variant="standard"
+              onChange={(ev) =>
+                setProduct({ ...product, Quantity: ev.target.value })
+              }
+            />
 
-      <Dialog open={open} onClose={handleClose}>
-        <DialogContent>
-          <FileBase
-            type="file"
-            label="اضف صورة"
-            multiple={false}
-            onDone={({ base64, base64: string }) =>
-              setProduct({ ...product, img: base64 })
-            }
-          />
-          <TextField
-            margin="dense"
-            id="name"
-            name="name"
-            label="اسم النتج"
-            type="text"
-            fullWidth
-            variant="standard"
-            value={product.name}
-            onChange={(ev) => setProduct({ ...product, name: ev.target.value })}
-          />
-          <TextField
-            id="standard-number"
-            label="اضف السعر"
-            type="number"
-            fullWidth
-            InputLabelProps={{
-              shrink: true,
-            }}
-            variant="standard"
-            onChange={(ev) =>
-              setProduct({ ...product, price: ev.target.value })
-            }
-          />
-          <TextField
-            id="standard-number"
-            label="اضف الكميه"
-            type="number"
-            fullWidth
-            InputLabelProps={{
-              shrink: true,
-            }}
-            variant="standard"
-            onChange={(ev) =>
-              setProduct({ ...product, Quantity: ev.target.value })
-            }
-          />
-          <DialogActions>
-            <Button onClick={handleClose}>Cancel</Button>
-            <Button onClick={handleAddProduct}>ADD</Button>
-          </DialogActions>
-        </DialogContent>
-      </Dialog>
-      <h1>{msg}</h1>
-    </div>
+            <DialogActions>
+              <Button onClick={handleUpdateClose}>تراجع</Button>
+              <Button onClick={updateProducts}>تحديث</Button>
+            </DialogActions>
+          </DialogContent>
+        </Dialog>
+        {/* End */}
+        {/* For adding a new product */}
+        <Dialog open={open} onClose={handleClose}>
+          <DialogContent>
+            <FileBase
+              type="file"
+              label="اضف صورة"
+              multiple={false}
+              onDone={({ base64, base64: string }) =>
+                setProduct({ ...product, img: base64 })
+              }
+            />
+            <TextField
+              margin="dense"
+              id="name"
+              name="name"
+              label="اسم النتج"
+              type="text"
+              fullWidth
+              variant="standard"
+              value={product.name}
+              onChange={(ev) =>
+                setProduct({ ...product, name: ev.target.value })
+              }
+            />
+            <TextField
+              id="standard-number"
+              label="اضف السعر"
+              type="number"
+              fullWidth
+              InputLabelProps={{
+                shrink: true,
+              }}
+              variant="standard"
+              onChange={(ev) =>
+                setProduct({ ...product, price: ev.target.value })
+              }
+            />
+            <TextField
+              id="standard-number"
+              label="اضف الكميه"
+              type="number"
+              fullWidth
+              InputLabelProps={{
+                shrink: true,
+              }}
+              variant="standard"
+              onChange={(ev) =>
+                setProduct({ ...product, Quantity: ev.target.value })
+              }
+            />
+            <DialogActions>
+              <Button onClick={handleClose}>Cancel</Button>
+              <Button onClick={handleAddProduct}>ADD</Button>
+            </DialogActions>
+          </DialogContent>
+        </Dialog>
+        {/* End */}
+        <h1>{msg}</h1>
+      </div>
     </>
   );
 };
