@@ -1,7 +1,8 @@
 .products {
   padding: 30px;
-  display: grid;
-  grid-template-columns: auto auto auto;
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap;
   background: #fff;
   width: 80rem;
   margin: auto;
@@ -15,6 +16,7 @@
   width: fit-content;
   height: fit-content;
   padding: 5px;
+  padding-top: 70px;
   display: flex;
   flex-direction: column;
 }
@@ -62,18 +64,18 @@
 }
 
 .b1{
-background: rgb(28, 218, 224);
+/* background: rgb(28, 218, 224); */
 height: 33rem;
 width: 90%;
 }
 .b2{
-background: rgb(164, 226, 47);
+/* background: rgb(164, 226, 47); */
 height: 33rem;
 width: 90%;
 
 }
 .b3{
-background: rgb(219, 21, 21);
+/* background: rgb(219, 21, 21); */
 height: 33rem;
 width: 90%;
 

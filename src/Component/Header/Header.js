@@ -11,7 +11,8 @@ import {
   Box,
   Menu,
   MenuItem,
-} from "@mui/material/";
+} from "@mui/material";
+import { IoStorefrontOutline } from "react-icons/io5";
 import { useSelector } from "react-redux";
 // End of import all dependencies
 import "./header.css";
@@ -65,11 +66,13 @@ const Header = () => {
       setUser(userid);
     } else {
       setIsLog(false);
+      navigate("/login");
     }
   };
   const logOut = () => {
     localStorage.clear();
-    navigate("/login");
+    setIsLog(false);
+    setUser("");
   };
   const userInfo = async () => {
     try {
@@ -82,7 +85,6 @@ const Header = () => {
           },
         }
       );
-      console.log(result.data);
       setInfo(result.data);
       setCart(result.data.cart);
     } catch (error) {
@@ -95,7 +97,22 @@ const Header = () => {
       {isLog ? (
         <header>
           <img src={logo} alt="" className="logo" />
-
+          <nav className="nav">
+            <Button sx={{ my: 2, color: "white"}}>
+              <Link to="/">الرئيسية</Link>
+            </Button>
+            <Button sx={{ my: 2, color: "white"}}>
+              <Link to="/tips">طرق العنايه بالنباتات</Link>
+            </Button>
+            <Button sx={{ my: 2, color: "white"}}>
+              <Link to="/problems">المشاكل والحلول</Link>
+            </Button>
+            <Button sx={{ my: 2, color: "white"}}>
+              <Link to="/products">
+                المتجر <IoStorefrontOutline />
+              </Link>
+            </Button>
+          </nav>
           {/* Dashboard bar */}
           {userType == "admin" ? (
             <Button
@@ -168,7 +185,9 @@ const Header = () => {
           <img src={logo} alt="" className="logo" />
           <div className="acut">
             {/* <Link to="/register">تسجيل جديد؟</Link> */}
-            <Link to="/login">تسجيل الدخول <MdLogin /> </Link>
+            <Link to="/login">
+              تسجيل الدخول <MdLogin />{" "}
+            </Link>
           </div>
         </header>
       )}

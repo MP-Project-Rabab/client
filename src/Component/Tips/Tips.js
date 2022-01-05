@@ -4,6 +4,14 @@ import { useDispatch, useSelector } from "react-redux";
 import { getPost, newPost, UpdatePost, delPost } from "../../reducers/post";
 import { Link } from "react-router-dom";
 import FileBase from "react-file-base64";
+import { BsPatchPlus } from "react-icons/bs";
+import {
+  TextField,
+  Button,
+  DialogContent,
+  DialogActions,
+  Dialog,
+} from "@mui/material";
 // End of import all dependencies
 import "./style.css";
 const Tips = () => {
@@ -22,6 +30,7 @@ const Tips = () => {
     isAdvice: true,
     title: "",
   });
+  const [open, setOpen] = useState(false);
   const dispatch = useDispatch();
 
   // Get All Tip function
@@ -44,7 +53,6 @@ const Tips = () => {
       console.log(error);
     }
   };
-  console.log(state);
 
   // Add new Tip function
   const newTip = async () => {
@@ -60,35 +68,14 @@ const Tips = () => {
         }
       );
       dispatch(newPost({ posts: result.data }));
-    } catch (error) {
-      console.log(error);
-    }
-    allTip();
-  };
-  // update Tip function
-  const update = async (id) => {
-    try {
-      const result = await axios.put(
-        `${process.env.REACT_APP_BASE_URL}/posts/update`,
-        {
-          title: tip.title,
-          _id: id,
-        },
-        {
-          headers: {
-            Authorization: `Bearer ${state.signIn.token}`,
-          },
-        }
-      );
-
-      dispatch(UpdatePost(result.data));
+      setOpen(false);
     } catch (error) {
       console.log(error);
     }
     allTip();
   };
 
-  // Delete Tip function
+  // // Delete Tip function
   const deleteTip = async (id) => {
     try {
       const result = await axios.delete(
@@ -109,45 +96,67 @@ const Tips = () => {
     allTip();
   };
 
+  const handleClickOpen = () => {
+    setOpen(true);
+  };
+
+  const handleClose = () => {
+    setOpen(false);
+  };
   return (
     <div className="tips">
-      <h1>Tips Component</h1>
+      <BsPatchPlus onClick={handleClickOpen} className="add2"/>
       {state.postReducer.posts.length &&
         state.postReducer.posts.map((info) => {
           return (
             <div key={info._id} className="tips-card">
               <img src={info.img} alt="" />
               <h2>
-                <Link to={`/post/${info._id}`}>
-                {info.title}
-                </Link>
-                <input
-                  type="text"
-                  name=""
-                  id=""
-                  onChange={(ev) => setTip({ ...tip, title: ev.target.value })}
-                />
-                <button onClick={() => update(info._id)}>Update</button>
+            {info.title}
               </h2>
               <h6>بواسطة: {info.user.userName}</h6>
               <button onClick={() => deleteTip(info._id)}>حذف</button>
+              <Link to={`/post/${info._id}`}>
+                المزيد
+                </Link>
+               
             </div>
           );
         })}
-      <input
+         <Dialog open={open} onClose={handleClose}>
+         <DialogContent>
+       
+      <FileBase
+        type="file"
+        multiple={false}
+        onDone={({ base64, base64: string }) =>
+        setTip({ ...tip, img: base64 })
+        }
+      />
+      <TextField
+        margin="dense"
+        id="name"
+        name="name"
+        label="العنوان:"
         type="text"
-        name=""
-        id=""
+        variant="standard"
         onChange={(ev) => setTip({ ...tip, title: ev.target.value })}
       />
-      <textarea
-        name=""
-        id=""
-        cols="30"
-        rows="10"
+
+      <TextField
+        id="standard-textarea"
+        label=""
+        placeholder="Placeholder"
+        multiline
+        variant="standard"
         onChange={(ev) => setTip({ ...tip, desc: ev.target.value })}
-      ></textarea>
-      <button onClick={newTip}>Add</button>
+      />
+       <DialogActions>
+            <Button onClick={handleClose}>تراجع</Button>
+            <Button onClick={newTip}>اضافه</Button>
+          </DialogActions>
+      </DialogContent>
+      </Dialog>
     </div>
   );
 };

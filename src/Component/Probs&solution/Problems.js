@@ -8,6 +8,7 @@ import {
   DialogContent,
   DialogActions,
   Dialog,
+  Divider
 } from "@mui/material";
 import { BsPatchPlus } from "react-icons/bs";
 import FileBase from "react-file-base64";
@@ -30,6 +31,8 @@ const Problems = () => {
     isProblem: true,
     title: "",
   });
+  const [open, setOpen] = useState(false);
+
   const dispatch = useDispatch();
 
   // Get All Problems function
@@ -68,6 +71,7 @@ const Problems = () => {
         }
       );
       dispatch(newPost({ posts: result.data }));
+      setOpen(false);
     } catch (error) {
       console.log(error);
     }
@@ -116,14 +120,22 @@ const Problems = () => {
     }
     allProblems();
   };
+  const handleClickOpen = () => {
+    setOpen(true);
+  };
+
+  const handleClose = () => {
+    // userProfile();
+    setOpen(false);
+  };
 
   return (
-    <div>
-      <h1>Problems Component</h1>
+    <div className="problem">
+    <BsPatchPlus onClick={handleClickOpen} className="add2"/>
       {state.postReducer.posts.length &&
         state.postReducer.posts.map((info) => {
           return (
-            <div key={info._id} className="tips-card">
+            <div key={info._id} className="prob-card">
               <h2>
                 <Link to={`/post/${info._id}`}>{info.title}</Link>
                 <input
@@ -140,9 +152,13 @@ const Problems = () => {
                 <h6>بواسطة: {info.user.userName}</h6>
               </Link>
               <button onClick={() => deleteProblem(info._id)}>حذف</button>
+              <Divider ariant="inset" />
             </div>
           );
         })}
+         <Dialog open={open} onClose={handleClose}>
+         <DialogContent>
+       
       <FileBase
         type="file"
         multiple={false}
@@ -157,7 +173,6 @@ const Problems = () => {
         label="عنوان المشكلة:"
         type="text"
         variant="standard"
-        // value={product.name}
         onChange={(ev) => setProblem({ ...problem, title: ev.target.value })}
       />
 
@@ -169,7 +184,12 @@ const Problems = () => {
         variant="standard"
         onChange={(ev) => setProblem({ ...problem, desc: ev.target.value })}
       />
-      <Button onClick={newProblem}>ADD</Button>
+       <DialogActions>
+            <Button onClick={handleClose}>تراجع</Button>
+            <Button onClick={newProblem}>اضافه</Button>
+          </DialogActions>
+      </DialogContent>
+      </Dialog>
     </div>
   );
 };

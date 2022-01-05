@@ -1,0 +1,16 @@
+.problem {
+    padding: 3em;
+    margin-top: 13em;
+    border: 2px solid black;
+    /* box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px; */
+    border-radius: 5px;
+}
+
+
+.add2 {
+    font-size: 3.5rem;
+    position: fixed;
+    left: 3%;
+    top: 77%;
+    cursor: pointer;
+  }

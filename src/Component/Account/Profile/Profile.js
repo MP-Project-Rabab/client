@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
-import { useSelector } from "react-redux";
+import { useSelector,useDispatch } from "react-redux";
 import FileBase from "react-file-base64";
 import {
   IconButton,
@@ -26,12 +26,15 @@ const Profile = () => {
   });
   useEffect(() => {
     userProfile();
+    userProducts()
   }, []);
 
   const [open, setOpen] = useState(false);
+  const [product, setProduct] = useState({});
   const state = useSelector((state) => {
     return state;
   });
+  const dispatch = useDispatch()
   const userProfile = async () => {
     try {
       const result = await axios.get(
@@ -68,6 +71,23 @@ const Profile = () => {
     userProfile();
   };
 
+  // Get user Products function
+  const userProducts = async () => {
+    try {
+      const result = await axios.get(
+        `${process.env.REACT_APP_BASE_URL}/products/by?user=`,
+
+        {
+          headers: {
+            Authorization: `Bearer ${state.signIn.token}`,
+          },
+        }
+      );
+      setProduct(result.data)
+    } catch (error) {
+      console.log(error);
+    }
+  };
   const handleClickOpen = () => {
     setOpen(true);
   };

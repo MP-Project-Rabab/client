@@ -26,7 +26,7 @@ function App() {
     <div className="App">
       
       <Header />
-      <Nav />
+      {/* <Nav /> */}
       {/* {user ? return <Navigate to="/" replace /> : <Login />} */}
       <Routes>
         <Route exact path="/" element={<Home />} />

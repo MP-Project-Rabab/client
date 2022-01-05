@@ -2,7 +2,7 @@
 .h1 {
   margin: 5% 12%;
   margin-top: 16%;
-  font-size: 9em;
+  font-size: 6em;
   font-family: "Reem Kufi", sans-serif;
   width: 60rem;
   /* background: #000; */
@@ -12,9 +12,86 @@
 
 .p1 {
   /* background: #000; */
-  color: #5dcc7e;
+  color: #52b788;
   width: 40rem;
   margin: 0 12%;
   font-size: 30px;
   font-family: 'Harmattan', sans-serif;
 }
+
+.section2 {
+  position: relative;
+  padding: 6rem;
+  padding-top: 20rem;
+  padding-right: 11rem;
+}
+
+.section2 h1{
+  position: absolute;
+  top: 30%;
+  left: 5%;
+  /* background: #000; */
+  width: 40rem;
+  font-family: "Reem Kufi", sans-serif;
+  color: #6b705c;
+
+}
+.section2 p{
+  position: absolute;
+  top: 42%;
+  left: 5%;
+  font-weight: 800;
+  /* background: #000; */
+  color: #52b788;
+  width: 40rem;
+  font-family: 'Harmattan', sans-serif;
+  font-size: 2em;
+
+}
+.box1 {
+  position: absolute;
+  bottom: 23%;
+  left: 55%;
+  background: #52b788;
+  width: 25rem;
+  height: 33rem;
+  z-index: -1;
+  border-radius: 9px;
+  box-shadow: rgb(38, 57, 77) 0px 20px 30px -10px;}
+
+.img1 {
+  width: 23rem;
+  border-radius: 9px;
+  box-shadow: rgb(38, 57, 77) 0px 20px 30px -10px;
+}
+
+
+.img2{
+  /* direction: ltr; */
+  width: 23rem;
+  border-radius: 9px;
+  box-shadow: rgb(38, 57, 77) 0px 20px 30px -10px;
+}
+
+.section3{
+  /* direction: ltr; */
+  margin-top: 10rem;
+  display: flex;
+  background: hsl(141, 45%, 81%);
+  height: 20rem;
+  width: 80rem;
+}
+.section3 h1{
+  /* direction: rtl; */
+  width: 40rem;
+  font-family: "Reem Kufi", sans-serif;
+  color: #6b705c;
+}
+
+/* .box2 {
+background: #1b4332;
+width: 100%;
+} */
+
+
+
