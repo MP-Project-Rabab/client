@@ -1,5 +1,5 @@
 .tips {
-  padding: 10em;
+  padding-top: 13em;
   /* border: 2px solid black;
   box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
   border-radius: 5px; */
@@ -26,4 +26,13 @@
 
 .tips-card button {
   width: 3.4rem;
+}
+
+
+@media screen and (max-width: 600px) {
+  .tips-card a {
+    margin-bottom: 2em;
+    
+   
+  }
 }
