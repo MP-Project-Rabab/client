@@ -1,15 +1,10 @@
-header {
-  /* padding: 15px 15px; */
-
-  /* margin: 8px; */
+.header header {
   display: flex;
-  justify-content: left;
+  justify-content: space-around;
   align-items: center;
   height: 6rem;
-  /* right: 72%; */
-  /* position: fixed; */
-  z-index: 1;
   width: 100%;
+  margin-top: 2rem;
 }
 
 a {
@@ -25,25 +20,44 @@ a {
 .nav-cart {
   display: flex;
   flex-direction: column;
-  padding: 50px;
   cursor: pointer;
-  /* position: absolute; */
 }
+
 .cart {
   font-size: 2.7rem;
 }
 
 .logo {
-  /* left: 340%;
-  position: absolute; */
-  width: 15rem;
+  width: 12rem;
+  border-radius: 50px;
 }
 
 .nav a {
-  color:#5dcc7e;
-  /* margin-right: 2px; */
+  color: #5dcc7e;
   font-size: 23px;
   font-weight: 900;
-  font-family: 'Harmattan', sans-serif;
+  font-family: "Harmattan", sans-serif;
 }
 
+
+@media screen and (max-width: 900px) {
+  .header header {
+    display: flex;
+
+    justify-content: right;
+    align-items: center;
+    height: 6rem;
+    margin-top: 2rem;
+  }
+  
+  .logo {
+    width: 10rem;
+    border-radius: 50px;
+  }
+
+  .avatar {
+    width: 4rem;
+    box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+  }
+  
+}

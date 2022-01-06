@@ -12,6 +12,7 @@ import "./style.css";
 
 const Login = () => {
   const navigate = useNavigate();
+  const [msg, setMsg] = useState("");
 
   const dispatch = useDispatch();
   const state = useSelector((state) => {
@@ -35,11 +36,9 @@ const Login = () => {
         user: result.data.result,
       };
       dispatch(logIn(data));
-      // setTimeout(() => {
-      //   console.log(result.data);
-      // },1000);
-        navigate("/");
-      console.log(state);
+      navigate("/");
+      {result.status == 400 ? (setMsg("الإيميل أو كلمة السر غير صحيح")) : 
+      (setMsg("تم تسجيل الدخول") )}
     } catch (error) {
       console.log(error);
     }
@@ -86,6 +85,7 @@ const Login = () => {
           </h4>
         </Stack>
       </Container>
+      <h1 className="msg">{msg}</h1>
     </div>
   );
 };

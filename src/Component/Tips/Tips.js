@@ -15,7 +15,6 @@ import {
 // End of import all dependencies
 import "./style.css";
 const Tips = () => {
- 
   useEffect(() => {
     allTip();
   }, []);
@@ -103,59 +102,59 @@ const Tips = () => {
   const handleClose = () => {
     setOpen(false);
   };
+  console.log(state.postReducer.posts.user);
   return (
     <div className="tips">
-      <BsPatchPlus onClick={handleClickOpen} className="add2"/>
+      <BsPatchPlus onClick={handleClickOpen} className="add2" />
       {state.postReducer.posts.length &&
         state.postReducer.posts.map((info) => {
           return (
             <div key={info._id} className="tips-card">
               <img src={info.img} alt="" />
-              <h2>
-            {info.title}
-              </h2>
+              <h2>{info.title}</h2>
               <h6>بواسطة: {info.user.userName}</h6>
-              <button onClick={() => deleteTip(info._id)}>حذف</button>
-              <Link to={`/post/${info._id}`}>
-                المزيد
-                </Link>
-               
+              {state.signIn.id == info.user._id ? (
+                <button onClick={() => deleteTip(info._id)}>حذف</button>
+              ) : (
+                <></>
+              )}
+
+              <Link to={`/post/${info._id}`}>أقرأ المزيد...</Link>
             </div>
           );
         })}
-         <Dialog open={open} onClose={handleClose}>
-         <DialogContent>
-       
-      <FileBase
-        type="file"
-        multiple={false}
-        onDone={({ base64, base64: string }) =>
-        setTip({ ...tip, img: base64 })
-        }
-      />
-      <TextField
-        margin="dense"
-        id="name"
-        name="name"
-        label="العنوان:"
-        type="text"
-        variant="standard"
-        onChange={(ev) => setTip({ ...tip, title: ev.target.value })}
-      />
+      <Dialog open={open} onClose={handleClose}>
+        <DialogContent>
+          <FileBase
+            type="file"
+            multiple={false}
+            onDone={({ base64, base64: string }) =>
+              setTip({ ...tip, img: base64 })
+            }
+          />
+          <TextField
+            margin="dense"
+            id="name"
+            name="name"
+            label="العنوان:"
+            type="text"
+            variant="standard"
+            onChange={(ev) => setTip({ ...tip, title: ev.target.value })}
+          />
 
-      <TextField
-        id="standard-textarea"
-        label=""
-        placeholder="Placeholder"
-        multiline
-        variant="standard"
-        onChange={(ev) => setTip({ ...tip, desc: ev.target.value })}
-      />
-       <DialogActions>
+          <TextField
+            id="standard-textarea"
+            label=""
+            placeholder="Placeholder"
+            multiline
+            variant="standard"
+            onChange={(ev) => setTip({ ...tip, desc: ev.target.value })}
+          />
+          <DialogActions>
             <Button onClick={handleClose}>تراجع</Button>
             <Button onClick={newTip}>اضافه</Button>
           </DialogActions>
-      </DialogContent>
+        </DialogContent>
       </Dialog>
     </div>
   );

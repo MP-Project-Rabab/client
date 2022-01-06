@@ -42,10 +42,8 @@
 
 .rate {
   direction: ltr;
- /* left: 60%; */
- align-self:flex-start;
+  align-self: flex-start;
 }
-
 
 .bttn {
   height: 1.8rem;
@@ -63,20 +61,57 @@
   margin-left: 9em;
 }
 
-.b1{
-/* background: rgb(28, 218, 224); */
-height: 33rem;
-width: 90%;
+.b1 {
+  /* background: rgb(28, 218, 224); */
+  height: 33rem;
+  width: 90%;
 }
-.b2{
-/* background: rgb(164, 226, 47); */
-height: 33rem;
-width: 90%;
+.b2 {
+  /* background: rgb(164, 226, 47); */
+  height: 33rem;
+  width: 90%;
+}
+.b3 {
+  /* background: rgb(219, 21, 21); */
+  height: 33rem;
+  width: 90%;
+}
 
+@media screen and (max-width: 600px) {
+  .products {
+    width: 80vw;
+    height: 80vh;
+    /* background: rgb(216, 152, 152); */
+    box-shadow: rgb(38, 57, 77) 0px 20px 30px -10px;
+  }
+  .products-card {
+    width: 6rem;
+    height: 6rem;
+    padding: 5px;
+    /* padding-top: 70px; */
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-evenly;
+    flex-direction: row;
+    margin-left: 0.6rem;
+  }
+
+  .products-card img {
+    width: 9rem;
+    height: 9rem;
+  }
+  
+  .add {
+  font-size: 3rem;
+  position: fixed;
+  left: 3%;
+  top: 85%;
+  cursor: pointer;
 }
-.b3{
-/* background: rgb(219, 21, 21); */
-height: 33rem;
-width: 90%;
+.rate {
+  direction: ltr;
+  align-self: flex-start;
+    background: #000;
+}
 
 }
