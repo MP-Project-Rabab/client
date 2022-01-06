@@ -24,8 +24,7 @@ const Register = () => {
         `${process.env.REACT_APP_BASE_URL}/user/register`,
         register
       );
-      console.log(result);
-      
+     
       {result.status == 210? (setMsg("ادخل كلمة سر قويه")) : 
       (setMsg("Active your Email") )}
       // navigate("/")

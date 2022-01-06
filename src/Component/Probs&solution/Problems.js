@@ -138,19 +138,11 @@ const Problems = () => {
             <div key={info._id} className="prob-card">
               <h2>
                 <Link to={`/post/${info._id}`}>{info.title}</Link>
-                <input
-                  type="text"
-                  name=""
-                  id=""
-                  onChange={(ev) =>
-                    setProblem({ ...problem, title: ev.target.value })
-                  }
-                />
-                <button onClick={() => update(info._id)}>Update</button>
               </h2>
-              <Link to={`/profile/${info.user._id}`}>
-                <h6>بواسطة: {info.user.userName}</h6>
-              </Link>
+              {/* <Link to={`/profile/${info.user._id}`}>
+                
+              </Link> */}
+              <h6>بواسطة: {info.user.userName}</h6>
               <button onClick={() => deleteProblem(info._id)}>حذف</button>
               <Divider ariant="inset" />
             </div>

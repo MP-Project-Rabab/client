@@ -220,14 +220,19 @@ const Products = () => {
               <div key={info._id} className="products-card">
                 <CgCloseO onClick={() => deleteProducts(info._id)} />
                 <img src={info.img} alt="" />
-                <IconButton
-                  color="primary"
-                  aria-label="upload picture"
-                  component="span"
-                  onClick={() => handleUpdateOpen(info._id)}
-                >
-                  <FiEdit3 />
-                </IconButton>
+                {state.signIn.id == info.seller._id ? (
+              <IconButton
+              color="primary"
+              aria-label="upload picture"
+              component="span"
+              onClick={() => handleUpdateOpen(info._id)}
+            >
+              <FiEdit3 />
+            </IconButton>
+        ) : (
+          <></>
+        )}
+              
                 <Rating
                   name="half-rating"
                   defaultValue={0}

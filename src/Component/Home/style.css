@@ -1,4 +1,3 @@
-
 .h1 {
   margin: 5% 12%;
   margin-top: 16%;
@@ -16,7 +15,7 @@
   width: 40rem;
   margin: 0 12%;
   font-size: 30px;
-  font-family: 'Harmattan', sans-serif;
+  font-family: "Harmattan", sans-serif;
 }
 
 .section2 {
@@ -26,7 +25,7 @@
   padding-right: 11rem;
 }
 
-.section2 h1{
+.section2 h1 {
   position: absolute;
   top: 30%;
   left: 5%;
@@ -34,9 +33,8 @@
   width: 40rem;
   font-family: "Reem Kufi", sans-serif;
   color: #6b705c;
-
 }
-.section2 p{
+.section2 p {
   position: absolute;
   top: 42%;
   left: 5%;
@@ -44,9 +42,8 @@
   /* background: #000; */
   color: #52b788;
   width: 40rem;
-  font-family: 'Harmattan', sans-serif;
+  font-family: "Harmattan", sans-serif;
   font-size: 2em;
-
 }
 .box1 {
   position: absolute;
@@ -57,7 +54,8 @@
   height: 33rem;
   z-index: -1;
   border-radius: 9px;
-  box-shadow: rgb(38, 57, 77) 0px 20px 30px -10px;}
+  box-shadow: rgb(38, 57, 77) 0px 20px 30px -10px;
+}
 
 .img1 {
   width: 23rem;
@@ -65,15 +63,14 @@
   box-shadow: rgb(38, 57, 77) 0px 20px 30px -10px;
 }
 
-
-.img2{
+.img2 {
   /* direction: ltr; */
   width: 23rem;
   border-radius: 9px;
   box-shadow: rgb(38, 57, 77) 0px 20px 30px -10px;
 }
 
-.section3{
+.section3 {
   /* direction: ltr; */
   margin-top: 10rem;
   display: flex;
@@ -81,7 +78,7 @@
   height: 20rem;
   width: 80rem;
 }
-.section3 h1{
+.section3 h1 {
   /* direction: rtl; */
   width: 40rem;
   font-family: "Reem Kufi", sans-serif;
@@ -93,5 +90,95 @@ background: #1b4332;
 width: 100%;
 } */
 
+@media screen and (max-width: 600px) {
+  /* .home {
+    background: #000;
+  } */
 
+  .section1 {
+    /* display: flex;
+    justify-content: center;
+    align-items: center; */
+    text-align: center;
+    /* width: 100vw; */
+    font-size: 6px;
+  }
 
+  .p1 {
+    margin-right: 23rem;
+    font-size: 25px;
+    width: 300px;
+    /* text-align: center; */
+  }
+
+  .section2 {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    /* position: relative; */
+    padding: 6rem;
+    /* font-size: 10px;
+    width: 300px;
+    background: #000; */
+    /* word-wrap:break-word; */
+  }
+
+  .section2 h1 {
+    font-size: 20px;
+  }
+  .section2 p {
+    /* margin-right: 23rem; */
+    font-size: 25px;
+    width: 300px;
+    /* text-align: center; */
+  }
+  .box1 {
+    width: 15rem;
+    height: 20rem;
+    z-index: -1;
+    position: absolute;
+    bottom: 60%;
+    left: 55%;
+  }
+
+  .img1 {
+    width: 15rem;
+    height: 20rem;
+    position: absolute;
+    bottom: 50%;
+    left: 40%;
+  }
+
+  .section3 {
+    /* direction: ltr; */
+    margin-top: 30rem;
+    display: flex;
+    justify-content: center;
+    height: 12rem;
+    width: 25rem;
+    padding: 6px;
+  }
+
+  .img2 {
+    /* direction: ltr; */
+    width: 8.4rem;
+    /* height: 8rem; */
+    border-radius: 9px;
+    box-shadow: rgb(38, 57, 77) 0px 20px 30px -10px;
+  }
+
+  .section3 h1 {
+    position: absolute;
+    left: 40%;
+    text-align: center;
+    width: 14rem;
+    font-size: 2em;
+    font-family: "Reem Kufi", sans-serif;
+    color: #6b705c;
+  }
+
+  .section3 p {
+    padding-top: 4.3rem;
+    font-size: 14px;
+  }
+}

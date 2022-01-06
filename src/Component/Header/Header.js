@@ -105,7 +105,7 @@ const Header = () => {
               <Link to="/tips">طرق العنايه بالنباتات</Link>
             </Button>
             <Button sx={{ my: 2, color: "white"}}>
-              <Link to="/problems">المشاكل والحلول</Link>
+              <Link to="/problems">مشاكل وحلول</Link>
             </Button>
             <Button sx={{ my: 2, color: "white"}}>
               <Link to="/products">
@@ -159,7 +159,7 @@ const Header = () => {
                 className="avatar"
                 alt="avatar"
                 src={info.avatar}
-                sx={{ width: 90, height: 90 }}
+                sx={{ width: 80, height: 80 }}
               />
             </IconButton>
             <Menu
@@ -184,7 +184,6 @@ const Header = () => {
         <header>
           <img src={logo} alt="" className="logo" />
           <div className="acut">
-            {/* <Link to="/register">تسجيل جديد؟</Link> */}
             <Link to="/login">
               تسجيل الدخول <MdLogin />{" "}
             </Link>

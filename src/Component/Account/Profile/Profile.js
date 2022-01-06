@@ -162,7 +162,7 @@ const Profile = () => {
       ) : (
         <></>
       )}
-      <h1>اسم المستخدم: </h1>
+    
       <h2>{userInfo.userName} </h2>
       <h1>موقعي:</h1>
       <h3>{userInfo.location} </h3>
