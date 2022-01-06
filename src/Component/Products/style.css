@@ -31,13 +31,24 @@
   font-weight: bold;
   word-wrap: break-word;
 }
+.products-card h5 {
+  color: rgb(173, 173, 173);
+}
 
 .add {
   font-size: 3.5rem;
+  padding-bottom: 19px;
+  padding-right: 10px;
+  
+}
+
+.add-product {
   position: fixed;
   left: 3%;
-  top: 77%;
+  top: 70%;
   cursor: pointer;
+  display: flex;
+  flex-direction: column;
 }
 
 .rate {
@@ -56,39 +67,37 @@
   cursor: pointer;
 }
 
+.bttn:hover {
+  background: rgb(231, 229, 229);
+  color: #6b705c;
+}
+
 .Swipe {
   margin-top: 5em;
-  margin-left: 9em;
+  /* margin-right: 9em; */
+  margin-left: 0;
+  padding-left: 0;
+  width: 90%;
 }
 
-.b1 {
-  /* background: rgb(28, 218, 224); */
-  height: 33rem;
-  width: 90%;
-}
-.b2 {
-  /* background: rgb(164, 226, 47); */
-  height: 33rem;
-  width: 90%;
-}
+.b1,
+.b2,
 .b3 {
-  /* background: rgb(219, 21, 21); */
   height: 33rem;
   width: 90%;
+  object-fit:fill;
 }
 
-@media screen and (max-width: 600px) {
+@media screen and (max-width: 900px) {
   .products {
     width: 80vw;
-    height: 80vh;
-    /* background: rgb(216, 152, 152); */
+    height: auto;
     box-shadow: rgb(38, 57, 77) 0px 20px 30px -10px;
   }
   .products-card {
     width: 6rem;
-    height: 6rem;
+    height: fit-content;
     padding: 5px;
-    /* padding-top: 70px; */
     display: flex;
     flex-wrap: wrap;
     justify-content: space-evenly;
@@ -100,18 +109,66 @@
     width: 9rem;
     height: 9rem;
   }
-  
-  .add {
-  font-size: 3rem;
-  position: fixed;
-  left: 3%;
-  top: 85%;
-  cursor: pointer;
-}
-.rate {
-  direction: ltr;
-  align-self: flex-start;
-    background: #000;
-}
 
+  .products-card h2 {
+    font-size: 13px;
+    word-wrap: break-word;
+    text-align: center;
+  }
+
+  
+  .rate {
+    direction: ltr;
+    align-self: flex-start;
+  }
+
+  .Swipe {
+    margin-top: 12em;
+    margin-right: 1.2em;
+    width: 90vw;
+    height: 20rem;
+    
+  }
+
+  .b1,
+  .b2,
+  .b3 {
+    /* background: rgb(28, 218, 224); */
+    height: 20rem;
+    width: 90vw;
+  }
+
+  .bttn {
+    height: 1.8rem;
+    width: 4.3rem;
+    color: #fff;
+    background: #6b705c;
+    border-radius: 10px;
+    font-size: 10px;
+    border: 1px solid #000;
+    cursor: pointer;
+    font-weight: bold;
+  }
+
+  .bttn:hover {
+    background: rgb(231, 229, 229);
+    color: #6b705c;
+  }
+
+  .products-card h5,
+  h4 {
+    margin: 3px;
+    margin-bottom: 10px;
+  }
+
+
+
+  .add-product {
+    position: fixed;
+    left: 4%;
+    top: 75%;
+    cursor: pointer;
+    display: flex;
+    flex-direction: column;
+  }
 }

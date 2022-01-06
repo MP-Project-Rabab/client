@@ -184,7 +184,7 @@ const Products = () => {
       setCart(result.data);
       {
         result.status == 200
-          ? setMsg("تم إضافته للسله")
+          ? setMsg("تمت إضافته للسله")
           : setMsg("لم تتم اضافته للسله");
       }
       console.log(result.data);
@@ -248,13 +248,16 @@ const Products = () => {
                 <h4>{info.price} ر.س</h4>
                 <button className="bttn" onClick={() => addToCart(info._id)}>
                   <BsCartPlusFill />
-                  اضف للسله
+                  أضف للسله
                 </button>
               </div>
             );
           })}
         {state.signIn.userType == "seller" ? (
+          <h3 className="add-product">
           <BsPatchPlus className="add" onClick={handleClickOpen} />
+          أضف منتج
+          </h3>
         ) : (
           <></>
         )}

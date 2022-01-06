@@ -11,8 +11,13 @@ import {
   Box,
   Menu,
   MenuItem,
+  Toolbar,
+  MenuIcon,
+  Container,
+  Tooltip,
+  AppBar,
 } from "@mui/material";
-import { IoStorefrontOutline } from "react-icons/io5";
+import { IoStorefrontOutline, IoMenu } from "react-icons/io5";
 import { useSelector } from "react-redux";
 // End of import all dependencies
 import "./header.css";
@@ -93,104 +98,112 @@ const Header = () => {
   };
 
   return (
-    <div className="header">
+    <AppBar position="static">
       {isLog ? (
-        <header>
-          <img src={logo} alt="" className="logo" />
-          <nav className="nav">
-            <Button sx={{ my: 2, color: "white"}}>
-              <Link to="/">الرئيسية</Link>
-            </Button>
-            <Button sx={{ my: 2, color: "white"}}>
-              <Link to="/tips">طرق العنايه بالنباتات</Link>
-            </Button>
-            <Button sx={{ my: 2, color: "white"}}>
-              <Link to="/problems">مشاكل وحلول</Link>
-            </Button>
-            <Button sx={{ my: 2, color: "white"}}>
-              <Link to="/products">
-                المتجر <IoStorefrontOutline />
-              </Link>
-            </Button>
-          </nav>
-          {/* Dashboard bar */}
-          {userType == "admin" ? (
-            <Button
-              id="basic-button"
-              aria-controls={open ? "basic-menu" : undefined}
-              aria-haspopup="true"
-              aria-expanded={open ? "true" : undefined}
-              onClick={handleClick}
-            >
-              Dashboard
-            </Button>
-          ) : (
-            <></>
-          )}
-          <Menu
-            id="basic-menu"
-            anchorEl={anchorEl}
-            open={open}
-            onClose={handleDashboardClose}
-            MenuListProps={{
-              "aria-labelledby": "basic-button",
-            }}
-          >
-            <MenuItem onClick={handleDashboardClose}>
-              <Link to="/users">المستخدمين</Link>
-            </MenuItem>
-            <MenuItem onClick={handleDashboardClose}>
-              {" "}
-              <Link to="/productsApprove">منتجات تحتاج للتأكيد</Link>
-            </MenuItem>
-            <MenuItem onClick={handleDashboardClose}>
-              <Link to="/postsApprove">postsApprove</Link>
-            </MenuItem>
-          </Menu>
-          <h4 className="nav-cart">
-            <Badge badgeContent={cart.length} color="success">
-              <GiFlowerPot className="cart" onClick={() => navigate("/cart")} />
-            </Badge>
-            السلة
-          </h4>
-          <Box sx={{ flexGrow: 0 }}>
-            <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
-              <Avatar
-                className="avatar"
-                alt="avatar"
-                src={info.avatar}
-                sx={{ width: 80, height: 80 }}
-              />
-            </IconButton>
-            <Menu
-              id="basic-menu"
-              anchorEl={anchorElUser}
-              open={Boolean(anchorElUser)}
-              onClose={handleCloseUserMenu}
-            >
-              <MenuItem onClick={handleClose}>
-                <Link to={`/profile/${state.signIn.id}`}>البروفايل</Link>
-              </MenuItem>
-              <MenuItem onClick={handleClose}>
-                <Link to="/" onClick={logOut}>
-                  تسجيل الخروج
-                  <MdOutlineLogout />
-                </Link>
-              </MenuItem>
-            </Menu>
-          </Box>
-        </header>
+        <Container maxWidth="xl">
+          <Toolbar disableGutters>
+            <Box sx={{ flexGrow: 1, display: { xs: "flex", md: "none" } }}>
+            <IoMenu />
+              <img src={logo} alt="" className="logo" />
+              <nav className="nav">
+                <Button sx={{ my: 2, color: "white" }}>
+                  <Link to="/">الرئيسية</Link>
+                </Button>
+                <Button sx={{ my: 2, color: "white" }}>
+                  <Link to="/tips">طرق العنايه بالنباتات</Link>
+                </Button>
+                <Button sx={{ my: 2, color: "white" }}>
+                  <Link to="/problems">مشاكل وحلول</Link>
+                </Button>
+                <Button sx={{ my: 2, color: "white" }}>
+                  <Link to="/products">
+                    المتجر <IoStorefrontOutline />
+                  </Link>
+                </Button>
+              </nav>
+              {/* Dashboard bar */}
+              {userType == "admin" ? (
+                <Button
+                  id="basic-button"
+                  aria-controls={open ? "basic-menu" : undefined}
+                  aria-haspopup="true"
+                  aria-expanded={open ? "true" : undefined}
+                  onClick={handleClick}
+                >
+                  Dashboard
+                </Button>
+              ) : (
+                <></>
+              )}
+              <Menu
+                id="basic-menu"
+                anchorEl={anchorEl}
+                open={open}
+                onClose={handleDashboardClose}
+                MenuListProps={{
+                  "aria-labelledby": "basic-button",
+                }}
+              >
+                <MenuItem onClick={handleDashboardClose}>
+                  <Link to="/users">المستخدمين</Link>
+                </MenuItem>
+                <MenuItem onClick={handleDashboardClose}>
+                  {" "}
+                  <Link to="/productsApprove">منتجات تحتاج للتأكيد</Link>
+                </MenuItem>
+                <MenuItem onClick={handleDashboardClose}>
+                  <Link to="/postsApprove">postsApprove</Link>
+                </MenuItem>
+              </Menu>
+              <h4 className="nav-cart">
+                <Badge badgeContent={cart.length} color="success">
+                  <GiFlowerPot
+                    className="cart"
+                    onClick={() => navigate("/cart")}
+                  />
+                </Badge>
+                السلة
+              </h4>
+              <Box sx={{ flexGrow: 0 }}>
+                <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
+                  <Avatar
+                    className="avatar"
+                    alt="avatar"
+                    src={info.avatar}
+                    sx={{ width: 80, height: 80 }}
+                  />
+                </IconButton>
+                <Menu
+                  id="basic-menu"
+                  anchorEl={anchorElUser}
+                  open={Boolean(anchorElUser)}
+                  onClose={handleCloseUserMenu}
+                >
+                  <MenuItem onClick={handleClose}>
+                    <Link to={`/profile/${state.signIn.id}`}>البروفايل</Link>
+                  </MenuItem>
+                  <MenuItem onClick={handleClose}>
+                    <Link to="/" onClick={logOut}>
+                      تسجيل الخروج
+                      <MdOutlineLogout />
+                    </Link>
+                  </MenuItem>
+                </Menu>
+              </Box>
+            </Box>
+          </Toolbar>
+        </Container>
       ) : (
-        <header>
+        <Container maxWidth="xl">
           <img src={logo} alt="" className="logo" />
           <div className="acut">
             <Link to="/login">
               تسجيل الدخول <MdLogin />{" "}
             </Link>
           </div>
-        </header>
+        </Container>
       )}
-    </div>
+    </AppBar>
   );
 };
 
