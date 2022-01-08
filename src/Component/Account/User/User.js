@@ -99,22 +99,22 @@ const User = () => {
     setOpen(false);
   };
   return (
-    <div className="users">
+    <>
       <TableContainer
         component={Paper}
         style={{
-          width: "auto",
+          width: "55%",
           padding: "7px",
           margin: "auto",
-          marginTop: "1rem",
+          marginTop: "12rem",
         }}
         >
         <h1 className="h11">قائمة المستخدمين</h1>
         <Table sx={{ minWidth: 650 }} aria-label="simple table">
           <TableHead>
             <TableRow>
-              <TableCell align="right">اسم المستخدم</TableCell>
               <TableCell align="right"></TableCell>
+              <TableCell align="right">اسم المستخدم</TableCell>
               <TableCell align="right">نوع المستخدم</TableCell>
               <TableCell align="right"></TableCell>
             </TableRow>
@@ -177,7 +177,7 @@ const User = () => {
           </DialogActions>
         </DialogContent>
       </Dialog>
-    </div>
+    </>
   );
 };
 

@@ -48,7 +48,7 @@ const Dashboard = () => {
         component="main"
         sx={{ flexGrow: 1, paddingRight: 40  }}
       >
-        <Toolbar />
+        {/* <Toolbar /> */}
         <Typography paragraph>
           Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
           eiusmod tempor incididunt ut labore et dolore magna aliqua. Rhoncus
@@ -87,7 +87,7 @@ const Dashboard = () => {
             width: drawerWidth,
             boxSizing: "border-box",
           },
-           
+          
         }}
        
         variant="permanent"

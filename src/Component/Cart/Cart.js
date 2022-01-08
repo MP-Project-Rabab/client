@@ -16,6 +16,7 @@ import {
   TableRow,
   Paper,
   Box,
+  Container
 } from "@mui/material";
 // End of import all dependencies
 import "./style.css";
@@ -79,7 +80,7 @@ const Cart = () => {
   return (
     <>
       {!cart.length ? (
-        <Box csx={{ flexGrow: 1, display: { xs: "none", md: "flex" } }}>
+        <Box sx={{ flexGrow: 1, display: { xs: "none", md: "flex" } }}>
           <h2>لا توجد منتجات في سلة المشتريات.</h2>
         </Box>
       ) : (
