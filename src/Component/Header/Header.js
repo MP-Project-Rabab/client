@@ -188,6 +188,13 @@ const Header = () => {
               sx={{ flexGrow: 1, display: { xs: "none", md: "flex" } }}
               className="nav"
             >
+                <img
+                src={logo}
+                alt=""
+                className="logo"
+                component="div"
+                sx={{ mr: 2, display: { xs: "none", md: "flex" } }}
+              />
               <Button
                 onClick={handleCloseNavMenu}
                 sx={{ my: 2, color: "white", display: "block" }}

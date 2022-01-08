@@ -1,7 +1,16 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
 import { useSelector } from "react-redux";
-
+import {
+  Button,
+  Table,
+  TableBody,
+  TableCell,
+  TableContainer,
+  TableHead,
+  TableRow,
+  Paper,
+} from "@mui/material/";
 const NoApproved = () => {
   useEffect(() => {
     postNotApproved();
@@ -50,9 +59,58 @@ const NoApproved = () => {
     postNotApproved();
   };
   return (
-    <div>
-      <h1>Approved</h1>
-      {approve.length &&
+    <div className="users">
+      <TableContainer
+        component={Paper}
+        style={{
+          width: "auto",
+          padding: "7px",
+          margin: "auto",
+          marginTop: "1rem",
+        }}
+        >
+        <h1 className="h11">قائمة البوستات</h1>
+        <Table sx={{ minWidth: 650 }} aria-label="simple table">
+          <TableHead>
+            <TableRow>
+              <TableCell align="right"></TableCell>
+              <TableCell align="right">العنوان</TableCell>
+              <TableCell align="right"></TableCell>
+             
+            </TableRow>
+          </TableHead>
+          <TableBody>
+            {approve.length &&
+            approve.map((item, i) => {
+                return (
+                  <TableRow
+                    key={i}
+                    className="cart-card"
+                    sx={{ "&:last-child td, &:last-child th": { border: 0 } }}
+                  >
+                    <TableCell component="th" scope="row" align="right">
+                      <img src={item.img} alt="" />
+                    </TableCell>
+                    <TableCell align="right">
+                      <h3>{item.title}</h3>
+                    </TableCell>
+                    <TableCell align="right">
+                      <Button
+                        color="primary"
+                        aria-label="upload picture"
+                        component="span"
+                        onClick={() => postApprove(item._id)}
+                      >
+                       يعتمد
+                      </Button>
+                    </TableCell>
+                  </TableRow>
+                );
+              })}
+          </TableBody>
+        </Table>
+      </TableContainer>
+      {/* {approve.length &&
         approve.map((item) => {
           return (
             <div key={approve._id} className="user-card">
@@ -61,7 +119,7 @@ const NoApproved = () => {
               <button onClick={() => postApprove(item._id)}>يعتمد</button>
             </div>
           );
-        })}
+        })} */}
     </div>
   );
 };

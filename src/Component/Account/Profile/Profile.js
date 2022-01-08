@@ -75,7 +75,7 @@ const Profile = () => {
   const userProducts = async () => {
     try {
       const result = await axios.get(
-        `${process.env.REACT_APP_BASE_URL}/products/by?user=`,
+        `${process.env.REACT_APP_BASE_URL}/products/by?user=${state.signIn.id}`,
 
         {
           headers: {
@@ -88,6 +88,8 @@ const Profile = () => {
       console.log(error);
     }
   };
+  
+  console.log(state);
   const handleClickOpen = () => {
     setOpen(true);
   };

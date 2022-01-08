@@ -113,6 +113,7 @@ const Products = () => {
     }
     allProducts();
   };
+  console.log(state.productsReducer);
   // update Product function
   const updateProducts = async () => {
     try {
@@ -196,12 +197,6 @@ const Products = () => {
           ? setSnackBar(true)
           : setMsg("لم تتم اضافته للسله");
       }
-      // {
-      //   result.status == 200
-      //     ? setMsg("تمت إضافته للسله")
-      //     : setMsg("لم تتم اضافته للسله");
-      // }
-      console.log(result.data);
     } catch (error) {
       console.log(error);
     }
