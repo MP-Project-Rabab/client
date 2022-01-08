@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
 import { useDispatch, useSelector } from "react-redux";
-import { getPost, newPost, UpdatePost, delPost } from "../../reducers/post";
+import { getPost, newPost, delPost } from "../../reducers/post";
 import { Link } from "react-router-dom";
 import FileBase from "react-file-base64";
 import { BsPatchPlus } from "react-icons/bs";
@@ -113,7 +113,8 @@ const Tips = () => {
               <img src={info.img} alt="" />
               <h2>{info.title}</h2>
               <h6>بواسطة: {info.user.userName}</h6>
-              {state.signIn.id == info.user._id ? (
+              {state.signIn.id == info.user._id ||
+              state.signIn.userType == "admin" ? (
                 <button onClick={() => deleteTip(info._id)}>حذف</button>
               ) : (
                 <></>
@@ -123,6 +124,7 @@ const Tips = () => {
             </div>
           );
         })}
+      {/* To open a form  */}
       <Dialog open={open} onClose={handleClose}>
         <DialogContent>
           <FileBase

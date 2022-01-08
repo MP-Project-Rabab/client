@@ -16,22 +16,20 @@ import User from "./Component/Account/User/User";
 import NotApproved from "./Component/notApproved/notApproved";
 import NoApproved from "./Component/Post/NoApproved";
 import Cart from "./Component/Cart/Cart";
-import f1 from "./img/f1.png"
-
+import f1 from "./img/f1.png";
 import Post from "./Component/Post/Post";
+import Dashboard from "./Component/Dashboard/Dashboard";
 
 function App() {
- 
   return (
     <div className="App">
-      
       <Header />
       {/* <Nav /> */}
       {/* {user ? return <Navigate to="/" replace /> : <Login />} */}
       <Routes>
         <Route exact path="/" element={<Home />} />
         <Route exact path="/register" element={<Register />} />
-        <Route exact path="/login" element={<Login />}/>
+        <Route exact path="/login" element={<Login />} />
         <Route exact path="/forget" element={<Forget />} />
         <Route exact path="/reset-pass/:id" element={<ResetPass />} />
         <Route exact path="/profile/:id" element={<Profile />} />
@@ -43,9 +41,9 @@ function App() {
         <Route exact path="/postsApprove" element={<NoApproved />} />
         <Route exact path="/cart" element={<Cart />} />
         <Route exact path="/post/:id" element={<Post />} />
+        <Route exact path="/dashboard" element={<Dashboard />} />
       </Routes>
-      <img src={f1} alt="" className="leaf"/>
-    
+      <img src={f1} alt="" className="leaf" />
     </div>
   );
 }

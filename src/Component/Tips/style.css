@@ -9,30 +9,36 @@
 }
 
 .tips-card {
-  /* background: #000; */
   width: max-content;
   display: flex;
   flex-direction: column;
   flex-wrap: wrap;
+  background: #fff;
+  margin-bottom: 2rem;
+  border-radius: 9px;
+  /* padding: 1rem; */
 
+  box-shadow: rgba(0, 0, 0, 0.16) 0px 1px 4px;
 }
 
 .tips-card img {
   height: 20rem;
   width: 17rem;
+  padding: 0;
+  margin: 0;
   border-radius: 9px;
-  
 }
 
 .tips-card button {
   width: 3.4rem;
 }
 
+.tips-card a {
+  text-decoration: none;
+}
 
 @media screen and (max-width: 600px) {
   .tips-card a {
     margin-bottom: 2em;
-    
-   
   }
 }

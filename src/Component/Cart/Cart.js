@@ -15,6 +15,7 @@ import {
   TableHead,
   TableRow,
   Paper,
+  Box,
 } from "@mui/material";
 // End of import all dependencies
 import "./style.css";
@@ -23,6 +24,7 @@ const Cart = () => {
   const [cart, setCart] = useState([]);
   const [quantity, setQuantity] = useState(1);
   const [total, setTotal] = useState(1);
+  // const [loading, setLoading] = useState(false)
   useEffect(() => {
     userInfo();
   }, []);
@@ -42,7 +44,6 @@ const Cart = () => {
         }
       );
 
-      console.log(result.data.cart);
       setCart(result.data.cart);
     } catch (error) {
       console.log(error);
@@ -61,7 +62,6 @@ const Cart = () => {
         }
       );
 
-      console.log(result.data.cart);
       // setCart(result.data.cart)
     } catch (error) {
       console.log(error);
@@ -78,67 +78,82 @@ const Cart = () => {
   };
   return (
     <>
-      <TableContainer
-        component={Paper}
-        style={{ width: "55%", padding: "7px", margin: "auto", marginTop: "12rem" }}
-      >
-        <Table sx={{ minWidth: 650 }} aria-label="simple table">
-          <TableHead>
-            <TableRow>
-              <TableCell align="right">المنتج</TableCell>
-              <TableCell align="right"></TableCell>
-              <TableCell align="right">السعر</TableCell>
-              <TableCell align="right">الكمية</TableCell>
-              <TableCell align="right">المجموع</TableCell>
-            </TableRow>
-          </TableHead>
-          <TableBody>
-            {cart.length &&
-              cart.map((info, i) => {
-                return (
-                  <TableRow
-                    key={i}
-                    className="cart-card"
-                    sx={{ "&:last-child td, &:last-child th": { border: 0 } }}
-                  >
-                    <TableCell component="th" scope="row" align="right">
-                      <img src={info.img} alt="" />
-                    </TableCell>
-                    <TableCell align="right">
-                      <h3>{info.name}</h3>
-                    </TableCell>
-                    <TableCell align="right">
-                      <h4> {info.price} ر.س</h4>
-                    </TableCell>
-                    <TableCell align="right">
-                      <IconButton onClick={(ev) => inc(ev.target.value)}>
-                        <BsPlus />
-                      </IconButton>
-                      {quantity}
-                      <IconButton onClick={dec}>
-                        <BiMinus />
-                      </IconButton>
-                    </TableCell>
-                    <TableCell align="right">{total}</TableCell>
-                    <IoTrashOutline
-                      onClick={() => deleteItem(info._id)}
-                      className="delete-icon"
-                    />
-                  </TableRow>
-                );
-              })}
-          </TableBody>
-        </Table>
-      </TableContainer>
-      <Link to="/products" className="continue">
-        <Button
-          variant="outlined"
-          color="success"
-          style={{ marginRight: "64rem", marginTop: "3rem" }}
-        >
-          متابعة التسوق
-        </Button>
-      </Link>
+      {!cart.length ? (
+        <Box csx={{ flexGrow: 1, display: { xs: "none", md: "flex" } }}>
+          <h2>لا توجد منتجات في سلة المشتريات.</h2>
+        </Box>
+      ) : (
+        <>
+          <TableContainer
+            component={Paper}
+            style={{
+              width: "55%",
+              padding: "7px",
+              margin: "auto",
+              marginTop: "12rem",
+            }}
+          >
+            <Table sx={{ minWidth: 650 }} aria-label="simple table">
+              <TableHead>
+                <TableRow>
+                  <TableCell align="right">المنتج</TableCell>
+                  <TableCell align="right"></TableCell>
+                  <TableCell align="right">السعر</TableCell>
+                  <TableCell align="right">الكمية</TableCell>
+                  <TableCell align="right">المجموع</TableCell>
+                </TableRow>
+              </TableHead>
+              <TableBody>
+                {cart.length &&
+                  cart.map((info, i) => {
+                    return (
+                      <TableRow
+                        key={i}
+                        className="cart-card"
+                        sx={{
+                          "&:last-child td, &:last-child th": { border: 0 },
+                        }}
+                      >
+                        <TableCell component="th" scope="row" align="right">
+                          <img src={info.img} alt="" />
+                        </TableCell>
+                        <TableCell align="right">
+                          <h3>{info.name}</h3>
+                        </TableCell>
+                        <TableCell align="right">
+                          <h4> {info.price} ر.س</h4>
+                        </TableCell>
+                        <TableCell align="right">
+                          <IconButton onClick={(ev) => inc(ev.target.value)}>
+                            <BsPlus />
+                          </IconButton>
+                          {quantity}
+                          <IconButton onClick={dec}>
+                            <BiMinus />
+                          </IconButton>
+                        </TableCell>
+                        <TableCell align="right">{total}</TableCell>
+                        <IoTrashOutline
+                          onClick={() => deleteItem(info._id)}
+                          className="delete-icon"
+                        />
+                      </TableRow>
+                    );
+                  })}
+              </TableBody>
+            </Table>
+          </TableContainer>
+          <Link to="/products" className="continue">
+            <Button
+              variant="outlined"
+              color="success"
+              style={{ marginRight: "64rem", marginTop: "3rem" }}
+            >
+              متابعة التسوق
+            </Button>
+          </Link>
+        </>
+      )}
     </>
   );
 };

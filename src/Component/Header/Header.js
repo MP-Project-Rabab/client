@@ -12,10 +12,10 @@ import {
   Menu,
   MenuItem,
   Toolbar,
-  MenuIcon,
   Container,
   Tooltip,
   AppBar,
+  Typography,
 } from "@mui/material";
 import { IoStorefrontOutline, IoMenu } from "react-icons/io5";
 import { useSelector } from "react-redux";
@@ -24,11 +24,21 @@ import "./header.css";
 import logo from "../../img/logo.png";
 
 const Header = () => {
-  const [cart, setCart] = useState([]);
-
   const state = useSelector((state) => {
     return state;
   });
+  // ////////////////////////////
+  const [cart, setCart] = useState([]);
+  const [isLog, setIsLog] = useState(false);
+  const [user, setUser] = useState("");
+  const [info, setInfo] = useState([]);
+  const [anchorElNav, setAnchorElNav] = useState(null);
+  let userType = localStorage.getItem("userType");
+  const navigate = useNavigate();
+  useEffect(() => {
+    userInfo();
+    log();
+  }, []);
 
   // Dashboard Bar
   const [anchorEl, setAnchorEl] = useState(null);
@@ -45,24 +55,22 @@ const Header = () => {
   const handleOpenUserMenu = (event) => {
     setAnchorElUser(event.currentTarget);
   };
+
   const handleCloseUserMenu = () => {
     setAnchorElUser(null);
   };
+
   const handleClose = () => {
     setAnchorElUser(null);
   };
 
-  // ////////////////////////////
-  const [isLog, setIsLog] = useState(false);
-  const [user, setUser] = useState("");
+  const handleOpenNavMenu = (event) => {
+    setAnchorElNav(event.currentTarget);
+  };
 
-  const [info, setInfo] = useState([]);
-  let userType = localStorage.getItem("userType");
-  const navigate = useNavigate();
-  useEffect(() => {
-    userInfo();
-    log();
-  }, []);
+  const handleCloseNavMenu = () => {
+    setAnchorElNav(null);
+  };
 
   let userid = localStorage.getItem("id");
   const log = () => {
@@ -98,63 +106,117 @@ const Header = () => {
   };
 
   return (
-    <AppBar position="static">
+    <AppBar
+      position="sticky"
+      sx={{ background: "white", color: "black", boxShadow: "none" }}
+    >
       {isLog ? (
         <Container maxWidth="xl">
           <Toolbar disableGutters>
+            {/* For small screen */}
+
             <Box sx={{ flexGrow: 1, display: { xs: "flex", md: "none" } }}>
-            <IoMenu />
-              <img src={logo} alt="" className="logo" />
-              <nav className="nav">
-                <Button sx={{ my: 2, color: "white" }}>
-                  <Link to="/">الرئيسية</Link>
-                </Button>
-                <Button sx={{ my: 2, color: "white" }}>
-                  <Link to="/tips">طرق العنايه بالنباتات</Link>
-                </Button>
-                <Button sx={{ my: 2, color: "white" }}>
-                  <Link to="/problems">مشاكل وحلول</Link>
-                </Button>
-                <Button sx={{ my: 2, color: "white" }}>
-                  <Link to="/products">
-                    المتجر <IoStorefrontOutline />
-                  </Link>
-                </Button>
-              </nav>
-              {/* Dashboard bar */}
-              {userType == "admin" ? (
-                <Button
-                  id="basic-button"
-                  aria-controls={open ? "basic-menu" : undefined}
-                  aria-haspopup="true"
-                  aria-expanded={open ? "true" : undefined}
-                  onClick={handleClick}
-                >
-                  Dashboard
-                </Button>
-              ) : (
-                <></>
-              )}
-              <Menu
-                id="basic-menu"
-                anchorEl={anchorEl}
-                open={open}
-                onClose={handleDashboardClose}
-                MenuListProps={{
-                  "aria-labelledby": "basic-button",
-                }}
+              <IconButton
+                size="large"
+                aria-label="account of current user"
+                aria-controls="menu-appbar"
+                aria-haspopup="true"
+                onClick={handleOpenNavMenu}
+                color="inherit"
               >
-                <MenuItem onClick={handleDashboardClose}>
-                  <Link to="/users">المستخدمين</Link>
+                <IoMenu />
+              </IconButton>
+              <img
+                src={logo}
+                alt=""
+                className="logo"
+                component="div"
+                sx={{ mr: 2, display: { xs: "none", md: "flex" } }}
+              />
+              <Menu
+                id="menu-appbar"
+                anchorEl={anchorElNav}
+                anchorOrigin={{
+                  vertical: "bottom",
+                  horizontal: "left",
+                }}
+                keepMounted
+                transformOrigin={{
+                  vertical: "top",
+                  horizontal: "left",
+                }}
+                open={Boolean(anchorElNav)}
+                onClose={handleCloseNavMenu}
+                sx={{
+                  display: { xs: "block", md: "none" },
+                }}
+                className="nav"
+              >
+                <MenuItem onClick={handleCloseNavMenu}>
+                  <Typography textAlign="center">
+                    {" "}
+                    <Link to="/">الرئيسية</Link>
+                  </Typography>
                 </MenuItem>
-                <MenuItem onClick={handleDashboardClose}>
-                  {" "}
-                  <Link to="/productsApprove">منتجات تحتاج للتأكيد</Link>
+                <MenuItem onClick={handleCloseNavMenu}>
+                  <Typography textAlign="center">
+                    {" "}
+                    <Link to="/tips">طرق العنايه بالنباتات</Link>
+                  </Typography>
                 </MenuItem>
-                <MenuItem onClick={handleDashboardClose}>
-                  <Link to="/postsApprove">postsApprove</Link>
+                <MenuItem onClick={handleCloseNavMenu}>
+                  <Typography textAlign="center">
+                    {" "}
+                    <Link to="/problems">مشاكل وحلول</Link>
+                  </Typography>
+                </MenuItem>
+                <MenuItem onClick={handleCloseNavMenu}>
+                  <Typography textAlign="center">
+                    {" "}
+                    <Link to="/products">
+                      {" "}
+                      المتجر <IoStorefrontOutline />
+                    </Link>
+                  </Typography>
                 </MenuItem>
               </Menu>
+            </Box>
+
+            {/* For large screen */}
+
+            <Box
+              sx={{ flexGrow: 1, display: { xs: "none", md: "flex" } }}
+              className="nav"
+            >
+              <Button
+                onClick={handleCloseNavMenu}
+                sx={{ my: 2, color: "white", display: "block" }}
+              >
+                <Link to="/">الرئيسية</Link>
+              </Button>
+              <Button
+                onClick={handleCloseNavMenu}
+                sx={{ my: 2, color: "white", display: "block" }}
+              >
+                <Link to="/tips">طرق العنايه بالنباتات</Link>
+              </Button>
+              <Button
+                onClick={handleCloseNavMenu}
+                sx={{ my: 2, color: "white", display: "block" }}
+              >
+                <Link to="/problems">مشاكل وحلول</Link>
+              </Button>
+              <Button
+                onClick={handleCloseNavMenu}
+                sx={{ my: 2, color: "white", display: "block" }}
+              >
+                <Link to="/products">
+                  المتجر <IoStorefrontOutline />
+                </Link>
+              </Button>
+            </Box>
+
+            <Box sx={{ flexGrow: 0, display: { xs: "flex", md: "flex" } }}>
               <h4 className="nav-cart">
                 <Badge badgeContent={cart.length} color="success">
                   <GiFlowerPot
@@ -164,43 +226,68 @@ const Header = () => {
                 </Badge>
                 السلة
               </h4>
-              <Box sx={{ flexGrow: 0 }}>
+              <Tooltip title="Open settings">
                 <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
-                  <Avatar
-                    className="avatar"
-                    alt="avatar"
-                    src={info.avatar}
-                    sx={{ width: 80, height: 80 }}
-                  />
+                  <Avatar alt={info.userName} src={info.avatar} />
                 </IconButton>
-                <Menu
-                  id="basic-menu"
-                  anchorEl={anchorElUser}
-                  open={Boolean(anchorElUser)}
-                  onClose={handleCloseUserMenu}
-                >
-                  <MenuItem onClick={handleClose}>
-                    <Link to={`/profile/${state.signIn.id}`}>البروفايل</Link>
+              </Tooltip>
+              <Menu
+                sx={{ mt: "45px" }}
+                id="menu-appbar"
+                anchorEl={anchorElUser}
+                anchorOrigin={{
+                  vertical: "top",
+                  horizontal: "right",
+                }}
+                keepMounted
+                transformOrigin={{
+                  vertical: "top",
+                  horizontal: "right",
+                }}
+                open={Boolean(anchorElUser)}
+                onClose={handleCloseUserMenu}
+              >
+                <MenuItem onClick={handleClose}>
+                  <Link to={`/profile/${state.signIn.id}`}>البروفايل</Link>
+                </MenuItem>
+                <MenuItem onClick={handleClose}>
+                  <Link to="/" onClick={logOut}>
+                    تسجيل الخروج
+                    <MdOutlineLogout />
+                  </Link>
+                </MenuItem>
+                {/* Dashboard bar */}
+                {userType == "admin" ? (
+                  <MenuItem
+                    id="basic-button"
+                    aria-controls={open ? "basic-menu" : undefined}
+                    aria-haspopup="true"
+                    aria-expanded={open ? "true" : undefined}
+                    onClick={handleClick}
+                  >
+                    <Link to="/dashboard">لوحة التحكم</Link>
                   </MenuItem>
-                  <MenuItem onClick={handleClose}>
-                    <Link to="/" onClick={logOut}>
-                      تسجيل الخروج
-                      <MdOutlineLogout />
-                    </Link>
-                  </MenuItem>
-                </Menu>
-              </Box>
+                ) : (
+                  <></>
+                )}
+              </Menu>
             </Box>
           </Toolbar>
         </Container>
       ) : (
         <Container maxWidth="xl">
-          <img src={logo} alt="" className="logo" />
-          <div className="acut">
-            <Link to="/login">
-              تسجيل الدخول <MdLogin />{" "}
-            </Link>
-          </div>
+          <Toolbar disableGutters>
+            <Box sx={{ flexGrow: 1, display: { xs: "none", md: "flex" } }}>
+              <img src={logo} alt="" className="logo" />
+              <div className="acut">
+                <Button sx={{ my: 2, color: "white", display: "block" }}>
+                  <Link to="/login">
+                    تسجيل الدخول <MdLogin />{" "}
+                  </Link>
+                </Button>
+              </div>
+            </Box>
+          </Toolbar>
         </Container>
       )}
     </AppBar>
