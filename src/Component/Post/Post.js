@@ -11,6 +11,7 @@ import {
   DialogContent,
   DialogActions,
   Dialog,
+  Container,
 } from "@mui/material";
 import FileBase from "react-file-base64";
 
@@ -118,52 +119,66 @@ const Post = () => {
     setOpen(false);
   };
   return (
-    <div className="one-post">
-      <h1>العنوان: {post.title}</h1>
-      <div>
-        <FiEdit3 className="edit" onClick={handleClickOpen} />
-      </div>
-      <Divider />
-      <div className="user">
-        <img src={user.avatar} alt="" className="avatar2" />
-        <h4>{user.userName}</h4>
-      </div>
-      <img src={post.img} alt="" className="post-img" />
+    <Container component="div" className="one-post">
+      <Box
+        sx={{
+          flexGrow: 0,
+          display: { xs: "flex", md: "flex" },
+          flexDirection: "column",
+        }}
+      >
+        <h1>العنوان: {post.title}</h1>
+        {state.signIn.id == user._id ? (
+          <FiEdit3 className="edit" onClick={handleClickOpen} />
+        ) : (
+          <></>
+        )}
+        <Divider />
+        <div className="user">
+          <img src={user.avatar} alt="" className="avatar2" />
+          <h4>{user.userName}</h4>
+        </div>
+        <img src={post.img} alt="" className="post-img" />
 
-      <p>{post.desc}</p>
-      <Box sx={{ width: "100%", typography: "body1" }}>
-        <TabContext value={value}>
-          <Box sx={{ borderBottom: 1, borderColor: "divider" }}>
-            <TabList onChange={handleChange} aria-label="lab API tabs example">
-              <Tab label="التعليقات:" value="1" />
-            </TabList>
-          </Box>
-          <TabPanel value="1">
-            {comments.length &&
-              comments.map((info, i) => {
-                // {console.log(info);}
-                return (
-                  <div key={i}>
-                    <h4>{info.comment}</h4>
-                  </div>
-                );
-              })}
-          </TabPanel>
-        </TabContext>
+        <p>{post.desc}</p>
+        <Box sx={{ width: "100%", typography: "body1" }}>
+          <TabContext value={value}>
+            <Box sx={{ borderBottom: 1, borderColor: "divider" }}>
+              <TabList
+                onChange={handleChange}
+                aria-label="lab API tabs example"
+              >
+                <Tab label="التعليقات:" value="1" />
+              </TabList>
+            </Box>
+            <TabPanel value="1">
+              {comments.length &&
+                comments.map((info, i) => {
+                  // {console.log(info);}
+                  return (
+                    <div key={i}>
+                      <h4>{info.comment}</h4>
+                    </div>
+                  );
+                })}
+            </TabPanel>
+          </TabContext>
+        </Box>
+        <textarea
+          name=""
+          id=""
+          cols="30"
+          rows="10"
+          className="textarea"
+          defaultValue="اكتب تعلقيك هنا"
+          onChange={(ev) => setcomment(ev.target.value)}
+        ></textarea>
+        <button onClick={() => addComment(post._id)} className="comment-bttn">
+          اضف تعليق
+        </button>
       </Box>
-      <textarea
-        name=""
-        id=""
-        cols="30"
-        rows="10"
-        className="textarea"
-        defaultValue="اكتب تعلقيك هنا"
-        onChange={(ev) => setcomment(ev.target.value)}
-      ></textarea>
-      <button onClick={() => addComment(post._id)} className="comment-bttn">
-        اضف تعليق
-      </button>
-      {/* For updating post */}
+
+      {/* To open a form For updating post */}
       <Dialog open={open} onClose={handleClose}>
         <DialogContent>
           <FileBase
@@ -197,7 +212,7 @@ const Post = () => {
           </DialogActions>
         </DialogContent>
       </Dialog>
-    </div>
+    </Container>
   );
 };
 

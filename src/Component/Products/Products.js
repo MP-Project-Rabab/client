@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
+import { Link } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import {
   getProducts,
@@ -15,7 +16,11 @@ import {
   Dialog,
   Rating,
   IconButton,
+  Snackbar,
+  Container,
+  Box
 } from "@mui/material";
+import MuiAlert from "@mui/material/Alert";
 import { FiEdit3 } from "react-icons/fi";
 import { BsPatchPlus, BsCartPlusFill } from "react-icons/bs";
 import { CgCloseO } from "react-icons/cg";
@@ -29,6 +34,9 @@ import f2 from "../../img/f2.jpg";
 
 import "./style.css";
 ///////////////////////////
+const Alert = React.forwardRef(function Alert(props, ref) {
+  return <MuiAlert elevation={6} ref={ref} variant="filled" {...props} />;
+});
 const Products = () => {
   useEffect(() => {
     allProducts();
@@ -41,6 +49,7 @@ const Products = () => {
   const [update, setUpdate] = useState(false);
   const [cart, setCart] = useState();
   const [productId, setProductId] = useState("");
+  const [snackBar, setSnackBar] = useState(false);
   const [rates, setRates] = useState({
     rate: 0,
     productId: "",
@@ -85,7 +94,6 @@ const Products = () => {
       console.log(error);
     }
   };
-  console.log(state.productsReducer.products);
   // Add New Products function
   const addProducts = async () => {
     try {
@@ -169,6 +177,7 @@ const Products = () => {
     }
     allProducts();
   };
+  // Add item to cart function
   const addToCart = async (id) => {
     try {
       const result = await axios.put(
@@ -184,13 +193,25 @@ const Products = () => {
       setCart(result.data);
       {
         result.status == 200
-          ? setMsg("تمت إضافته للسله")
+          ? setSnackBar(true)
           : setMsg("لم تتم اضافته للسله");
       }
+      // {
+      //   result.status == 200
+      //     ? setMsg("تمت إضافته للسله")
+      //     : setMsg("لم تتم اضافته للسله");
+      // }
       console.log(result.data);
     } catch (error) {
       console.log(error);
     }
+  };
+  const handleSnackBarClose = (event, reason) => {
+    if (reason === "clickaway") {
+      return;
+    }
+
+    setSnackBar(false);
   };
   const handleAddProduct = () => {
     addProducts();
@@ -211,9 +232,31 @@ const Products = () => {
   };
 
   return (
-    <>
-      {MyComponent()}
-      <div className="products">
+    <div className="products">
+       {MyComponent()}
+       <Box
+        sx={{
+          flexGrow: 0,
+          display: { xs: "flex", md: "flex" },
+          flexDirection: "column",
+          
+        }}
+        >
+     
+      <Snackbar
+        open={snackBar}
+        autoHideDuration={3000}
+        onClose={handleSnackBarClose}
+      >
+        <Alert
+          onClose={handleSnackBarClose}
+          severity="success"
+          sx={{ width: "100%" }}
+        >
+          تم إضافة المنتج للسلة!
+        </Alert>
+      </Snackbar>
+     
         {state.productsReducer.products.length &&
           state.productsReducer.products.map((info) => {
             return (
@@ -221,18 +264,21 @@ const Products = () => {
                 <CgCloseO onClick={() => deleteProducts(info._id)} />
                 <img src={info.img} alt="" />
                 {state.signIn.id == info.seller._id ? (
-              <IconButton
-              color="primary"
-              aria-label="upload picture"
-              component="span"
-              onClick={() => handleUpdateOpen(info._id)}
-            >
-              <FiEdit3 />
-            </IconButton>
-        ) : (
-          <></>
-        )}
-              
+                  <IconButton
+                    color="primary"
+                    aria-label="upload picture"
+                    component="span"
+                    onClick={() => handleUpdateOpen(info._id)}
+                  >
+                    <FiEdit3 />
+                  </IconButton>
+                ) : (
+                  <></>
+                )}
+                <Link to={`/profile/${info.seller._id}`}>
+                  <h5>البائع: {info.seller.userName}</h5>
+                </Link>
+
                 <Rating
                   name="half-rating"
                   defaultValue={0}
@@ -255,12 +301,13 @@ const Products = () => {
           })}
         {state.signIn.userType == "seller" ? (
           <h3 className="add-product">
-          <BsPatchPlus className="add" onClick={handleClickOpen} />
-          أضف منتج
+            <BsPatchPlus className="add" onClick={handleClickOpen} />
+            أضف منتج
           </h3>
         ) : (
           <></>
         )}
+         </Box>
         {/* For updating a product */}
         <Dialog open={update} onClose={handleUpdateClose}>
           <DialogContent>
@@ -377,8 +424,8 @@ const Products = () => {
         </Dialog>
         {/* End */}
         <h1>{msg}</h1>
-      </div>
-    </>
+     
+    </div>
   );
 };
 
