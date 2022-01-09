@@ -69,9 +69,33 @@ const Cart = () => {
     }
     userInfo();
   };
-  const inc = (ev) => {
+
+  // Add item to cart function
+  const addToCart = async (id) => {
+    try {
+      const result = await axios.put(
+        `${process.env.REACT_APP_BASE_URL}/products/one`,
+        { _id: id, user: state.signIn.id },
+
+        {
+          headers: {
+            Authorization: `Bearer ${state.signIn.token}`,
+          },
+        }
+      );
+      setCart(result.data);
+      // {
+      //   result.status == 200
+      //     ? setSnackBar(true)
+      //     : setMsg("لم تتم اضافته للسله");
+      // }
+    } catch (error) {
+      console.log(error);
+    }
+  };
+  const inc = (id) => {
     setQuantity(quantity + 1);
-    console.log(quantity);
+    console.log(id);
   };
   const dec = () => {
     setQuantity(quantity - 1);
@@ -125,7 +149,7 @@ const Cart = () => {
                           <h4> {info.price} ر.س</h4>
                         </TableCell>
                         <TableCell align="right">
-                          <IconButton onClick={(ev) => inc(ev.target.value)}>
+                          <IconButton onClick={(ev) => inc(info._id)}>
                             <BsPlus />
                           </IconButton>
                           {quantity}
