@@ -1,10 +1,7 @@
 .profile {
   margin: auto;
   padding: 2em;
-  top: 30%;
-  left: 25%;
-  position: absolute;
-  /* height: 10vh; */
+  margin-top: 7rem;
   width: 40rem;
   text-align: center;
   box-shadow: rgb(38, 57, 77) 0px 20px 30px -10px;
@@ -13,10 +10,20 @@
   background: #d8e2dc;
 }
 
+.profile-item {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
 
 
-
-.avatar2 {
-  width: 130px;
+.profile img {
+  width: 7rem;
+  height: 7rem;
   border-radius: 66px;
+}
+
+.rate2 {
+  direction: ltr;
 }

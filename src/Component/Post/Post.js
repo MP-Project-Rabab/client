@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import axios from "axios";
-import { useDispatch, useSelector } from "react-redux";
+import { useSelector } from "react-redux";
 import { Tabs, Tab, Box, Divider } from "@mui/material";
 import { TabContext, TabList, TabPanel } from "@mui/lab";
 import { FiEdit3 } from "react-icons/fi";
@@ -14,6 +14,7 @@ import {
   Container,
 } from "@mui/material";
 import FileBase from "react-file-base64";
+import { CgCloseO } from "react-icons/cg";
 
 // End of import all dependencies
 import "./style.css";
@@ -40,7 +41,6 @@ const Post = () => {
   const handleChange = (event, newValue) => {
     setValue(newValue);
   };
-  const dispatch = useDispatch();
 
   const onePost = async () => {
     try {
@@ -57,7 +57,7 @@ const Post = () => {
       setPost(result.data);
       setComments(result.data.commentes);
       setUser(result.data.user);
-      console.log(result.data);
+     
     } catch (error) {
       console.log(error);
     }
@@ -79,6 +79,25 @@ const Post = () => {
         }
       );
 
+      setcomment(result.data);
+    } catch (error) {
+      console.log(error);
+    }
+    onePost();
+  };
+
+  // delete Product function
+  const deleteComment = async (id) => {
+    try {
+      const result = await axios.delete(
+        `${process.env.REACT_APP_BASE_URL}/comments/delete?_id=${id}&adminId=${state.signIn.id}`,
+
+        {
+          headers: {
+            Authorization: `Bearer ${state.signIn.token}`,
+          },
+        }
+      );
       setcomment(result.data);
     } catch (error) {
       console.log(error);
@@ -128,7 +147,7 @@ const Post = () => {
         }}
       >
         <h1>العنوان: {post.title}</h1>
-        {state.signIn.id == user._id ? (
+        {state.signIn.id === user._id ? (
           <FiEdit3 className="edit" onClick={handleClickOpen} />
         ) : (
           <></>
@@ -154,10 +173,12 @@ const Post = () => {
             <TabPanel value="1">
               {comments.length &&
                 comments.map((info, i) => {
-                  // {console.log(info);}
+                  
                   return (
                     <div key={i}>
                       <h4>{info.comment}</h4>
+                <CgCloseO onClick={() => deleteComment(info._id)} />
+
                     </div>
                   );
                 })}
@@ -208,7 +229,7 @@ const Post = () => {
           />
           <DialogActions>
             <Button onClick={handleClose}>تراجع</Button>
-            <Button onClick={() => update(post._id)}>اضافه</Button>
+            <Button onClick={() => update(post._id)}>تحديث</Button>
           </DialogActions>
         </DialogContent>
       </Dialog>
