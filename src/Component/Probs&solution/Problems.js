@@ -8,7 +8,7 @@ import {
   DialogContent,
   DialogActions,
   Dialog,
-  Divider
+  Divider,
 } from "@mui/material";
 import { BsPatchPlus } from "react-icons/bs";
 import FileBase from "react-file-base64";
@@ -131,7 +131,10 @@ const Problems = () => {
 
   return (
     <div className="problem">
-    <BsPatchPlus onClick={handleClickOpen} className="add2"/>
+      <h3 className="add-product">
+        <BsPatchPlus className="add" onClick={handleClickOpen} />
+        أضف بوست
+      </h3>
       {state.postReducer.posts.length &&
         state.postReducer.posts.map((info) => {
           return (
@@ -143,44 +146,51 @@ const Problems = () => {
                 
               </Link> */}
               <h6>بواسطة: {info.user.userName}</h6>
-              <button onClick={() => deleteProblem(info._id)}>حذف</button>
+              {state.signIn.id === info.user._id ||
+              state.signIn.userType === "admin" ? (
+                <button onClick={() => deleteProblem(info._id)}>حذف</button>
+              ) : (
+                <></>
+              )}
+              {/* <button onClick={() => deleteProblem(info._id)}>حذف</button> */}
               <Divider ariant="inset" />
             </div>
           );
         })}
-         <Dialog open={open} onClose={handleClose}>
-         <DialogContent>
-       
-      <FileBase
-        type="file"
-        multiple={false}
-        onDone={({ base64, base64: string }) =>
-          setProblem({ ...problem, img: base64 })
-        }
-      />
-      <TextField
-        margin="dense"
-        id="name"
-        name="name"
-        label="عنوان المشكلة:"
-        type="text"
-        variant="standard"
-        onChange={(ev) => setProblem({ ...problem, title: ev.target.value })}
-      />
+      <Dialog open={open} onClose={handleClose}>
+        <DialogContent>
+          <FileBase
+            type="file"
+            multiple={false}
+            onDone={({ base64, base64: string }) =>
+              setProblem({ ...problem, img: base64 })
+            }
+          />
+          <TextField
+            margin="dense"
+            id="name"
+            name="name"
+            label="عنوان المشكلة:"
+            type="text"
+            variant="standard"
+            onChange={(ev) =>
+              setProblem({ ...problem, title: ev.target.value })
+            }
+          />
 
-      <TextField
-        id="standard-textarea"
-        label="اكتب مشكلتك هنا:"
-        placeholder="Placeholder"
-        multiline
-        variant="standard"
-        onChange={(ev) => setProblem({ ...problem, desc: ev.target.value })}
-      />
-       <DialogActions>
+          <TextField
+            id="standard-textarea"
+            label="اكتب مشكلتك هنا:"
+            placeholder="Placeholder"
+            multiline
+            variant="standard"
+            onChange={(ev) => setProblem({ ...problem, desc: ev.target.value })}
+          />
+          <DialogActions>
             <Button onClick={handleClose}>تراجع</Button>
             <Button onClick={newProblem}>اضافه</Button>
           </DialogActions>
-      </DialogContent>
+        </DialogContent>
       </Dialog>
     </div>
   );
