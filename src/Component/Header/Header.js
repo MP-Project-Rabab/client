@@ -41,14 +41,14 @@ const Header = () => {
   }, []);
 
   // Dashboard Bar
-  const [anchorEl, setAnchorEl] = useState(null);
-  const open = Boolean(anchorEl);
-  const handleClick = (event) => {
-    setAnchorEl(event.currentTarget);
-  };
-  const handleDashboardClose = () => {
-    setAnchorEl(null);
-  };
+  // const [anchorEl, setAnchorEl] = useState(null);
+  // const open = Boolean(anchorEl);
+  // const handleClick = (event) => {
+  //   setAnchorEl(event.currentTarget);
+  // };
+  // const handleDashboardClose = () => {
+  //   setAnchorEl(null);
+  // };
 
   // user  MUI AppBar
   const [anchorElUser, setAnchorElUser] = useState(null);
@@ -154,27 +154,22 @@ const Header = () => {
               >
                 <MenuItem onClick={handleCloseNavMenu}>
                   <Typography textAlign="center">
-                    {" "}
                     <Link to="/">الرئيسية</Link>
                   </Typography>
                 </MenuItem>
                 <MenuItem onClick={handleCloseNavMenu}>
                   <Typography textAlign="center">
-                    {" "}
                     <Link to="/tips">طرق العنايه بالنباتات</Link>
                   </Typography>
                 </MenuItem>
                 <MenuItem onClick={handleCloseNavMenu}>
                   <Typography textAlign="center">
-                    {" "}
                     <Link to="/problems">مشاكل وحلول</Link>
                   </Typography>
                 </MenuItem>
                 <MenuItem onClick={handleCloseNavMenu}>
                   <Typography textAlign="center">
-                    {" "}
                     <Link to="/products">
-                      {" "}
                       المتجر <IoStorefrontOutline />
                     </Link>
                   </Typography>
@@ -188,7 +183,7 @@ const Header = () => {
               sx={{ flexGrow: 1, display: { xs: "none", md: "flex" } }}
               className="nav"
             >
-                <img
+              <img
                 src={logo}
                 alt=""
                 className="logo"
@@ -197,25 +192,25 @@ const Header = () => {
               />
               <Button
                 onClick={handleCloseNavMenu}
-                sx={{ my: 2, color: "white", display: "block" }}
+                sx={{ my: 6, color: "white", display: "block" }}
               >
                 <Link to="/">الرئيسية</Link>
               </Button>
               <Button
                 onClick={handleCloseNavMenu}
-                sx={{ my: 2, color: "white", display: "block" }}
+                sx={{ my: 6, color: "white", display: "block" }}
               >
                 <Link to="/tips">طرق العنايه بالنباتات</Link>
               </Button>
               <Button
                 onClick={handleCloseNavMenu}
-                sx={{ my: 2, color: "white", display: "block" }}
+                sx={{ my: 6, color: "white", display: "block" }}
               >
                 <Link to="/problems">مشاكل وحلول</Link>
               </Button>
               <Button
                 onClick={handleCloseNavMenu}
-                sx={{ my: 2, color: "white", display: "block" }}
+                sx={{ my: 6, color: "white", display: "block" }}
               >
                 <Link to="/products">
                   المتجر <IoStorefrontOutline />
@@ -239,7 +234,7 @@ const Header = () => {
                 </IconButton>
               </Tooltip>
               <Menu
-                sx={{ mt: "45px" }}
+                sx={{ mt: "77px" }}
                 id="menu-appbar"
                 anchorEl={anchorElUser}
                 anchorOrigin={{
@@ -253,30 +248,32 @@ const Header = () => {
                 }}
                 open={Boolean(anchorElUser)}
                 onClose={handleCloseUserMenu}
+                className="menu"
               >
                 <MenuItem onClick={handleClose}>
-                  <Link to={`/profile/${state.signIn.id}`}>البروفايل</Link>
+                  <Link to={`/profile/${state.signIn.id}`}>الحساب</Link>
                 </MenuItem>
+
+                {/* Dashboard bar */}
+                {userType === "admin" ? (
+                  <MenuItem
+                    // id="basic-button"
+                    // aria-controls={open ? "basic-menu" : undefined}
+                    // aria-haspopup="true"
+                    // aria-expanded={open ? "true" : undefined}
+                    onClick={handleClose}
+                  >
+                    <Link to="/dashboard">لوحة التحكم</Link>
+                  </MenuItem>
+                ) : (
+                  <div></div>
+                )}
                 <MenuItem onClick={handleClose}>
                   <Link to="/" onClick={logOut}>
                     تسجيل الخروج
                     <MdOutlineLogout />
                   </Link>
                 </MenuItem>
-                {/* Dashboard bar */}
-                {userType == "admin" ? (
-                  <MenuItem
-                    id="basic-button"
-                    aria-controls={open ? "basic-menu" : undefined}
-                    aria-haspopup="true"
-                    aria-expanded={open ? "true" : undefined}
-                    onClick={handleClick}
-                  >
-                    <Link to="/dashboard">لوحة التحكم</Link>
-                  </MenuItem>
-                ) : (
-                  <></>
-                )}
               </Menu>
             </Box>
           </Toolbar>

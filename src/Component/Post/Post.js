@@ -2,7 +2,8 @@ import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import axios from "axios";
 import { useSelector } from "react-redux";
-import { Tabs, Tab, Box, Divider } from "@mui/material";
+import { Link } from "react-router-dom";
+import { Tab, Box, Divider } from "@mui/material";
 import { TabContext, TabList, TabPanel } from "@mui/lab";
 import { FiEdit3 } from "react-icons/fi";
 import {
@@ -56,8 +57,8 @@ const Post = () => {
 
       setPost(result.data);
       setComments(result.data.commentes);
+      console.log(result.data);
       setUser(result.data.user);
-     
     } catch (error) {
       console.log(error);
     }
@@ -80,17 +81,36 @@ const Post = () => {
       );
 
       setcomment(result.data);
+      setcomment("")
     } catch (error) {
       console.log(error);
     }
     onePost();
   };
 
-  // delete Product function
+  // delete comment function
   const deleteComment = async (id) => {
     try {
       const result = await axios.delete(
         `${process.env.REACT_APP_BASE_URL}/comments/delete?_id=${id}&adminId=${state.signIn.id}`,
+
+        {
+          headers: {
+            Authorization: `Bearer ${state.signIn.token}`,
+          },
+        }
+      );
+      setcomment(result.data);
+    } catch (error) {
+      console.log(error);
+    }
+    onePost();
+  };
+  // delete comment function
+  const updateComment = async (id) => {
+    try {
+      const result = await axios.put(
+        `${process.env.REACT_APP_BASE_URL}/comments/update?_id=${id}&comment=${comment}`,
 
         {
           headers: {
@@ -137,6 +157,7 @@ const Post = () => {
   const handleClose = () => {
     setOpen(false);
   };
+
   return (
     <Container component="div" className="one-post">
       <Box
@@ -155,7 +176,12 @@ const Post = () => {
         <Divider />
         <div className="user">
           <img src={user.avatar} alt="" className="avatar2" />
-          <h4>{user.userName}</h4>
+          <h4>
+             <Link to={`/profile/${user._id}`}>
+            {user.userName}
+                
+              </Link>
+            </h4>
         </div>
         <img src={post.img} alt="" className="post-img" />
 
@@ -173,12 +199,13 @@ const Post = () => {
             <TabPanel value="1">
               {comments.length &&
                 comments.map((info, i) => {
-                  
                   return (
-                    <div key={i}>
+                    <div key={i} className="comment">
+                      <img src={info.userId.avatar} alt="" />
                       <h4>{info.comment}</h4>
-                <CgCloseO onClick={() => deleteComment(info._id)} />
-
+                      <h1>{info.userId.userName}</h1>
+                      <CgCloseO onClick={() => deleteComment(info._id)} />
+                      <h6>{info.date}</h6>
                     </div>
                   );
                 })}
@@ -191,7 +218,8 @@ const Post = () => {
           cols="30"
           rows="10"
           className="textarea"
-          defaultValue="اكتب تعلقيك هنا"
+          defaultValue={comment}
+          placeholder="اكتب تعلقيك هنا"
           onChange={(ev) => setcomment(ev.target.value)}
         ></textarea>
         <button onClick={() => addComment(post._id)} className="comment-bttn">

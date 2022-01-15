@@ -20,7 +20,12 @@ let productsReducer = (state = initialState, action) => {
 
     case "UPDATE_Products":
       const { updProduct } = payload;
-      return { products: state.products.map((el) => el._id == updProduct) };
+      return {
+        products: state.products.map((el) => {
+          if (el._id === updProduct._id) return updProduct;
+          else return el;
+        }),
+      };
 
     default:
       return state;

@@ -142,9 +142,7 @@ const Problems = () => {
               <h2>
                 <Link to={`/post/${info._id}`}>{info.title}</Link>
               </h2>
-              {/* <Link to={`/profile/${info.user._id}`}>
-                
-              </Link> */}
+             
               <h6>بواسطة: {info.user.userName}</h6>
               {state.signIn.id === info.user._id ||
               state.signIn.userType === "admin" ? (
@@ -152,7 +150,6 @@ const Problems = () => {
               ) : (
                 <></>
               )}
-              {/* <button onClick={() => deleteProblem(info._id)}>حذف</button> */}
               <Divider ariant="inset" />
             </div>
           );

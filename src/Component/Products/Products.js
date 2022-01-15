@@ -38,6 +38,7 @@ const Alert = React.forwardRef(function Alert(props, ref) {
   return <MuiAlert elevation={6} ref={ref} variant="filled" {...props} />;
 });
 const Products = () => {
+  // ///////////
   useEffect(() => {
     allProducts();
   }, []);
@@ -47,9 +48,8 @@ const Products = () => {
   const [msg, setMsg] = useState("");
   const [open, setOpen] = useState(false);
   const [update, setUpdate] = useState(false);
-  const [cart, setCart] = useState();
   const [productId, setProductId] = useState("");
-  const [sellerId, setSellerId] = useState("");
+  const [sellerId, setSellerId] = useState({});
   const [snackBar, setSnackBar] = useState(false);
   const [rates, setRates] = useState({
     rate: 0,
@@ -63,7 +63,7 @@ const Products = () => {
     price: state.productsReducer.products.price,
     Quantity: state.productsReducer.products.Quantity,
   });
-console.log(product);
+console.log(sellerId);
   const dispatch = useDispatch();
   // Swipe image handle
   const AutoPlaySwipeableViews = autoPlay(SwipeableViews);
@@ -91,9 +91,9 @@ console.log(product);
         products: result.data,
       };
       dispatch(getProducts(data));
-      setSellerId(result.data.seller._id)
+      setSellerId(result.data)
       setProduct(result.data)
-      console.log(result.data.seller);
+      
     } catch (error) {
       console.log(error);
     }
@@ -131,7 +131,7 @@ console.log(product);
         }
       );
       console.log(result.data);
-      dispatch(UpdateProducts({ products: result.data }));
+      // dispatch(UpdateProducts({ products: result.data }));
     } catch (error) {
       console.log(error);
     }
@@ -194,7 +194,6 @@ console.log(product);
           },
         }
       );
-      setCart(result.data);
       {
         result.status === 200
           ? setSnackBar(true)
@@ -259,7 +258,7 @@ console.log(product);
               <div key={info._id} className="products-card">
                 <CgCloseO onClick={() => deleteProducts(info._id)} />
                 <img src={info.img} alt="" />
-                {state.signIn.id == info.seller._id ? (
+                {state.signIn.id === info.seller._id ? (
                   <IconButton
                     color="primary"
                     aria-label="upload picture"

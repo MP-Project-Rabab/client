@@ -35,6 +35,8 @@
   display: inline-flex;
   padding: 9px;
 }
+
+
 .post-img {
     width: 19rem;
     border: 2px solid #a5a58d;
@@ -45,6 +47,11 @@
   cursor: pointer;
 }
 
-@media screen and (max-width: 900px) {
-  
+.comment {
+  display: flex;
+  flex-direction: column;
 }
+
+/* @media screen and (max-width: 900px) {
+  
+} */

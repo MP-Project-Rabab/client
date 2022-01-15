@@ -1,13 +1,12 @@
 import React, { useState } from "react";
 import axios from "axios";
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch} from "react-redux";
 import { Link, useNavigate } from "react-router-dom";
 import Stack from "@mui/material/Stack";
 import TextField from "@mui/material/TextField";
 import Button from "@mui/material/Button";
 import Container from "@mui/material/Container";
 import { logIn } from "../../../reducers/login";
-import { FcGoogle } from "react-icons/fc";
 import "./style.css";
 
 const Login = () => {
@@ -15,9 +14,6 @@ const Login = () => {
   const [msg, setMsg] = useState("");
 
   const dispatch = useDispatch();
-  const state = useSelector((state) => {
-    return state;
-  });
 
   const [log, setLogIn] = useState({
     // userName
@@ -37,8 +33,8 @@ const Login = () => {
       };
       dispatch(logIn(data));
       navigate("/");
-      {result.status == 400 ? (setMsg("الإيميل أو كلمة السر غير صحيح")) : 
-      (setMsg("تم تسجيل الدخول") )}
+      {result.status === 400 ? setMsg("الإيميل أو كلمة السر غير صحيح") : 
+      setMsg("تم تسجيل الدخول") }
     } catch (error) {
       console.log(error);
     }
