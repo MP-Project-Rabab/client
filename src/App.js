@@ -1,5 +1,5 @@
 import React from "react";
-import { Routes, Route, useNavigate, Navigate } from "react-router-dom";
+import { Routes, Route } from "react-router-dom";
 import Home from "./Component/Home/Home";
 import Register from "./Component/Account/Register/Register";
 import Login from "./Component/Account/Login/Login";
@@ -8,13 +8,12 @@ import ResetPass from "./Component/Account/ResetPass/ResetPass";
 import Profile from "./Component/Account/Profile/Profile";
 import Tips from "./Component/Tips/Tips";
 import "./App.css";
-import Nav from "./Component/Header/Nav";
 import Header from "./Component/Header/Header";
 import Products from "./Component/Products/Products";
 import Problems from "./Component/Probs&solution/Problems";
 import User from "./Component/Account/User/User";
-import NotApproved from "./Component/notApproved/notApproved";
-import NoApproved from "./Component/Post/NoApproved";
+import Product from "./Component/notApproved/Product";
+import Posts from "./Component/notApproved/Posts";
 import Cart from "./Component/Cart/Cart";
 import f1 from "./img/f1.png";
 import Post from "./Component/Post/Post";
@@ -36,9 +35,9 @@ function App() {
         <Route exact path="/tips" element={<Tips />} />
         <Route exact path="/products" element={<Products />} />
         <Route exact path="/problems" element={<Problems />} />
-        <Route exact path="/users" element={<User />} />
-        <Route exact path="/productsApprove" element={<NotApproved />} />
-        <Route exact path="/postsApprove" element={<NoApproved />} />
+        {/* <Route exact path="/users" element={<User />} />
+        <Route exact path="/productsApprove" element={<Product />} />
+        <Route exact path="/postsApprove" element={<Posts />} /> */}
         <Route exact path="/cart" element={<Cart />} />
         <Route exact path="/post/:id" element={<Post />} />
         <Route exact path="/dashboard" element={<Dashboard />} />

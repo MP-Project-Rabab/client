@@ -16,7 +16,7 @@ import {
   TableRow,
   Paper,
   Box,
-  Container
+  Container,
 } from "@mui/material";
 // End of import all dependencies
 import "./style.css";
@@ -24,6 +24,7 @@ import "./style.css";
 const Cart = () => {
   const [cart, setCart] = useState([]);
   const [quantity, setQuantity] = useState(1);
+  const [orders, setOrders] = useState([]);
   const [total, setTotal] = useState(1);
   // const [loading, setLoading] = useState(false)
   useEffect(() => {
@@ -62,20 +63,18 @@ const Cart = () => {
           },
         }
       );
-
-      // setCart(result.data.cart)
     } catch (error) {
       console.log(error);
     }
     userInfo();
   };
 
-  // Add item to cart function
-  const addToCart = async (id) => {
+  // handle the order function
+  const newOrder = async (id) => {
     try {
-      const result = await axios.put(
-        `${process.env.REACT_APP_BASE_URL}/products/one`,
-        { _id: id, user: state.signIn.id },
+      const result = await axios.post(
+        `${process.env.REACT_APP_BASE_URL}/order/add`,
+        { Quantity : 0, user: state.signIn.id , orders: id, totalPrice: 0},
 
         {
           headers: {
@@ -83,12 +82,7 @@ const Cart = () => {
           },
         }
       );
-      setCart(result.data);
-      // {
-      //   result.status == 200
-      //     ? setSnackBar(true)
-      //     : setMsg("لم تتم اضافته للسله");
-      // }
+      setOrders(result.data)
     } catch (error) {
       console.log(error);
     }
@@ -103,7 +97,7 @@ const Cart = () => {
   };
   return (
     <>
-      {!cart.length ? (
+      {cart.length === 0 ? (
         <Box sx={{ flexGrow: 1, display: { xs: "none", md: "flex" } }}>
           <h2>لا توجد منتجات في سلة المشتريات.</h2>
         </Box>
@@ -157,7 +151,7 @@ const Cart = () => {
                             <BiMinus />
                           </IconButton>
                         </TableCell>
-                        <TableCell align="right">{total}</TableCell>
+                        <TableCell align="right">{info.price}</TableCell>
                         <IoTrashOutline
                           onClick={() => deleteItem(info._id)}
                           className="delete-icon"

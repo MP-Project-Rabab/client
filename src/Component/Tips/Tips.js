@@ -102,6 +102,7 @@ const Tips = () => {
   const handleClose = () => {
     setOpen(false);
   };
+  console.log(state.postReducer.posts);
  
   return (
     <div className="tips">

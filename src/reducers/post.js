@@ -18,7 +18,7 @@ const initialState = {
 
       case "UPDATE_POST":
         const { updPost } = payload;
-        return { posts: state.posts.map((el) => el._id == updPost) };
+        return { posts: state.posts.map((el) => el._id === updPost) };
         
   
       default:

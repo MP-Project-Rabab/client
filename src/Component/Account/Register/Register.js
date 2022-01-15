@@ -1,5 +1,4 @@
-import React, { useState } from "react";
-import { useNavigate } from "react-router-dom";
+import React, { useState } from "react"
 import axios from "axios";
 import Stack from "@mui/material/Stack";
 import TextField from "@mui/material/TextField";
@@ -16,7 +15,7 @@ const Register = () => {
     password: "",
     role: "61c17ed647031d953256a722",
   });
-  const navigate = useNavigate();
+  
   const creatUser = async () => {
       console.log(register);
     try {
@@ -25,7 +24,7 @@ const Register = () => {
         register
       );
      
-      {result.status == 210? (setMsg("ادخل كلمة سر قويه")) : 
+      {result.status === 210? (setMsg("ادخل كلمة سر قويه")) : 
       (setMsg("Active your Email") )}
       // navigate("/")
      

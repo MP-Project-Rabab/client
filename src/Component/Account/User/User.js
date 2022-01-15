@@ -99,14 +99,13 @@ const User = () => {
     setOpen(false);
   };
   return (
-    <>
+    <div className="users">
       <TableContainer
         component={Paper}
         style={{
-          width: "55%",
+          width: "auto",
           padding: "7px",
           margin: "auto",
-          marginTop: "12rem",
         }}
         >
         <h1 className="h11">قائمة المستخدمين</h1>
@@ -177,7 +176,7 @@ const User = () => {
           </DialogActions>
         </DialogContent>
       </Dialog>
-    </>
+    </div>
   );
 };
 

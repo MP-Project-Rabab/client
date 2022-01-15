@@ -11,20 +11,24 @@ import {
   TableRow,
   Paper,
 } from "@mui/material/";
-const NoApproved = () => {
-  useEffect(() => {
-    postNotApproved();
-  }, []);
+import "./style.css";
+// End of import all dependencies
+
+const Product = () => {
   const [approve, setApprove] = useState({});
+  useEffect(() => {
+    allNonApproved();
+  }, []);
 
   const state = useSelector((state) => {
     return state;
   });
-  //  Get All Posts Is not Approved function
-  const postNotApproved = async () => {
+
+  // Get All Products Is not Approvedfunction
+  const allNonApproved = async () => {
     try {
       const result = await axios.get(
-        `${process.env.REACT_APP_BASE_URL}/posts/notAprove`,
+        `${process.env.REACT_APP_BASE_URL}/products/notAprove`,
 
         {
           headers: {
@@ -33,17 +37,16 @@ const NoApproved = () => {
         }
       );
       setApprove(result.data);
-      console.log(result.data);
+    
     } catch (error) {
       console.log(error);
     }
   };
-
-  // Approved All Posts function
-  const postApprove = async (id) => {
+  // Approved All Products function
+  const approved = async (id) => {
     try {
       const result = await axios.put(
-        `${process.env.REACT_APP_BASE_URL}/posts/approved`,
+        `${process.env.REACT_APP_BASE_URL}/products/approved`,
         { isApproved: true, _id: id },
 
         {
@@ -56,10 +59,11 @@ const NoApproved = () => {
     } catch (error) {
       console.log(error);
     }
-    postNotApproved();
+    allNonApproved();
   };
+
   return (
-    <div className="users">
+    <div className="approve-posts">
       <TableContainer
         component={Paper}
         style={{
@@ -69,14 +73,14 @@ const NoApproved = () => {
           marginTop: "1rem",
         }}
         >
-        <h1 className="h11">قائمة البوستات</h1>
+        <h1 className="h11">قائمة المنتجات</h1>
         <Table sx={{ minWidth: 650 }} aria-label="simple table">
           <TableHead>
             <TableRow>
+              <TableCell align="right">المنتج</TableCell>
               <TableCell align="right"></TableCell>
-              <TableCell align="right">العنوان</TableCell>
+              <TableCell align="right">السعر</TableCell>
               <TableCell align="right"></TableCell>
-             
             </TableRow>
           </TableHead>
           <TableBody>
@@ -92,14 +96,17 @@ const NoApproved = () => {
                       <img src={item.img} alt="" />
                     </TableCell>
                     <TableCell align="right">
-                      <h3>{item.title}</h3>
+                      <h3>{item.name}</h3>
+                    </TableCell>
+                    <TableCell align="right">
+                      <h4> {item.price}</h4>
                     </TableCell>
                     <TableCell align="right">
                       <Button
                         color="primary"
                         aria-label="upload picture"
                         component="span"
-                        onClick={() => postApprove(item._id)}
+                        onClick={() => approved(item._id)}
                       >
                        يعتمد
                       </Button>
@@ -110,18 +117,8 @@ const NoApproved = () => {
           </TableBody>
         </Table>
       </TableContainer>
-      {/* {approve.length &&
-        approve.map((item) => {
-          return (
-            <div key={approve._id} className="user-card">
-              <img src={item.img} alt="" />
-              <h2>{item.title}</h2>
-              <button onClick={() => postApprove(item._id)}>يعتمد</button>
-            </div>
-          );
-        })} */}
     </div>
   );
 };
 
-export default NoApproved;
+export default Product;

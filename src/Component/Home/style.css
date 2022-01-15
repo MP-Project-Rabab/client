@@ -1,11 +1,12 @@
 .h1 {
-  margin: 5% 12%;
+  /* margin: auto; */
   margin-top: 16%;
   font-size: 6em;
   font-family: "Reem Kufi", sans-serif;
-  width: 60rem;
+  /* width: 60rem; */
   /* background: #000; */
   text-decoration: underline;
+  text-align: center;
   color: #6b705c;
 }
 
@@ -13,7 +14,8 @@
   /* background: #000; */
   color: #52b788;
   width: 40rem;
-  margin: 0 12%;
+  margin: auto;
+  /* margin: 0 12%; */
   font-size: 30px;
   font-family: "Harmattan", sans-serif;
 }

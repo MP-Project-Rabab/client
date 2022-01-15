@@ -49,6 +49,7 @@
   cursor: pointer;
   display: flex;
   flex-direction: column;
+  color: darkseagreen;
 }
 
 .rate {

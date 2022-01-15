@@ -2,7 +2,7 @@
   display: flex;
   justify-content: space-around;
   align-items: center;
-  height: 6rem;
+  /* height: 6rem; */
   width: 100%;
   margin-top: 2rem;
 }
@@ -11,6 +11,10 @@ a {
   text-decoration: none;
   color: #b7b7a4;
   font-size: 20px;
+}
+
+.menu a {
+  color: #78b176;
 }
 
 .avatar {
@@ -34,14 +38,12 @@ a {
 }
 
 .nav a {
-  color: #5dcc7e;
+  color: #78b176;
   font-size: 23px;
   font-weight: 900;
   font-family: "Harmattan", sans-serif;
   text-decoration: none;
-  
 }
-
 
 /* @media screen and (max-width: 900px) {
   .header header {

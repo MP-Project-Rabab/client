@@ -1,122 +1,81 @@
 import React from "react";
-import { styled, useTheme } from "@mui/material/styles";
-import {
-  Box,
-  Toolbar,
-  List,
-  CssBaseline,
-  Divider,
-  IconButton,
-  ListItem,
-  ListItemIcon,
-  ListItemText,
-  AppBar,
-  Drawer,
-} from "@mui/material/";
-import MuiAppBar from "@mui/material/AppBar";
-import MuiDrawer from "@mui/material/Drawer";
-import Typography from "@mui/material/Typography";
-// import ChevronLeftIcon from "@mui/icons-material/ChevronLeft";
-// import ChevronRightIcon from "@mui/icons-material/ChevronRight";
-// import InboxIcon from "@mui/icons-material/MoveToInbox";
-// import MailIcon from "@mui/icons-material/Mail";
-import { IoMenu } from "react-icons/io5";
-import {
-  MdOutlineArrowBackIos,
-  MdOutlineArrowForwardIos,
-  MdOutlineMailOutline,
-  MdOutlineMoveToInbox,
-} from "react-icons/md";
-
+import { Box, Tabs, Tab, Typography } from "@mui/material/";
+import PropTypes from "prop-types";
+import Product from "../notApproved/Product";
+import Posts from "../notApproved/Posts";
+import User from "../Account/User/User";
+import "./style.css";
 // End of import all dependencies
-const drawerWidth = 240;
+
+function TabPanel(props) {
+  const { children, value, index, ...other } = props;
+
+  return (
+    <div
+      role="tabpanel"
+      hidden={value !== index}
+      id={`vertical-tabpanel-${index}`}
+      aria-labelledby={`vertical-tab-${index}`}
+      {...other}
+    >
+      {value === index && (
+        <Box sx={{ p: 3 }}>
+          <Typography>{children}</Typography>
+        </Box>
+      )}
+    </div>
+  );
+}
+
+TabPanel.propTypes = {
+  children: PropTypes.node,
+  index: PropTypes.number.isRequired,
+  value: PropTypes.number.isRequired,
+};
+
+function a11yProps(index) {
+  return {
+    id: `vertical-tab-${index}`,
+    "aria-controls": `vertical-tabpanel-${index}`,
+  };
+}
 
 const Dashboard = () => {
-  return (
-    <Box sx={{ display: "flex"}}>
-      <CssBaseline />
-      {/* <AppBar
-            position="fixed" sx={{ zIndex: (theme) => theme.zIndex.drawer + 1 }}
-          >
-            <Toolbar>
-              <Typography variant="h6" noWrap component="div">
-                Permanent drawer
-              </Typography>
-            </Toolbar>
-          </AppBar> */}
-      <Box
-        component="main"
-        sx={{ flexGrow: 1, paddingRight: 40  }}
-      >
-        {/* <Toolbar /> */}
-        <Typography paragraph>
-          Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
-          eiusmod tempor incididunt ut labore et dolore magna aliqua. Rhoncus
-          dolor purus non enim praesent elementum facilisis leo vel. Risus at
-          ultrices mi tempus imperdiet. Semper risus in hendrerit gravida rutrum
-          quisque non tellus. Convallis convallis tellus id interdum velit
-          laoreet id donec ultrices. Odio morbi quis commodo odio aenean sed
-          adipiscing. Amet nisl suscipit adipiscing bibendum est ultricies
-          integer quis. Cursus euismod quis viverra nibh cras. Metus vulputate
-          eu scelerisque felis imperdiet proin fermentum leo. Mauris commodo
-          quis imperdiet massa tincidunt. Cras tincidunt lobortis feugiat
-          vivamus at augue. At augue eget arcu dictum varius duis at consectetur
-          lorem. Velit sed ullamcorper morbi tincidunt. Lorem donec massa sapien
-          faucibus et molestie ac.
-        </Typography>
-        <Typography paragraph>
-          Consequat mauris nunc congue nisi vitae suscipit. Fringilla est
-          ullamcorper eget nulla facilisi etiam dignissim diam. Pulvinar
-          elementum integer enim neque volutpat ac tincidunt. Ornare suspendisse
-          sed nisi lacus sed viverra tellus. Purus sit amet volutpat consequat
-          mauris. Elementum eu facilisis sed odio morbi. Euismod lacinia at quis
-          risus sed vulputate odio. Morbi tincidunt ornare massa eget egestas
-          purus viverra accumsan in. In hendrerit gravida rutrum quisque non
-          tellus orci ac. Pellentesque nec nam aliquam sem et tortor. Habitant
-          morbi tristique senectus et. Adipiscing elit duis tristique
-          sollicitudin nibh sit. Ornare aenean euismod elementum nisi quis
-          eleifend. Commodo viverra maecenas accumsan lacus vel facilisis. Nulla
-          posuere sollicitudin aliquam ultrices sagittis orci a.
-        </Typography>
-      </Box>
-      <Drawer
-        sx={{
-          width: drawerWidth,
-          flexShrink: 0,
-          "& .MuiDrawer-paper": {
-            width: drawerWidth,
-            boxSizing: "border-box",
-          },
-          
-        }}
-       
-        variant="permanent"
-        anchor="right"
-      >
-        <Toolbar sx={{ mt: 20, bgcolor: "#52b788"}}>
-          <Typography variant="h6" noWrap component="div">
-            لوحة التحكم
-          </Typography>
-        </Toolbar>
+  const [value, setValue] = React.useState(0);
 
-        {/* <Toolbar /> */}
-        <Divider />
-        <List sx={{ flexGrow: 1, bgcolor: "#52b788"}}>
-          {["Inbox", "Starred", "Send email", "Drafts"].map((text, index) => (
-            <ListItem button key={text}>
-              <ListItemIcon>
-                {index % 2 === 0 ? (
-                  <MdOutlineMoveToInbox />
-                ) : (
-                  <MdOutlineMailOutline />
-                )}
-              </ListItemIcon>
-              <ListItemText primary={text} />
-            </ListItem>
-          ))}
-        </List>
-        {/* <Divider /> */}
-      </Drawer>
+  const handleChange = (event, newValue) => {
+    setValue(newValue);
+  };
+
+  return (
+    <Box
+      sx={{
+        flexGrow: 1,
+        bgcolor: "background.paper",
+        height: 224,
+      }}
+    >
+      <Tabs
+        orientation="vertical"
+        variant="scrollable"
+        value={value}
+        onChange={handleChange}
+        aria-label="Vertical tabs example"
+        sx={{ borderRight: 1, borderColor: "divider" }}
+      >
+        <Tab label="منشورات تحتاج للموافقه" {...a11yProps(0)} />
+        <Tab label="منتجات تحتاج للموافقه" {...a11yProps(1)} />
+        <Tab label="المستخدمين" {...a11yProps(2)} />
+      </Tabs>
+      <TabPanel value={value} index={0}>
+        <Posts />
+      </TabPanel>
+      <TabPanel value={value} index={1}>
+        <Product />
+      </TabPanel>
+      <TabPanel value={value} index={2}>
+        <User />
+      </TabPanel>
     </Box>
   );
 };
