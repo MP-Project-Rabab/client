@@ -30,7 +30,6 @@ const Header = () => {
   // ////////////////////////////
   const [cart, setCart] = useState([]);
   const [isLog, setIsLog] = useState(false);
-  const [user, setUser] = useState("");
   const [info, setInfo] = useState([]);
   const [anchorElNav, setAnchorElNav] = useState(null);
   let userType = localStorage.getItem("userType");
@@ -39,16 +38,6 @@ const Header = () => {
     userInfo();
     log();
   }, []);
-
-  // Dashboard Bar
-  // const [anchorEl, setAnchorEl] = useState(null);
-  // const open = Boolean(anchorEl);
-  // const handleClick = (event) => {
-  //   setAnchorEl(event.currentTarget);
-  // };
-  // const handleDashboardClose = () => {
-  //   setAnchorEl(null);
-  // };
 
   // user  MUI AppBar
   const [anchorElUser, setAnchorElUser] = useState(null);
@@ -76,16 +65,13 @@ const Header = () => {
   const log = () => {
     if (userid) {
       setIsLog(true);
-      setUser(userid);
     } else {
       setIsLog(false);
-      navigate("/login");
     }
   };
   const logOut = () => {
     localStorage.clear();
     setIsLog(false);
-    setUser("");
   };
   const userInfo = async () => {
     try {
@@ -108,7 +94,12 @@ const Header = () => {
   return (
     <AppBar
       position="sticky"
-      sx={{ background: "white", color: "black", boxShadow: "none" }}
+      sx={{
+        background: "white",
+        color: "black",
+        boxShadow: "rgba(0, 0, 0, 0.35) 0px 5px 15px",
+        height: "16vh",
+      }}
     >
       {isLog ? (
         <Container maxWidth="xl">
@@ -169,7 +160,7 @@ const Header = () => {
                 </MenuItem>
                 <MenuItem onClick={handleCloseNavMenu}>
                   <Typography textAlign="center">
-                    <Link to="/products">
+                    <Link to="/store">
                       المتجر <IoStorefrontOutline />
                     </Link>
                   </Typography>
@@ -212,7 +203,7 @@ const Header = () => {
                 onClick={handleCloseNavMenu}
                 sx={{ my: 6, color: "white", display: "block" }}
               >
-                <Link to="/products">
+                <Link to="/store">
                   المتجر <IoStorefrontOutline />
                 </Link>
               </Button>
@@ -256,13 +247,7 @@ const Header = () => {
 
                 {/* Dashboard bar */}
                 {userType === "admin" ? (
-                  <MenuItem
-                    // id="basic-button"
-                    // aria-controls={open ? "basic-menu" : undefined}
-                    // aria-haspopup="true"
-                    // aria-expanded={open ? "true" : undefined}
-                    onClick={handleClose}
-                  >
+                  <MenuItem onClick={handleClose}>
                     <Link to="/dashboard">لوحة التحكم</Link>
                   </MenuItem>
                 ) : (
@@ -281,15 +266,120 @@ const Header = () => {
       ) : (
         <Container maxWidth="xl">
           <Toolbar disableGutters>
-            <Box sx={{ flexGrow: 1, display: { xs: "none", md: "flex" } }}>
-              <img src={logo} alt="" className="logo" />
-              <div className="acut">
-                <Button sx={{ my: 2, color: "white", display: "block" }}>
-                  <Link to="/login">
-                    تسجيل الدخول <MdLogin />{" "}
-                  </Link>
-                </Button>
-              </div>
+            {/* For small screen */}
+
+            <Box sx={{ flexGrow: 1, display: { xs: "flex", md: "none" } }}>
+              <IconButton
+                size="large"
+                aria-label="account of current user"
+                aria-controls="menu-appbar"
+                aria-haspopup="true"
+                onClick={handleOpenNavMenu}
+                color="inherit"
+              >
+                <IoMenu />
+              </IconButton>
+              <Link to="/">
+                <img
+                  src={logo}
+                  alt=""
+                  className="logo"
+                  component="div"
+                  sx={{ mr: 2, display: { xs: "none", md: "flex" } }}
+                />
+              </Link>
+              <Menu
+                id="menu-appbar"
+                anchorEl={anchorElNav}
+                anchorOrigin={{
+                  vertical: "bottom",
+                  horizontal: "left",
+                }}
+                keepMounted
+                transformOrigin={{
+                  vertical: "top",
+                  horizontal: "left",
+                }}
+                open={Boolean(anchorElNav)}
+                onClose={handleCloseNavMenu}
+                sx={{
+                  display: { xs: "block", md: "none" },
+                }}
+                className="nav"
+              >
+                <MenuItem onClick={handleCloseNavMenu}>
+                  <Typography textAlign="center">
+                    <Link to="/">الرئيسية</Link>
+                  </Typography>
+                </MenuItem>
+                <MenuItem onClick={handleCloseNavMenu}>
+                  <Typography textAlign="center">
+                    <Link to="/tips">طرق العنايه بالنباتات</Link>
+                  </Typography>
+                </MenuItem>
+                <MenuItem onClick={handleCloseNavMenu}>
+                  <Typography textAlign="center">
+                    <Link to="/problems">مشاكل وحلول</Link>
+                  </Typography>
+                </MenuItem>
+                <MenuItem onClick={handleCloseNavMenu}>
+                  <Typography textAlign="center">
+                    <Link to="/store">
+                      المتجر <IoStorefrontOutline />
+                    </Link>
+                  </Typography>
+                </MenuItem>
+              </Menu>
+              <Typography textAlign="center" className="login-nav">
+                <Link to="/login">
+                  تسجيل الدخول <MdLogin />
+                </Link>
+              </Typography>
+            </Box>
+            {/* For large screen */}
+            <Box
+              sx={{ flexGrow: 1, display: { xs: "none", md: "flex" } }}
+              className="nav"
+            >
+              {/* <img src={logo} alt="" className="logo" /> */}
+              <img
+                src={logo}
+                alt=""
+                className="logo"
+                component="div"
+                sx={{ mr: 2, display: { xs: "none", md: "flex" } }}
+              />
+              <Button
+                onClick={handleCloseNavMenu}
+                sx={{ my: 6, color: "white", display: "block" }}
+              >
+                <Link to="/">الرئيسية</Link>
+              </Button>
+              <Button
+                onClick={handleCloseNavMenu}
+                sx={{ my: 6, color: "white", display: "block" }}
+              >
+                <Link to="/tips">طرق العنايه بالنباتات</Link>
+              </Button>
+              <Button
+                onClick={handleCloseNavMenu}
+                sx={{ my: 6, color: "white", display: "block" }}
+              >
+                <Link to="/problems">مشاكل وحلول</Link>
+              </Button>
+              <Button
+                onClick={handleCloseNavMenu}
+                sx={{ my: 6, color: "white", display: "block" }}
+              >
+                <Link to="/store">
+                  المتجر <IoStorefrontOutline />
+                </Link>
+              </Button>
+              <Button sx={{ my: 2, color: "white", display: "block" }}>
+                <Link to="/login">
+                  تسجيل الدخول <MdLogin />
+                </Link>
+              </Button>
             </Box>
           </Toolbar>
         </Container>

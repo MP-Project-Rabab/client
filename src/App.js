@@ -11,9 +11,6 @@ import "./App.css";
 import Header from "./Component/Header/Header";
 import Products from "./Component/Products/Products";
 import Problems from "./Component/Probs&solution/Problems";
-import User from "./Component/Account/User/User";
-import Product from "./Component/notApproved/Product";
-import Posts from "./Component/notApproved/Posts";
 import Cart from "./Component/Cart/Cart";
 import f1 from "./img/f1.png";
 import Post from "./Component/Post/Post";
@@ -25,6 +22,7 @@ function App() {
       <Header />
       {/* <Nav /> */}
       {/* {user ? return <Navigate to="/" replace /> : <Login />} */}
+      
       <Routes>
         <Route exact path="/" element={<Home />} />
         <Route exact path="/register" element={<Register />} />
@@ -33,11 +31,8 @@ function App() {
         <Route exact path="/reset-pass/:id" element={<ResetPass />} />
         <Route exact path="/profile/:id" element={<Profile />} />
         <Route exact path="/tips" element={<Tips />} />
-        <Route exact path="/products" element={<Products />} />
+        <Route exact path="/store" element={<Products />} />
         <Route exact path="/problems" element={<Problems />} />
-        {/* <Route exact path="/users" element={<User />} />
-        <Route exact path="/productsApprove" element={<Product />} />
-        <Route exact path="/postsApprove" element={<Posts />} /> */}
         <Route exact path="/cart" element={<Cart />} />
         <Route exact path="/post/:id" element={<Post />} />
         <Route exact path="/dashboard" element={<Dashboard />} />

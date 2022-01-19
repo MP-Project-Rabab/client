@@ -14,6 +14,7 @@ import {
 } from "@mui/material";
 // End of import all dependencies
 import "./style.css";
+import nature2 from '../../img/nature2.jpg'
 const Tips = () => {
   useEffect(() => {
     allTip();
@@ -102,15 +103,15 @@ const Tips = () => {
   const handleClose = () => {
     setOpen(false);
   };
-  console.log(state.postReducer.posts);
  
   return (
     <div className="tips">
+      <img src={nature2} alt="" className="nature"/>
         <h3 className="add-product">
             <BsPatchPlus className="add" onClick={handleClickOpen} />
            أضف بوست
           </h3>
-      {/* <BsPatchPlus onClick={handleClickOpen} className="add2" /> */}
+      
       {state.postReducer.posts.length &&
         state.postReducer.posts.map((info) => {
           return (
@@ -118,7 +119,7 @@ const Tips = () => {
               <img src={info.img} alt="" />
               <h2>{info.title}</h2>
               <h6>بواسطة: {info.user.userName}</h6>
-              {state.signIn.id === info.user._id ||
+              {state.signIn.id === info.user ||
               state.signIn.userType === "admin" ? (
                 <button onClick={() => deleteTip(info._id)}>حذف</button>
               ) : (

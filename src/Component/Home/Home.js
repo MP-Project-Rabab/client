@@ -1,7 +1,8 @@
 import React from "react";
 // End of import all dependencies
-import pexels1 from '../../img/pexels1.jpg'
-import f2 from '../../img/f2.jpg'
+import pexels1 from "../../img/pexels1.jpg";
+import p1 from "../../img/p1.png";
+import pg1 from "../../img/pg1.jpg";
 import "./style.css";
 const Home = () => {
   return (
@@ -16,7 +17,7 @@ const Home = () => {
         </p>
       </section>
       <section className="section2">
-        <img src={pexels1} alt="" className="img1"/>
+        <img src={pexels1} alt="" className="img1" />
         <div className="box1"></div>
         <h1>"كن صديقاً للنبات ففي النباتات تفاصيل جميلة للحياة"</h1>
         <p className="p2">
@@ -30,12 +31,21 @@ const Home = () => {
         <div className="box2"></div>
         <h1>منتج من متجرنا </h1>
         <p className="p3">
-          نعتقد أن رؤية النبات في حياتك اليومية يجلب الفرح. لذلك نحن نبذل قصارى
-          جهدنا لتسهيل الوصول إليها. هناك الكثير من النباتات المتنوعة التي ستجد
-          واحدة تحبها من تلك التي لا تحتاج إلى الانتباه إلى تلك التي تطلب الثناء
-          كل يوم.
+          أسهل طريقة لجعل حياتك صحية هي عن طريق شراء النباتات المفضلة لديك
         </p>
-        <img src={f2} alt="" className="img2"/>
+        <img src={p1} alt="" className="img2" />
+        <h4>نبتة جلد النمر</h4>
+      </section>
+      <section className="section4">
+        <div className="box3">
+          <img src={pg1} alt="" className="img3" />
+        </div>
+        <h1>منتج من متجرنا </h1>
+        
+        <p className="p4">
+         أسهل طريقة لجعل حياتك صحية هي عن طريق شراء النباتات المفضلة لديك
+        </p>
+        {/* <h4>نبتة جلد النمر</h4> */}
       </section>
     </div>
   );

@@ -16,6 +16,7 @@ import {
   TableRow,
   Paper,
   Box,
+  // eslint-disable-next-line
   Container,
 } from "@mui/material";
 // End of import all dependencies
@@ -23,12 +24,12 @@ import "./style.css";
 
 const Cart = () => {
   const [cart, setCart] = useState([]);
-  const [quantity, setQuantity] = useState(1);
-  const [orders, setOrders] = useState([]);
-  const [total, setTotal] = useState(1);
+  const [quantity, setQuantity] = useState();
+  const [order, setOrder] = useState({});
   // const [loading, setLoading] = useState(false)
   useEffect(() => {
     userInfo();
+    getOrder();
   }, []);
   const state = useSelector((state) => {
     return state;
@@ -52,7 +53,10 @@ const Cart = () => {
     }
   };
   const deleteItem = async (id) => {
+    deleteOrder(id);
+
     try {
+      // eslint-disable-next-line
       const result = await axios.put(
         `${process.env.REACT_APP_BASE_URL}/products/cart`,
         { _id: id, user: state.signIn.id },
@@ -70,11 +74,10 @@ const Cart = () => {
   };
 
   // handle the order function
-  const newOrder = async (id) => {
+  const getOrder = async (id) => {
     try {
-      const result = await axios.post(
-        `${process.env.REACT_APP_BASE_URL}/order/add`,
-        { Quantity : 0, user: state.signIn.id , orders: id, totalPrice: 0},
+      const result = await axios.get(
+        `${process.env.REACT_APP_BASE_URL}/order/all`,
 
         {
           headers: {
@@ -82,14 +85,53 @@ const Cart = () => {
           },
         }
       );
-      setOrders(result.data)
+      setOrder(result.data);
     } catch (error) {
       console.log(error);
     }
   };
+  // update order
+  const updateOrder = async (id) => {
+   
+    try {
+      const result = await axios.put(
+        `${process.env.REACT_APP_BASE_URL}/order/update`,
+        { orders: id, ...order },
+
+        {
+          headers: {
+            Authorization: `Bearer ${state.signIn.token}`,
+          },
+        }
+      );
+      // setOrders(result.data);
+      console.log(result.data);
+    } catch (error) {
+      console.log(error);
+    }
+    getOrder();
+  };
+
+  const deleteOrder = async (id) => {
+    try {
+      // eslint-disable-next-line
+      const result = await axios.delete(
+        `${process.env.REACT_APP_BASE_URL}/order/delete?orders=${id}`,
+        {
+          headers: {
+            Authorization: `Bearer ${state.signIn.token}`,
+          },
+        }
+      );
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
   const inc = (id) => {
-    setQuantity(quantity + 1);
-    console.log(id);
+    console.log(order);
+    setOrder({ ...order, Quantity: order[0].Quantity + 1 });
+    updateOrder(id);
   };
   const dec = () => {
     setQuantity(quantity - 1);
@@ -146,16 +188,31 @@ const Cart = () => {
                           <IconButton onClick={(ev) => inc(info._id)}>
                             <BsPlus />
                           </IconButton>
-                          {quantity}
+                          {/* <h5 key={order[0]._id}>{order[0].Quantity}</h5> */}
+                          {order.length &&
+                          order.map((item, i) => {
+                            // {console.log(item._id)}
+                            return (
+                            
+                         <>
+                            <h5 key={item._id}>{item.Quantity}</h5>   
+                         </>
+                             
+                            )
+                            
+                          })}
                           <IconButton onClick={dec}>
                             <BiMinus />
                           </IconButton>
                         </TableCell>
+                        {/* {order.Quantity} */}
                         <TableCell align="right">{info.price}</TableCell>
-                        <IoTrashOutline
+                        <IconButton
                           onClick={() => deleteItem(info._id)}
                           className="delete-icon"
-                        />
+                        >
+                          <IoTrashOutline />
+                        </IconButton>
                       </TableRow>
                     );
                   })}
@@ -166,9 +223,18 @@ const Cart = () => {
             <Button
               variant="outlined"
               color="success"
-              style={{ marginRight: "64rem", marginTop: "3rem" }}
+              style={{ marginRight: "54rem", marginTop: "3rem" }}
             >
               متابعة التسوق
+            </Button>
+          </Link>
+          <Link to="/products" className="check">
+            <Button
+              variant="outlined"
+              color="success"
+              style={{ marginRight: "4rem", marginTop: "3rem" }}
+            >
+              متابعة الدفع
             </Button>
           </Link>
         </>

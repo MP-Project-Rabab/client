@@ -55,7 +55,6 @@ const Problems = () => {
       console.log(error);
     }
   };
-  console.log(state);
 
   // Add new Problem function
   const newProblem = async () => {
@@ -78,6 +77,7 @@ const Problems = () => {
     allProblems();
   };
   // update Problem function
+  // eslint-disable-next-line
   const update = async (id) => {
     try {
       const result = await axios.put(

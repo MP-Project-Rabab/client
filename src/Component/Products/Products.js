@@ -5,6 +5,7 @@ import { useDispatch, useSelector } from "react-redux";
 import {
   getProducts,
   newProducts,
+  // eslint-disable-next-line
   UpdateProducts,
   delProducts,
 } from "../../reducers/products";
@@ -17,8 +18,12 @@ import {
   Rating,
   IconButton,
   Snackbar,
+  // eslint-disable-next-line
   Container,
+  // eslint-disable-next-line
   Box,
+  // eslint-disable-next-line
+  Grid,
 } from "@mui/material";
 import MuiAlert from "@mui/material/Alert";
 import { FiEdit3 } from "react-icons/fi";
@@ -45,25 +50,26 @@ const Products = () => {
   const state = useSelector((state) => {
     return state;
   });
-  const [msg, setMsg] = useState("");
+  // All useStates
   const [open, setOpen] = useState(false);
   const [update, setUpdate] = useState(false);
   const [productId, setProductId] = useState("");
+  // eslint-disable-next-line
   const [sellerId, setSellerId] = useState({});
   const [snackBar, setSnackBar] = useState(false);
+
   const [rates, setRates] = useState({
     rate: 0,
     productId: "",
     byUser: "",
   });
   const [product, setProduct] = useState({
-    seller: state.signIn.id,
     img: state.productsReducer.products.img,
     name: state.productsReducer.products.name,
     price: state.productsReducer.products.price,
     Quantity: state.productsReducer.products.Quantity,
   });
-console.log(sellerId);
+
   const dispatch = useDispatch();
   // Swipe image handle
   const AutoPlaySwipeableViews = autoPlay(SwipeableViews);
@@ -91,9 +97,8 @@ console.log(sellerId);
         products: result.data,
       };
       dispatch(getProducts(data));
-      setSellerId(result.data)
-      setProduct(result.data)
-      
+      setSellerId(result.data);
+      setProduct(result.data);
     } catch (error) {
       console.log(error);
     }
@@ -103,7 +108,7 @@ console.log(sellerId);
     try {
       const result = await axios.post(
         `${process.env.REACT_APP_BASE_URL}/products/add`,
-        product,
+        { seller: state.signIn.id, ...product },
 
         {
           headers: {
@@ -187,18 +192,38 @@ console.log(sellerId);
       const result = await axios.put(
         `${process.env.REACT_APP_BASE_URL}/products/one`,
         { _id: id, user: state.signIn.id },
-
         {
           headers: {
             Authorization: `Bearer ${state.signIn.token}`,
           },
         }
       );
-      {
-        result.status === 200
-          ? setSnackBar(true)
-          : setMsg("لم تتم اضافته للسله");
-      }
+
+      result.status === 200 ? setSnackBar(true) : setSnackBar(false);
+    } catch (error) {
+      console.log(error);
+    }
+    newOrder(id);
+  };
+  // handle the order function
+  const newOrder = async (id) => {
+    console.log(id);
+    try {
+      const result = await axios.post(
+        `${process.env.REACT_APP_BASE_URL}/order/new`,
+        {
+          user: state.signIn.id,
+          orders: id,
+          totalPrice: 44,
+        },
+        {
+          headers: {
+            Authorization: `Bearer ${state.signIn.token}`,
+          },
+        }
+      );
+
+      console.log(result.data);
     } catch (error) {
       console.log(error);
     }
@@ -231,78 +256,92 @@ console.log(sellerId);
   return (
     <div className="products">
       {MyComponent()}
-      <Box
-        sx={{
-          flexGrow: 0,
-          display: { xs: "flex", md: "flex" },
-          flexDirection: "column",
-        }}
+
+      <Snackbar
+        open={snackBar}
+        autoHideDuration={3000}
+        onClose={handleSnackBarClose}
       >
-        <Snackbar
-          open={snackBar}
-          autoHideDuration={3000}
+        <Alert
           onClose={handleSnackBarClose}
+          severity="success"
+          sx={{ width: "100%" }}
         >
-          <Alert
-            onClose={handleSnackBarClose}
-            severity="success"
-            sx={{ width: "100%" }}
-          >
-            تم إضافة المنتج للسلة!
-          </Alert>
-        </Snackbar>
+          تم إضافة المنتج للسلة!
+        </Alert>
+      </Snackbar>
 
-        {state.productsReducer.products.length &&
-          state.productsReducer.products.map((info) => {
-            return (
-              <div key={info._id} className="products-card">
-                <CgCloseO onClick={() => deleteProducts(info._id)} />
-                <img src={info.img} alt="" />
-                {state.signIn.id === info.seller._id ? (
-                  <IconButton
-                    color="primary"
-                    aria-label="upload picture"
-                    component="span"
-                    onClick={() => handleUpdateOpen(info._id)}
-                  >
-                    <FiEdit3 />
-                  </IconButton>
-                ) : (
-                  <></>
-                )}
-                <Link to={`/profile/${info.seller._id}`}>
-                  <h5>البائع: {info.seller.userName}</h5>
-                </Link>
+      {state.productsReducer.products.length &&
+        state.productsReducer.products.map((info) => {
+          return (
+            <div key={info._id} className="products-card">
+              <CgCloseO
+                onClick={() => deleteProducts(info._id)}
+                className="delete"
+              />
+              <img src={info.img} alt="" />
+              {state.signIn.id === info.seller._id ? (
+                <IconButton
+                  color="primary"
+                  aria-label="upload picture"
+                  component="span"
+                  onClick={() => handleUpdateOpen(info._id)}
+                >
+                  <FiEdit3 />
+                </IconButton>
+              ) : (
+                <></>
+              )}
+              <Link to={`/profile/${info.seller._id}`}>
+                <h5>البائع: {info.seller.userName}</h5>
+              </Link>
 
-                <Rating
-                  name="half-rating"
-                  defaultValue={0}
-                  precision={0.5}
-                  className="rate"
-                  onClick={() => addRate(info._id)}
-                  onChange={(ev) =>
-                    setRates({ ...rates, rate: ev.target.defaultValue })
-                  }
-                />
-                <h2>{info.name}</h2>
-                <h5>متوفر:{info.Quantity} </h5>
-                <h4>{info.price} ر.س</h4>
-                <button className="bttn" onClick={() => addToCart(info._id)}>
-                  <BsCartPlusFill />
-                  أضف للسله
-                </button>
-              </div>
-            );
-          })}
-        {state.signIn.userType === "seller" ? (
-          <h3 className="add-product">
-            <BsPatchPlus className="add" onClick={handleClickOpen} />
-            أضف منتج
-          </h3>
-        ) : (
-          <></>
-        )}
-      </Box>
+              <Rating
+                name="half-rating"
+                defaultValue={0}
+                precision={0.5}
+                className="rate"
+                onClick={() => addRate(info._id)}
+                onChange={(ev) =>
+                  setRates({ ...rates, rate: ev.target.defaultValue })
+                }
+              />
+              <h2>{info.name}</h2>
+              {info.Quantity > 0 ? (
+                <>
+                  <h5 className="green">متوفر</h5>
+                  <button className="bttn" onClick={() => addToCart(info._id)}>
+                    <BsCartPlusFill />
+                    أضف للسله
+                  </button>
+                </>
+              ) : (
+                <>
+                  <h5 className="red">غير متوفر</h5>
+                  <button className="disabled-bttn" disabled>
+                    <BsCartPlusFill />
+                    أضف للسله
+                  </button>
+                </>
+              )}
+
+              <h4>{info.price} ر.س</h4>
+              {/* <button className="bttn" onClick={() => addToCart(info._id)}>
+                <BsCartPlusFill />
+                أضف للسله
+              </button> */}
+            </div>
+          );
+        })}
+      {state.signIn.userType === "seller" ? (
+        <h3 className="add-product">
+          <BsPatchPlus className="add" onClick={handleClickOpen} />
+          أضف منتج
+        </h3>
+      ) : (
+        <></>
+      )}
+
       {/* For updating a product */}
       <Dialog open={update} onClose={handleUpdateClose}>
         <DialogContent>
@@ -414,7 +453,6 @@ console.log(sellerId);
         </DialogContent>
       </Dialog>
       {/* End */}
-      <h1>{msg}</h1>
     </div>
   );
 };
