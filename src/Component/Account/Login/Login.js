@@ -16,7 +16,7 @@ const Login = () => {
   const dispatch = useDispatch();
 
   const [log, setLogIn] = useState({
-    // userName
+    
     email: "",
     password: "",
   });
@@ -33,8 +33,8 @@ const Login = () => {
       };
       dispatch(logIn(data));
       navigate("/");
-      {result.status === 400 ? setMsg("الإيميل أو كلمة السر غير صحيح") : 
-      setMsg("تم تسجيل الدخول") }
+      result.status === 400 ? setMsg("الإيميل أو كلمة السر غير صحيح") : 
+      setMsg("تم تسجيل الدخول") 
     } catch (error) {
       console.log(error);
     }

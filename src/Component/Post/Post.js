@@ -57,7 +57,6 @@ const Post = () => {
 
       setPost(result.data);
       setComments(result.data.commentes);
-      console.log(result.data);
       setUser(result.data.user);
     } catch (error) {
       console.log(error);
@@ -81,7 +80,7 @@ const Post = () => {
       );
 
       setcomment(result.data);
-      setcomment("")
+      setcomment("");
     } catch (error) {
       console.log(error);
     }
@@ -107,6 +106,7 @@ const Post = () => {
     onePost();
   };
   // delete comment function
+  // eslint-disable-next-line
   const updateComment = async (id) => {
     try {
       const result = await axios.put(
@@ -177,11 +177,8 @@ const Post = () => {
         <div className="user">
           <img src={user.avatar} alt="" className="avatar2" />
           <h4>
-             <Link to={`/profile/${user._id}`}>
-            {user.userName}
-                
-              </Link>
-            </h4>
+            <Link to={`/profile/${user._id}`}>{user.userName}</Link>
+          </h4>
         </div>
         <img src={post.img} alt="" className="post-img" />
 
@@ -201,11 +198,24 @@ const Post = () => {
                 comments.map((info, i) => {
                   return (
                     <div key={i} className="comment">
-                      <img src={info.userId.avatar} alt="" />
-                      <h4>{info.comment}</h4>
-                      <h1>{info.userId.userName}</h1>
-                      <CgCloseO onClick={() => deleteComment(info._id)} />
+                     <div className="userName">
+                     <img
+                        src={info.userId.avatar}
+                        alt=""
+                        className="comment-avatar"
+                      />
+                      <h5>{info.userId.userName}</h5>
+                     </div>
                       <h6>{info.date}</h6>
+                      <h4>{info.comment}</h4>
+                      {state.signIn.id === info.userId._id ||
+                      state.signIn.userType === "admin" ? (
+                        <CgCloseO onClick={() => deleteComment(info._id)} />
+                      ) : (
+                        <></>
+                      )}
+
+                      
                     </div>
                   );
                 })}

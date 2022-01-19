@@ -1,7 +1,7 @@
 .products {
   padding: 30px;
   display: flex;
-  justify-content: space-between;
+  justify-content: space-evenly;
   flex-wrap: wrap;
   background: #fff;
   width: 80rem;
@@ -39,7 +39,6 @@
   font-size: 3.5rem;
   padding-bottom: 19px;
   padding-right: 10px;
-  
 }
 
 .add-product {
@@ -73,6 +72,16 @@
   color: #6b705c;
 }
 
+.disabled-bttn {
+  width: 6rem;
+  border: 1px solid rgb(109, 109, 109);
+  border-radius: 10px;
+  font-size: 14px;
+  height: 1.8rem;
+  opacity: 0.3;
+}
+
+
 .Swipe {
   margin-top: 5em;
   /* margin-right: 9em; */
@@ -86,9 +95,25 @@
 .b3 {
   height: 33rem;
   width: 90%;
-  object-fit:fill;
+  object-fit: fill;
 }
 
+.delete {
+  cursor: pointer;
+  font-size: 22px;
+  /* position: absolute; */
+  right: 1%;
+  /* margin-bottom: 1rem; */
+  margin-left: 4.1rem;
+}
+
+.products-card .green {
+  color: green;
+}
+
+.products-card .red {
+  color: rgb(197, 23, 23);
+}
 @media screen and (max-width: 900px) {
   .products {
     width: 80vw;
@@ -117,7 +142,6 @@
     text-align: center;
   }
 
-  
   .rate {
     direction: ltr;
     align-self: flex-start;
@@ -128,7 +152,6 @@
     margin-right: 1.2em;
     width: 90vw;
     height: 20rem;
-    
   }
 
   .b1,
@@ -161,8 +184,6 @@
     margin: 3px;
     margin-bottom: 10px;
   }
-
-
 
   .add-product {
     position: fixed;

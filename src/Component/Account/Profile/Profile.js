@@ -109,6 +109,7 @@ const Profile = () => {
       <h2>{userInfo.userName} </h2>
       <h1>موقعي:</h1>
       <h3>{userInfo.location} </h3>
+      
       </div>
      
       <Dialog open={open} onClose={handleClose}>
@@ -118,6 +119,14 @@ const Profile = () => {
             multiple={false}
             onDone={({ base64, base64: string }) =>
               setUserInfo({ ...userInfo, avatar: base64 })
+            }
+          />
+          certifacte
+          <FileBase
+            type="file"
+            multiple={false}
+            onDone={({ base64, base64: string }) =>
+              setUserInfo({ ...userInfo, certifacte: base64 })
             }
           />
           <TextField
@@ -156,6 +165,7 @@ const Profile = () => {
        <>
         {products.length &&
           products.map((info) => {
+          
             return (
               <div key={info._id} className="products-card">
                 <img src={info.img} alt="" />

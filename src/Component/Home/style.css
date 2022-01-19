@@ -51,7 +51,7 @@
   position: absolute;
   bottom: 23%;
   left: 55%;
-  background: #52b788;
+  background: #85a384;
   width: 25rem;
   height: 33rem;
   z-index: -1;
@@ -67,30 +67,100 @@
 
 .img2 {
   /* direction: ltr; */
-  width: 23rem;
+  height: 43rem;
+  width: 32rem;
   border-radius: 9px;
-  box-shadow: rgb(38, 57, 77) 0px 20px 30px -10px;
+  position: absolute;
+  right: 56%;
+  bottom: -31%;
+  /* box-shadow: rgb(38, 57, 77) 0px 20px 30px -10px; */
 }
 
 .section3 {
   /* direction: ltr; */
   margin-top: 10rem;
   display: flex;
-  background: hsl(141, 45%, 81%);
+  background: #85a384;
   height: 20rem;
-  width: 80rem;
+  width: 70rem;
+  border-radius: 9px;
+  position: relative;
 }
 .section3 h1 {
   /* direction: rtl; */
   width: 40rem;
   font-family: "Reem Kufi", sans-serif;
-  color: #6b705c;
+  color: #fff;
+  margin: auto;
+  font-size: 50px;
 }
 
-/* .box2 {
-background: #1b4332;
-width: 100%;
-} */
+.section3 p {
+  /* color: #7ce042; */
+  font-family: "Harmattan", sans-serif;
+  font-size: 1.8em;
+  position: absolute;
+  top: 65%;
+  left: 38%;
+  /* background: #000; */
+}
+.section3 h4 {
+  color: #fff;
+  /* font-family: "Harmattan", sans-serif; */
+  font-size: 1.6em;
+  position: absolute;
+  top: 71%;
+  left: 14%;
+  border: 3px solid #fff;
+  border-radius: 5px;
+  padding: 2px;
+  background: #3a5a40;
+  box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+}
+
+.section4 {
+  margin: auto;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+  height: 100vh;
+  /* background: #000; */
+}
+
+.section4 h1 {
+  color: #dad7cd;
+  position: absolute;
+  top: 90%;
+  background: #588157;
+  padding: 5px;
+}
+
+.img3 {
+  height: 23rem;
+  width: 16rem;
+  border-radius: 92px 92px 0px 0px / 81px 81px 0px 0px;
+  padding: 8px;
+  /* position: absolute;
+  right: 45%;
+  bottom: 22.6%; */
+  /* box-shadow: rgb(38, 57, 77) 0px 20px 30px -10px; */
+}
+
+.box3 {
+  height: 24rem;
+  width: 17rem;
+  border: 3px solid #344e41;
+  border-radius: 92px 92px 0px 0px / 81px 81px 0px 0px;
+  position: absolute;
+  top: 30%;
+}
+
+.section4 p {
+  position: absolute;
+  top: 100%;
+  color: #344e41;
+}
 
 @media screen and (max-width: 600px) {
   /* .home {

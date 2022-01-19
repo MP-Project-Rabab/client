@@ -1,13 +1,18 @@
 .tips {
-  padding-top: 13em;
+  padding: 0.4em;
+  /* padding-top: 5em; */
   /* border: 2px solid black;
   box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
   border-radius: 5px; */
   display: flex;
   justify-content: space-evenly;
+  flex-direction: column;
   flex-wrap: wrap;
 }
-
+.nature {
+  width: 100vw;
+  height: 80vh;
+}
 .tips-card {
   width: max-content;
   display: flex;

@@ -31,6 +31,8 @@ width: 40rem;
 
 .delete-icon {
     font-size: 1.7rem;
-    padding-top: 2.5em;
-    cursor: pointer;
+    position: absolute;
+    top: 63px;
+    /* padding-top: 2.1em; */
+    /* cursor: pointer; */
 }

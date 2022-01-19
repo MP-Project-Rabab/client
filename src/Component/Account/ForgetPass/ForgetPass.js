@@ -27,7 +27,7 @@ const ForgetPass = () => {
     <div>
       <Container>
         <Stack spacing={5} className="register-form">
-          <h1>Enter your email</h1>
+          <h1>أدخل إيميلك لإستعادة كلمة المرور</h1>
           {/* Email Field */}
           <TextField
             required
