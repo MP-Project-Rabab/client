@@ -264,6 +264,7 @@ const Header = () => {
           </Toolbar>
         </Container>
       ) : (
+        // if the user didnt sign in 
         <Container maxWidth="xl">
           <Toolbar disableGutters>
             {/* For small screen */}
@@ -330,11 +331,11 @@ const Header = () => {
                   </Typography>
                 </MenuItem>
               </Menu>
-              <Typography textAlign="center" className="login-nav">
+              {/* <Typography textAlign="center" className="login-nav">
                 <Link to="/login">
                   تسجيل الدخول <MdLogin />
                 </Link>
-              </Typography>
+              </Typography> */}
             </Box>
             {/* For large screen */}
             <Box
@@ -375,12 +376,17 @@ const Header = () => {
                   المتجر <IoStorefrontOutline />
                 </Link>
               </Button>
+            </Box>
+              <Button sx={{ my: 2, color: "white", display: "block" }}>
+                <Link to="/register">
+                  تسجيل جديد 
+                </Link>
+              </Button>
               <Button sx={{ my: 2, color: "white", display: "block" }}>
                 <Link to="/login">
                   تسجيل الدخول <MdLogin />
                 </Link>
               </Button>
-            </Box>
           </Toolbar>
         </Container>
       )}

@@ -1,0 +1,10 @@
+.footer {
+    height: 10vh;
+    background: #85a384;
+    color: #fff;
+}
+
+.icon {
+    border: 2px solid white;
+    /* border-radius: 50%; */
+}

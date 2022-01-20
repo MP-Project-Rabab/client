@@ -254,8 +254,11 @@ const Products = () => {
   };
 
   return (
-    <div className="products">
+    <>
+
       {MyComponent()}
+   
+    <div className="products">
 
       <Snackbar
         open={snackBar}
@@ -307,6 +310,7 @@ const Products = () => {
                 }
               />
               <h2>{info.name}</h2>
+              <h4>{info.price} ر.س</h4>
               {info.Quantity > 0 ? (
                 <>
                   <h5 className="green">متوفر</h5>
@@ -324,12 +328,6 @@ const Products = () => {
                   </button>
                 </>
               )}
-
-              <h4>{info.price} ر.س</h4>
-              {/* <button className="bttn" onClick={() => addToCart(info._id)}>
-                <BsCartPlusFill />
-                أضف للسله
-              </button> */}
             </div>
           );
         })}
@@ -454,6 +452,7 @@ const Products = () => {
       </Dialog>
       {/* End */}
     </div>
+    </>
   );
 };
 

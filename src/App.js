@@ -15,6 +15,7 @@ import Cart from "./Component/Cart/Cart";
 import f1 from "./img/f1.png";
 import Post from "./Component/Post/Post";
 import Dashboard from "./Component/Dashboard/Dashboard";
+import Footer from "./Component/Footer/Footer";
 
 function App() {
   return (
@@ -38,6 +39,7 @@ function App() {
         <Route exact path="/dashboard" element={<Dashboard />} />
       </Routes>
       <img src={f1} alt="" className="leaf" />
+      <Footer />
     </div>
   );
 }

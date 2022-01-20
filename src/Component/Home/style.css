@@ -13,7 +13,7 @@
 .p1 {
   /* background: #000; */
   color: #52b788;
-  width: 40rem;
+  width: 60rem;
   margin: auto;
   /* margin: 0 12%; */
   font-size: 30px;
@@ -83,7 +83,7 @@
   background: #85a384;
   height: 20rem;
   width: 70rem;
-  border-radius: 9px;
+  border-radius: 10px 0 0 10px;
   position: relative;
 }
 .section3 h1 {
@@ -111,7 +111,7 @@
   position: absolute;
   top: 71%;
   left: 14%;
-  border: 3px solid #fff;
+  border: 2px solid #fff;
   border-radius: 5px;
   padding: 2px;
   background: #3a5a40;

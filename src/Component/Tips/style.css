@@ -8,11 +8,31 @@
   justify-content: space-evenly;
   flex-direction: column;
   flex-wrap: wrap;
+  position: relative;
 }
+
 .nature {
-  width: 100vw;
+  width: auto;
   height: 80vh;
 }
+
+.h2 {
+  position: absolute;
+  background: #6b705c;
+  bottom: 65%;
+  color: #fff;
+  padding: 2rem;
+  font-size: 35px;
+  border-radius: 5px 0 0 5px;
+}
+
+.card-container {
+  display: flex;
+  justify-content: space-evenly;
+  flex-wrap: wrap;
+  text-align: center;
+}
+
 .tips-card {
   width: max-content;
   display: flex;
@@ -21,8 +41,6 @@
   background: #fff;
   margin-bottom: 2rem;
   border-radius: 9px;
-  /* padding: 1rem; */
-
   box-shadow: rgba(0, 0, 0, 0.16) 0px 1px 4px;
 }
 
@@ -40,10 +58,29 @@
 
 .tips-card a {
   text-decoration: none;
+  /* position: absolute; */
+  /* left: 7%;
+  top: 95%; */
+  padding: 10px;
+  font-weight: bold;
+  align-self: flex-end;
+}
+
+.tips-card h2 {
+  text-decoration: underline;
+  color: #588157;
 }
 
 @media screen and (max-width: 600px) {
-  .tips-card a {
-    margin-bottom: 2em;
+.tips {
+  padding: 0;
+}
+  .nature {
+    width: 100vw;
+    height: 80vh;
+  }
+
+  .h2 {
+    font-size: 25px;
   }
 }
