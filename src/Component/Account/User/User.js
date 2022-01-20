@@ -139,7 +139,6 @@ const User = () => {
                     <TableCell align="right">
                       <IconButton
                         color="primary"
-                        aria-label="upload picture"
                         component="span"
                         onClick={() => handleClickOpen(user._id)}
                       >

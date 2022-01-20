@@ -19,6 +19,7 @@ import {
   // eslint-disable-next-line
   Container,
 } from "@mui/material";
+import Item from "./Item";
 // End of import all dependencies
 import "./style.css";
 
@@ -92,7 +93,6 @@ const Cart = () => {
   };
   // update order
   const updateOrder = async (id) => {
-   
     try {
       const result = await axios.put(
         `${process.env.REACT_APP_BASE_URL}/order/update`,
@@ -168,6 +168,7 @@ const Cart = () => {
                 {cart.length &&
                   cart.map((info, i) => {
                     return (
+                      // <Item id={info._id} key={info._id}/>
                       <TableRow
                         key={i}
                         className="cart-card"
@@ -188,24 +189,13 @@ const Cart = () => {
                           <IconButton onClick={(ev) => inc(info._id)}>
                             <BsPlus />
                           </IconButton>
-                          {/* <h5 key={order[0]._id}>{order[0].Quantity}</h5> */}
-                          {order.length &&
-                          order.map((item, i) => {
-                            // {console.log(item._id)}
-                            return (
-                            
-                         <>
-                            <h5 key={item._id}>{item.Quantity}</h5>   
-                         </>
-                             
-                            )
-                            
-                          })}
+                          <h5 key={order[0]._id}>{order[0].Quantity}</h5>
+
                           <IconButton onClick={dec}>
                             <BiMinus />
                           </IconButton>
                         </TableCell>
-                        {/* {order.Quantity} */}
+
                         <TableCell align="right">{info.price}</TableCell>
                         <IconButton
                           onClick={() => deleteItem(info._id)}
