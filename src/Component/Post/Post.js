@@ -190,6 +190,7 @@ const Post = () => {
                 onChange={handleChange}
                 aria-label="lab API tabs example"
               >
+                <h5>{comments.length}</h5>
                 <Tab label="التعليقات:" value="1" />
               </TabList>
             </Box>

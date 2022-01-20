@@ -11,10 +11,11 @@ import {
   DialogContent,
   DialogActions,
   Dialog,
+  Container,
 } from "@mui/material";
 // End of import all dependencies
 import "./style.css";
-import nature2 from '../../img/nature2.jpg'
+import nature2 from "../../img/nature2.jpg";
 const Tips = () => {
   useEffect(() => {
     allTip();
@@ -103,33 +104,36 @@ const Tips = () => {
   const handleClose = () => {
     setOpen(false);
   };
- 
+
   return (
     <div className="tips">
-      <img src={nature2} alt="" className="nature"/>
-        <h3 className="add-product">
-            <BsPatchPlus className="add" onClick={handleClickOpen} />
-           أضف بوست
-          </h3>
-      
-      {state.postReducer.posts.length &&
-        state.postReducer.posts.map((info) => {
-          return (
-            <div key={info._id} className="tips-card">
-              <img src={info.img} alt="" />
-              <h2>{info.title}</h2>
-              <h6>بواسطة: {info.user.userName}</h6>
-              {state.signIn.id === info.user ||
-              state.signIn.userType === "admin" ? (
-                <button onClick={() => deleteTip(info._id)}>حذف</button>
-              ) : (
-                <></>
-              )}
+      <img src={nature2} alt="" className="nature" />
+      <h2 className="h2">ستجد هنا كل ماتود معرفته عن طرق العنايه بنباتاتك</h2>
+      <h3 className="add-product">
+        <BsPatchPlus className="add" onClick={handleClickOpen} />
+        أضف بوست
+      </h3>
+      <Container sx={{ py: 8 }} maxWidth="md">
+        <div className="card-container">
+          {state.postReducer.posts.length &&
+            state.postReducer.posts.map((info) => {
+              return (
+                <div key={info._id} className="tips-card">
+                  <img src={info.img} alt="" />
+                  <h2>{info.title}</h2>
+                  {state.signIn.id === info.user ||
+                  state.signIn.userType === "admin" ? (
+                    <button onClick={() => deleteTip(info._id)}>حذف</button>
+                  ) : (
+                    <></>
+                  )}
 
-              <Link to={`/post/${info._id}`}>أقرأ المزيد...</Link>
-            </div>
-          );
-        })}
+                  <Link to={`/post/${info._id}`}>أقرأ المزيد...</Link>
+                </div>
+              );
+            })}
+        </div>
+      </Container>
       {/* To open a form  */}
       <Dialog open={open} onClose={handleClose}>
         <DialogContent>
