@@ -85,8 +85,8 @@ Tips          | `/tips`       | Guest
 
 ## for more information
 - [ Slides. ](#slid) 
-- [ Frontend Deployed Link. ](#slid)
-- [ Backend Deployed Link. ](#slid)
+- [ Frontend Deployed Link. ](https://awraqi.netlify.app/)
+- [ Backend Deployed Link. ](https://server-awraqi.herokuapp.com/)
 - [ Backend Repo ](https://github.com/MP-Project-Rabab/server)
 - [ Trello ](https://trello.com/b/6MWA3WsS/frontend)
 
