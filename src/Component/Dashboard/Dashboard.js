@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import { Box, Tabs, Tab, Typography } from "@mui/material/";
 import PropTypes from "prop-types";
 import Product from "../notApproved/Product";
@@ -41,7 +41,7 @@ function a11yProps(index) {
 }
 
 const Dashboard = () => {
-  const [value, setValue] = React.useState(0);
+  const [value, setValue] = useState(0);
 
   const handleChange = (event, newValue) => {
     setValue(newValue);
@@ -52,7 +52,9 @@ const Dashboard = () => {
       sx={{
         flexGrow: 1,
         bgcolor: "background.paper",
-        height: 224,
+        height: 324,
+        mt:"5rem",
+       
       }}
     >
       <Tabs
@@ -61,7 +63,7 @@ const Dashboard = () => {
         value={value}
         onChange={handleChange}
         aria-label="Vertical tabs example"
-        sx={{ borderRight: 1, borderColor: "divider" }}
+        sx={{ borderRight: 1, borderColor: "divider", fontSize: "50rem" }}
       >
         <Tab label="منشورات تحتاج للموافقه" {...a11yProps(0)} />
         <Tab label="منتجات تحتاج للموافقه" {...a11yProps(1)} />

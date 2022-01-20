@@ -51,7 +51,6 @@ const Posts = () => {
           },
         }
       );
-      console.log(result.data);
     } catch (error) {
       console.log(error);
     }

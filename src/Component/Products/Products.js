@@ -207,8 +207,8 @@ const Products = () => {
   };
   // handle the order function
   const newOrder = async (id) => {
-    console.log(id);
     try {
+      // eslint-disable-next-line
       const result = await axios.post(
         `${process.env.REACT_APP_BASE_URL}/order/new`,
         {
@@ -222,8 +222,6 @@ const Products = () => {
           },
         }
       );
-
-      console.log(result.data);
     } catch (error) {
       console.log(error);
     }
