@@ -10,6 +10,7 @@ import {
   Dialog,
   Button,
   Rating,
+  Container,
 } from "@mui/material/";
 import { FaUserEdit } from "react-icons/fa";
 import { useParams } from "react-router-dom";
@@ -46,6 +47,7 @@ const Profile = () => {
         }
       );
       setUserInfo(result.data);
+      // products.isApproved=== "true" ?
       setProducts(result.data.shop);
     } catch (error) {
       console.log(error);
@@ -79,18 +81,23 @@ const Profile = () => {
     userProfile();
     setOpen(false);
   };
-
+console.log(products.isApproved=== "true");
   return (
-    <div className="profile">
+    <Container maxWidth="sm" className="profile">
       <div className="profile-item">
-      <IconButton
-        color="primary"
-        aria-label="upload picture"
-        component="span"
-        onClick={handleClickOpen}
-      >
-        <FaUserEdit />
-      </IconButton>
+      {userInfo._id === state.signIn.id ? (
+         <IconButton
+         color="primary"
+         aria-label="upload picture"
+         component="span"
+         onClick={handleClickOpen}
+       >
+         <FaUserEdit />
+       </IconButton>
+      ) : (
+        <></>
+      )}
+     
       <img src={userInfo.avatar} alt="" className="avatar2" />
       {userInfo.userType === "seller" ? (
         <Rating
@@ -163,9 +170,10 @@ const Profile = () => {
      
       {userInfo.userType === "seller" ? (
        <>
+       {/* {products.} */}
         {products.length &&
           products.map((info) => {
-          
+            // {info.isApproved === "true" ? ()}
             return (
               <div key={info._id} className="products-card">
                 <img src={info.img} alt="" />
@@ -180,7 +188,7 @@ const Profile = () => {
         <></>
       )}
      
-    </div>
+    </Container>
   );
 };
 

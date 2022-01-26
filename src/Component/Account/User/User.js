@@ -107,7 +107,7 @@ const User = () => {
           padding: "7px",
           margin: "auto",
         }}
-        >
+      >
         <h1 className="h11">قائمة المستخدمين</h1>
         <Table sx={{ minWidth: 650 }} aria-label="simple table">
           <TableHead>
@@ -115,6 +115,7 @@ const User = () => {
               <TableCell align="right"></TableCell>
               <TableCell align="right">اسم المستخدم</TableCell>
               <TableCell align="right">نوع المستخدم</TableCell>
+              <TableCell align="right"></TableCell>
               <TableCell align="right"></TableCell>
             </TableRow>
           </TableHead>
@@ -145,10 +146,16 @@ const User = () => {
                         <FiEdit3 />
                       </IconButton>
                     </TableCell>
-                    <IoTrashOutline
-                      onClick={() => deleteUser(user._id)}
-                      className="delete-icon"
-                    />
+                    <TableCell align="right">
+                      <IconButton
+                        color="error"
+                        component="span"
+                        className="delete-icon"
+                        onClick={() => deleteUser(user._id)}
+                      >
+                        <IoTrashOutline />
+                      </IconButton>
+                    </TableCell>
                   </TableRow>
                 );
               })}

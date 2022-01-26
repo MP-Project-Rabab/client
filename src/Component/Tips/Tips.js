@@ -82,7 +82,7 @@ const Tips = () => {
       const result = await axios.delete(
         `${
           process.env.REACT_APP_BASE_URL
-        }/posts/delete?isDeleted=${true}&_id=${id}`,
+        }/posts/delete?_id=${id}&adminId=${state.signIn.id}`,
         {
           headers: {
             Authorization: `Bearer ${state.signIn.token}`,

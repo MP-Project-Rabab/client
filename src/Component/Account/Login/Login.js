@@ -1,11 +1,8 @@
 import React, { useState } from "react";
 import axios from "axios";
-import { useDispatch} from "react-redux";
+import { useDispatch } from "react-redux";
 import { Link, useNavigate } from "react-router-dom";
-import Stack from "@mui/material/Stack";
-import TextField from "@mui/material/TextField";
-import Button from "@mui/material/Button";
-import Container from "@mui/material/Container";
+import { Stack, TextField, Button, Container } from "@mui/material";
 import { logIn } from "../../../reducers/login";
 import "./style.css";
 
@@ -16,7 +13,6 @@ const Login = () => {
   const dispatch = useDispatch();
 
   const [log, setLogIn] = useState({
-    
     email: "",
     password: "",
   });
@@ -33,16 +29,17 @@ const Login = () => {
       };
       dispatch(logIn(data));
       navigate("/");
-      result.status === 400 ? setMsg("الإيميل أو كلمة السر غير صحيح") : 
-      setMsg("تم تسجيل الدخول") 
+      result.status === 400
+        ? setMsg("الإيميل أو كلمة السر غير صحيح")
+        : setMsg("تم تسجيل الدخول");
     } catch (error) {
       console.log(error);
     }
   };
 
   return (
-    <div className="login">
-      <Container>
+    
+      <Container maxWidth="sm" className="login"> 
         <Stack spacing={5} className="register-form">
           {/* Email Field */}
           <TextField
@@ -67,7 +64,7 @@ const Login = () => {
             onChange={(ev) => setLogIn({ ...log, password: ev.target.value })}
           />
 
-          <Button appearance="primary" onClick={userLog}>
+          <Button onClick={userLog}>
             تسجيل الدخول
           </Button>
           <Link to="/forget" className="register">
@@ -80,9 +77,9 @@ const Login = () => {
             </Link>
           </h4>
         </Stack>
-      </Container>
       <h1 className="msg">{msg}</h1>
-    </div>
+      </Container>
+    
   );
 };
 

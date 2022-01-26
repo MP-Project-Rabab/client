@@ -7,7 +7,7 @@ const Footer = () => {
   return (
     <div className="footer">
     
-      <Stack direction="row" spacing={1} sx={{m: 1}}>
+      <Stack direction="row" spacing={1} sx={{m: 1}} className="icon">
         <IconButton sx={{color: "white", border: "2px solid white"}}>
           <FaTwitter />
         </IconButton>

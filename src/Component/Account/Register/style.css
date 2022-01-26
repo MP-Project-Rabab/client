@@ -1,21 +1,24 @@
 .registe {
   width: 30rem;
-  background: #fff;
+  background: #deeed3;
   margin: auto;
   margin-top: 10em;
   padding: 5em;
   border-radius: 20px;
   position: relative;
   text-align: center;
-  color: #a5a58d;
+  color: black;
   /* height: 10rem; */
   box-shadow: rgb(38, 57, 77) 0px 20px 30px -10px;
 }
 
+.registe h1 {
+  color: #78b176;
+}
 .registe button {
-  right: 37%;
-  width: 6rem;
+  right: 33%;
+  width: 11rem;
   font-size: 30px;
   font-weight: bold;
-  color: #a5a58d;
+  color: #78b176;
 }

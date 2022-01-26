@@ -98,7 +98,7 @@ const Header = () => {
         background: "white",
         color: "black",
         boxShadow: "rgba(0, 0, 0, 0.35) 0px 5px 15px",
-        height: "16vh",
+        height:"fit-content",
       }}
     >
       {isLog ? (
@@ -179,29 +179,29 @@ const Header = () => {
                 alt=""
                 className="logo"
                 component="div"
-                sx={{ mr: 2, display: { xs: "none", md: "flex" } }}
+                sx={{ mr: 1, display: { xs: "none", md: "flex" } }}
               />
               <Button
                 onClick={handleCloseNavMenu}
-                sx={{ my: 6, color: "white", display: "block" }}
+                sx={{ my: 3, display: "block" }}
               >
                 <Link to="/">الرئيسية</Link>
               </Button>
               <Button
                 onClick={handleCloseNavMenu}
-                sx={{ my: 6, color: "white", display: "block" }}
+                sx={{ my: 3, display: "block" }}
               >
                 <Link to="/tips">طرق العنايه بالنباتات</Link>
               </Button>
               <Button
                 onClick={handleCloseNavMenu}
-                sx={{ my: 6, color: "white", display: "block" }}
+                sx={{ my: 3, display: "block" }}
               >
                 <Link to="/problems">مشاكل وحلول</Link>
               </Button>
               <Button
                 onClick={handleCloseNavMenu}
-                sx={{ my: 6, color: "white", display: "block" }}
+                sx={{ my: 3, display: "block" }}
               >
                 <Link to="/store">
                   المتجر <IoStorefrontOutline />
@@ -342,47 +342,46 @@ const Header = () => {
               sx={{ flexGrow: 1, display: { xs: "none", md: "flex" } }}
               className="nav"
             >
-              {/* <img src={logo} alt="" className="logo" /> */}
               <img
                 src={logo}
                 alt=""
                 className="logo"
                 component="div"
-                sx={{ mr: 2, display: { xs: "none", md: "flex" } }}
+                sx={{ mr: 1, display: { xs: "none", md: "flex" } }}
               />
               <Button
                 onClick={handleCloseNavMenu}
-                sx={{ my: 6, color: "white", display: "block" }}
+                sx={{ my: 3, display: "block" }}
               >
                 <Link to="/">الرئيسية</Link>
               </Button>
               <Button
                 onClick={handleCloseNavMenu}
-                sx={{ my: 6, color: "white", display: "block" }}
+                sx={{ my: 3, display: "block" }}
               >
                 <Link to="/tips">طرق العنايه بالنباتات</Link>
               </Button>
               <Button
                 onClick={handleCloseNavMenu}
-                sx={{ my: 6, color: "white", display: "block" }}
+                sx={{ my: 3, display: "block" }}
               >
                 <Link to="/problems">مشاكل وحلول</Link>
               </Button>
               <Button
                 onClick={handleCloseNavMenu}
-                sx={{ my: 6, color: "white", display: "block" }}
+                sx={{ my: 3, display: "block" }}
               >
                 <Link to="/store">
                   المتجر <IoStorefrontOutline />
                 </Link>
               </Button>
             </Box>
-              <Button sx={{ my: 2, color: "white", display: "block" }}>
+              <Button sx={{ my: 3, display: "block" }}>
                 <Link to="/register">
                   تسجيل جديد 
                 </Link>
               </Button>
-              <Button sx={{ my: 2, color: "white", display: "block" }}>
+              <Button sx={{ my: 3, display: "block" }}>
                 <Link to="/login">
                   تسجيل الدخول <MdLogin />
                 </Link>
