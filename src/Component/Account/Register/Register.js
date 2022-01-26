@@ -1,10 +1,7 @@
 import React, { useState } from "react";
 import axios from "axios";
-import Stack from "@mui/material/Stack";
-import TextField from "@mui/material/TextField";
-import Button from "@mui/material/Button";
-import Container from "@mui/material/Container";
 import { Link } from "react-router-dom";
+import { Stack, TextField, Button, Container } from "@mui/material";
 
 import "./style.css";
 
@@ -34,9 +31,9 @@ const Register = () => {
     }
   };
   return (
-    <div className="registe">
-      <h1>تسجيل حساب جديد</h1>
-      <Container>
+    
+    <Container maxWidth="sm" className="registe">
+        <h1>تسجيل حساب جديد</h1>
         <Stack spacing={5} className="register-form">
           {/* User Name Field */}
           <TextField
@@ -78,15 +75,19 @@ const Register = () => {
           />
 
           <Button appearance="primary" onClick={creatUser}>
-            تسجيل
+            تسجيل جديد
           </Button>
-          <Link to="/login" className="register">
+          <h4>
+            هل لديك حساب بالفعل؟
+            <Link to="/login" className="register">
             تسجيل الدخول
           </Link>
+          </h4>
+         
         </Stack>
+        <h1>{msg}</h1>
       </Container>
-      <h1>{msg}</h1>
-    </div>
+    
   );
 };
 

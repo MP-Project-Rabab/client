@@ -99,12 +99,7 @@
 }
 
 .delete {
-  cursor: pointer;
-  font-size: 22px;
-  /* position: absolute; */
-  right: 1%;
-  /* margin-bottom: 1rem; */
-  margin-left: 4.1rem;
+  width: fit-content;
 }
 
 .products-card .green {

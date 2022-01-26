@@ -5,6 +5,7 @@
 }
 
 .icon {
-    border: 2px solid white;
-    /* border-radius: 50%; */
+    text-align: center;
+    display: flex;
+    justify-content: center;
 }

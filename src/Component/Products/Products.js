@@ -253,203 +253,217 @@ const Products = () => {
 
   return (
     <>
-
       {MyComponent()}
-   
-    <div className="products">
 
-      <Snackbar
-        open={snackBar}
-        autoHideDuration={3000}
-        onClose={handleSnackBarClose}
-      >
-        <Alert
+      <div className="products">
+        <Snackbar
+          open={snackBar}
+          autoHideDuration={3000}
           onClose={handleSnackBarClose}
-          severity="success"
-          sx={{ width: "100%" }}
         >
-          تم إضافة المنتج للسلة!
-        </Alert>
-      </Snackbar>
+          <Alert
+            onClose={handleSnackBarClose}
+            severity="success"
+            sx={{ width: "100%" }}
+          >
+            تم إضافة المنتج للسلة!
+          </Alert>
+        </Snackbar>
 
-      {state.productsReducer.products.length &&
-        state.productsReducer.products.map((info) => {
-          return (
-            <div key={info._id} className="products-card">
-              <CgCloseO
-                onClick={() => deleteProducts(info._id)}
-                className="delete"
-              />
-              <img src={info.img} alt="" />
-              {state.signIn.id === info.seller._id ? (
-                <IconButton
-                  color="primary"
-                  aria-label="upload picture"
-                  component="span"
-                  onClick={() => handleUpdateOpen(info._id)}
-                >
-                  <FiEdit3 />
-                </IconButton>
-              ) : (
-                <></>
-              )}
-              <Link to={`/profile/${info.seller._id}`}>
-                <h5>البائع: {info.seller.userName}</h5>
-              </Link>
+        {state.productsReducer.products.length &&
+          state.productsReducer.products.map((info) => {
+            return (
+              <div key={info._id} className="products-card">
+                {state.signIn.id === info.seller._id ||
+                state.signIn.userType === "admin" ? (
+                  <IconButton
+                    color="error"
+                    component="span"
+                    className="delete"
+                    onClick={() => deleteProducts(info._id)}
+                  >
+                    <CgCloseO />
+                  </IconButton>
+                ) : (
+                  <></>
+                )}
 
-              <Rating
-                name="half-rating"
-                defaultValue={0}
-                precision={0.5}
-                className="rate"
-                onClick={() => addRate(info._id)}
-                onChange={(ev) =>
-                  setRates({ ...rates, rate: ev.target.defaultValue })
-                }
-              />
-              <h2>{info.name}</h2>
-              <h4>{info.price} ر.س</h4>
-              {info.Quantity > 0 ? (
-                <>
-                  <h5 className="green">متوفر</h5>
-                  <button className="bttn" onClick={() => addToCart(info._id)}>
-                    <BsCartPlusFill />
-                    أضف للسله
-                  </button>
-                </>
-              ) : (
-                <>
-                  <h5 className="red">غير متوفر</h5>
-                  <button className="disabled-bttn" disabled>
-                    <BsCartPlusFill />
-                    أضف للسله
-                  </button>
-                </>
-              )}
-            </div>
-          );
-        })}
-      {state.signIn.userType === "seller" ? (
-        <h3 className="add-product">
-          <BsPatchPlus className="add" onClick={handleClickOpen} />
-          أضف منتج
-        </h3>
-      ) : (
-        <></>
-      )}
+                <img src={info.img} alt="" />
+                {state.signIn.id === info.seller._id ? (
+                  <IconButton
+                    color="primary"
+                    aria-label="upload picture"
+                    component="span"
+                    onClick={() => handleUpdateOpen(info._id)}
+                  >
+                    <FiEdit3 />
+                  </IconButton>
+                ) : (
+                  <></>
+                )}
+                <Rating
+                  name="half-rating"
+                  defaultValue={0}
+                  precision={0.5}
+                  className="rate"
+                  onClick={() => addRate(info._id)}
+                  onChange={(ev) =>
+                    setRates({ ...rates, rate: ev.target.defaultValue })
+                  }
+                />
+                <Link to={`/profile/${info.seller._id}`}>
+                  <h5>البائع: {info.seller.userName}</h5>
+                </Link>
+                <h2>{info.name}</h2>
+                <h4>{info.price} ر.س</h4>
+                {info.Quantity > 0 ? (
+                  <>
+                    <h5 className="green">متوفر</h5>
+                    <button
+                      className="bttn"
+                      onClick={() => addToCart(info._id)}
+                    >
+                      <BsCartPlusFill />
+                      أضف للسله
+                    </button>
+                  </>
+                ) : (
+                  <>
+                    <h5 className="red">غير متوفر</h5>
+                    <button className="disabled-bttn" disabled>
+                      <BsCartPlusFill />
+                      أضف للسله
+                    </button>
+                  </>
+                )}
+              </div>
+            );
+          })}
+        {state.signIn.userType === "seller" ? (
+          <h3 className="add-product">
+            <BsPatchPlus className="add" onClick={handleClickOpen} />
+            أضف منتج
+          </h3>
+        ) : (
+          <></>
+        )}
 
-      {/* For updating a product */}
-      <Dialog open={update} onClose={handleUpdateClose}>
-        <DialogContent>
-          <FileBase
-            type="file"
-            label="تحديث صورة"
-            multiple={false}
-            onDone={({ base64, base64: string }) =>
-              setProduct({ ...product, img: base64 })
-            }
-          />
-          <TextField
-            margin="dense"
-            id="name"
-            name="name"
-            label="تحديث اسم النتج"
-            type="text"
-            fullWidth
-            variant="standard"
-            value={product.name}
-            onChange={(ev) => setProduct({ ...product, name: ev.target.value })}
-          />
-          <TextField
-            id="standard-number"
-            label="تحديث السعر"
-            type="number"
-            fullWidth
-            InputLabelProps={{
-              shrink: true,
-            }}
-            variant="standard"
-            onChange={(ev) =>
-              setProduct({ ...product, price: ev.target.value })
-            }
-          />
-          <TextField
-            id="standard-number"
-            label="تحديث الكميه"
-            type="number"
-            fullWidth
-            InputLabelProps={{
-              shrink: true,
-            }}
-            variant="standard"
-            onChange={(ev) =>
-              setProduct({ ...product, Quantity: ev.target.value })
-            }
-          />
+        {/* For updating a product */}
+        <Dialog open={update} onClose={handleUpdateClose}>
+          <DialogContent>
+            <FileBase
+              type="file"
+              label="تحديث صورة"
+              multiple={false}
+              onDone={({ base64, base64: string }) =>
+                setProduct({ ...product, img: base64 })
+              }
+            />
+            <TextField
+              margin="dense"
+              id="name"
+              name="name"
+              label="تحديث اسم النتج"
+              type="text"
+              fullWidth
+              variant="standard"
+              value={product.name}
+              onChange={(ev) =>
+                setProduct({ ...product, name: ev.target.value })
+              }
+            />
+            <TextField
+              id="standard-number"
+              label="تحديث السعر"
+              type="number"
+              fullWidth
+              InputLabelProps={{
+                shrink: true,
+              }}
+              variant="standard"
+              onChange={(ev) =>
+                setProduct({ ...product, price: ev.target.value })
+              }
+            />
+            <TextField
+              id="standard-number"
+              label="تحديث الكميه"
+              type="number"
+              fullWidth
+              InputLabelProps={{
+                shrink: true,
+              }}
+              variant="standard"
+              onChange={(ev) =>
+                setProduct({ ...product, Quantity: ev.target.value })
+              }
+            />
 
-          <DialogActions>
-            <Button onClick={handleUpdateClose}>تراجع</Button>
-            <Button onClick={updateProducts}>تحديث</Button>
-          </DialogActions>
-        </DialogContent>
-      </Dialog>
-      {/* End */}
-      {/* For adding a new product */}
-      <Dialog open={open} onClose={handleClose}>
-        <DialogContent>
-          <FileBase
-            type="file"
-            label="اضف صورة"
-            multiple={false}
-            onDone={({ base64, base64: string }) =>
-              setProduct({ ...product, img: base64 })
-            }
-          />
-          <TextField
-            margin="dense"
-            id="name"
-            name="name"
-            label="اسم النتج"
-            type="text"
-            fullWidth
-            variant="standard"
-            value={product.name}
-            onChange={(ev) => setProduct({ ...product, name: ev.target.value })}
-          />
-          <TextField
-            id="standard-number"
-            label="اضف السعر"
-            type="number"
-            fullWidth
-            InputLabelProps={{
-              shrink: true,
-            }}
-            variant="standard"
-            onChange={(ev) =>
-              setProduct({ ...product, price: ev.target.value })
-            }
-          />
-          <TextField
-            id="standard-number"
-            label="اضف الكميه"
-            type="number"
-            fullWidth
-            InputLabelProps={{
-              shrink: true,
-            }}
-            variant="standard"
-            onChange={(ev) =>
-              setProduct({ ...product, Quantity: ev.target.value })
-            }
-          />
-          <DialogActions>
-            <Button onClick={handleClose}>Cancel</Button>
-            <Button onClick={handleAddProduct}>ADD</Button>
-          </DialogActions>
-        </DialogContent>
-      </Dialog>
-      {/* End */}
-    </div>
+            <DialogActions>
+              <Button onClick={handleUpdateClose}>تراجع</Button>
+              <Button onClick={updateProducts}>تحديث</Button>
+            </DialogActions>
+          </DialogContent>
+        </Dialog>
+        {/* End */}
+        {/* For adding a new product */}
+        <Dialog open={open} onClose={handleClose}>
+          <DialogContent>
+            <FileBase
+              type="file"
+              label="اضف صورة"
+              multiple={false}
+              onDone={({ base64, base64: string }) =>
+                setProduct({ ...product, img: base64 })
+              }
+            />
+            <TextField
+              margin="dense"
+              id="name"
+              name="name"
+              label="اسم النتج"
+              type="text"
+              fullWidth
+              variant="standard"
+              value={product.name}
+              onChange={(ev) =>
+                setProduct({ ...product, name: ev.target.value })
+              }
+            />
+            <TextField
+              id="standard-number"
+              label="اضف السعر"
+              type="number"
+              fullWidth
+              InputLabelProps={{
+                shrink: true,
+              }}
+              variant="standard"
+              onChange={(ev) =>
+                setProduct({ ...product, price: ev.target.value })
+              }
+            />
+            <TextField
+              id="standard-number"
+              label="اضف الكميه"
+              type="number"
+              fullWidth
+              InputLabelProps={{
+                shrink: true,
+              }}
+              variant="standard"
+              onChange={(ev) =>
+                setProduct({ ...product, Quantity: ev.target.value })
+              }
+            />
+            <DialogActions>
+              <Button onClick={handleClose}>Cancel</Button>
+              <Button onClick={handleAddProduct}>ADD</Button>
+            </DialogActions>
+          </DialogContent>
+        </Dialog>
+        {/* End */}
+      </div>
     </>
   );
 };

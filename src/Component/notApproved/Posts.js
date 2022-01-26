@@ -10,7 +10,7 @@ import {
   TableHead,
   TableRow,
   Paper,
-} from "@mui/material/";
+} from "@mui/material";
 const Posts = () => {
   useEffect(() => {
     postNotApproved();
@@ -41,6 +41,7 @@ const Posts = () => {
   // Approved All Posts function
   const postApprove = async (id) => {
     try {
+      // eslint-disable-next-line
       const result = await axios.put(
         `${process.env.REACT_APP_BASE_URL}/posts/approved`,
         { isApproved: true, _id: id },
@@ -64,7 +65,7 @@ const Posts = () => {
           width: "auto",
           padding: "7px",
           margin: "auto",
-          marginTop: "1rem",
+          marginTop: "13rem",
         }}
         >
         <h1 className="h11">قائمة البوستات</h1>

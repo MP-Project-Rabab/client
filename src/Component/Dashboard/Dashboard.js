@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Box, Tabs, Tab, Typography } from "@mui/material/";
+import { Box, Tabs, Tab, Typography } from "@mui/material";
 import PropTypes from "prop-types";
 import Product from "../notApproved/Product";
 import Posts from "../notApproved/Posts";
@@ -12,6 +12,7 @@ function TabPanel(props) {
 
   return (
     <div
+      component="div"
       role="tabpanel"
       hidden={value !== index}
       id={`vertical-tabpanel-${index}`}
@@ -48,37 +49,36 @@ const Dashboard = () => {
   };
 
   return (
-    <Box
-      sx={{
-        flexGrow: 1,
-        bgcolor: "background.paper",
-        height: 324,
-        mt:"5rem",
-       
-      }}
-    >
-      <Tabs
-        orientation="vertical"
-        variant="scrollable"
-        value={value}
-        onChange={handleChange}
-        aria-label="Vertical tabs example"
-        sx={{ borderRight: 1, borderColor: "divider", fontSize: "50rem" }}
+    <div>
+      <Box
+        sx={{
+          flexGrow: 1,
+          bgcolor: "background.paper",
+          height: 324,
+          mt: "5rem",
+        }}
       >
-        <Tab label="منشورات تحتاج للموافقه" {...a11yProps(0)} />
-        <Tab label="منتجات تحتاج للموافقه" {...a11yProps(1)} />
-        <Tab label="المستخدمين" {...a11yProps(2)} />
-      </Tabs>
-      <TabPanel value={value} index={0}>
-        <Posts />
-      </TabPanel>
-      <TabPanel value={value} index={1}>
-        <Product />
-      </TabPanel>
-      <TabPanel value={value} index={2}>
-        <User />
-      </TabPanel>
-    </Box>
+        <Tabs
+          value={value}
+          onChange={handleChange}
+          sx={{ borderRight: 1, borderColor: "divider" }}
+          centered
+        >
+          <Tab label="منشورات تحتاج للموافقه" {...a11yProps(0)} />
+          <Tab label="منتجات تحتاج للموافقه" {...a11yProps(1)} />
+          <Tab label="المستخدمين" {...a11yProps(2)} />
+        </Tabs>
+        <TabPanel value={value} index={0}>
+          <Posts />
+        </TabPanel>
+        <TabPanel value={value} index={1}>
+          <Product />
+        </TabPanel>
+        <TabPanel value={value} index={2}>
+          <User />
+        </TabPanel>
+      </Box>
+    </div>
   );
 };
 

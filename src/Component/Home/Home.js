@@ -1,8 +1,10 @@
 import React from "react";
+import { Container } from "@mui/material";
 // End of import all dependencies
 import pexels1 from "../../img/pexels1.jpg";
 import p1 from "../../img/p1.png";
 import pg1 from "../../img/pg1.jpg";
+
 import "./style.css";
 const Home = () => {
   return (
@@ -41,9 +43,9 @@ const Home = () => {
           <img src={pg1} alt="" className="img3" />
         </div>
         <h1>منتج من متجرنا </h1>
-        
+
         <p className="p4">
-         أسهل طريقة لجعل حياتك صحية هي عن طريق شراء النباتات المفضلة لديك
+          أسهل طريقة لجعل حياتك صحية هي عن طريق شراء النباتات المفضلة لديك
         </p>
         {/* <h4>نبتة جلد النمر</h4> */}
       </section>

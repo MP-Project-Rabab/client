@@ -22,7 +22,9 @@
 }
 
 .delete-icon {
-  font-size: 4px;
+  font-size: 25px;
+  position: absolute;
+  top: 10%;
 }
 
 .h11 {

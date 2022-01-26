@@ -223,7 +223,9 @@ const Post = () => {
             </TabPanel>
           </TabContext>
         </Box>
-        <textarea
+        {state.signIn.id ? (
+          <>
+          <textarea
           name=""
           id=""
           cols="30"
@@ -236,6 +238,20 @@ const Post = () => {
         <button onClick={() => addComment(post._id)} className="comment-bttn">
           اضف تعليق
         </button>
+          </>
+        ) : (
+          <>
+          <h1>
+         لإضافة تعليق سجل
+            <Link to="/login" className="register">
+           الدخول
+          </Link>
+          </h1>
+          </>
+        )
+
+        }
+        
       </Box>
 
       {/* To open a form For updating post */}

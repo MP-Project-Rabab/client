@@ -45,6 +45,7 @@ const Product = () => {
   // Approved All Products function
   const approved = async (id) => {
     try {
+      // eslint-disable-next-line
       const result = await axios.put(
         `${process.env.REACT_APP_BASE_URL}/products/approved`,
         { isApproved: true, _id: id },
@@ -55,7 +56,6 @@ const Product = () => {
           },
         }
       );
-      console.log(result.data);
     } catch (error) {
       console.log(error);
     }
