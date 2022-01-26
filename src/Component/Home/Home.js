@@ -1,5 +1,4 @@
 import React from "react";
-import { Container } from "@mui/material";
 // End of import all dependencies
 import pexels1 from "../../img/pexels1.jpg";
 import p1 from "../../img/p1.png";
@@ -10,7 +9,7 @@ const Home = () => {
   return (
     <div className="home">
       <section className="section1">
-        <h1 className="h1"> إملاء مكانك بالنباتات</h1>
+        <h1 className="h1"> إملأ مكانك بالنباتات</h1>
         <p className="p1">
           نحن عشاق النباتات! نقدم لك مجموعة منتقاة بعناية من النباتات الداخلية
           والخارجية والسلع من الموزع المفضل لدينا ونقدمها لك. سنشارك جميع
