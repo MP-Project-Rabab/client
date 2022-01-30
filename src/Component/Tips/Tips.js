@@ -80,9 +80,7 @@ const Tips = () => {
   const deleteTip = async (id) => {
     try {
       const result = await axios.delete(
-        `${
-          process.env.REACT_APP_BASE_URL
-        }/posts/delete?_id=${id}&adminId=${state.signIn.id}`,
+        `${process.env.REACT_APP_BASE_URL}/posts/delete?_id=${id}&adminId=${state.signIn.id}`,
         {
           headers: {
             Authorization: `Bearer ${state.signIn.token}`,
@@ -114,25 +112,29 @@ const Tips = () => {
         أضف بوست
       </h3>
       <Container sx={{ py: 8 }} maxWidth="md">
-        <div className="card-container">
-          {state.postReducer.posts.length &&
-            state.postReducer.posts.map((info) => {
-              return (
-                <div key={info._id} className="tips-card">
-                  <img src={info.img} alt="" />
-                  <h2>{info.title}</h2>
-                  {state.signIn.id === info.user ||
-                  state.signIn.userType === "admin" ? (
-                    <button onClick={() => deleteTip(info._id)}>حذف</button>
-                  ) : (
-                    <></>
-                  )}
+        {state.postReducer.posts.length === 0 ? (
+          <h2>لا يوجد بوستات</h2>
+        ) : (
+          <div className="card-container">
+            {state.postReducer.posts.length &&
+              state.postReducer.posts.map((info) => {
+                return (
+                  <div key={info._id} className="tips-card">
+                    <img src={info.img} alt="" />
+                    <h2>{info.title}</h2>
+                    {state.signIn.id === info.user ||
+                    state.signIn.userType === "admin" ? (
+                      <button onClick={() => deleteTip(info._id)}>حذف</button>
+                    ) : (
+                      <></>
+                    )}
 
-                  <Link to={`/post/${info._id}`}>أقرأ المزيد...</Link>
-                </div>
-              );
-            })}
-        </div>
+                    <Link to={`/post/${info._id}`}>أقرأ المزيد...</Link>
+                  </div>
+                );
+              })}
+          </div>
+        )}
       </Container>
       {/* To open a form  */}
       <Dialog open={open} onClose={handleClose}>
@@ -145,6 +147,7 @@ const Tips = () => {
             }
           />
           <TextField
+            fullWidth
             margin="dense"
             id="name"
             name="name"
@@ -155,9 +158,10 @@ const Tips = () => {
           />
 
           <TextField
+            fullWidth
             id="standard-textarea"
             label=""
-            placeholder="Placeholder"
+            placeholder="محتوى البوست"
             multiline
             variant="standard"
             onChange={(ev) => setTip({ ...tip, desc: ev.target.value })}

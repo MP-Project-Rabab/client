@@ -49,12 +49,12 @@ a {
 
 @media screen and (max-width: 900px) {
   .login-nav {
-  
     align-self:center;
   }
 
-  .login-nav a {
+  .nav-link a {
     color: #78b176;
-   
+    font-size: 14px;
+    font-weight: bold;
   }
 }

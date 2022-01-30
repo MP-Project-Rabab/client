@@ -135,25 +135,32 @@ const Problems = () => {
         <BsPatchPlus className="add" onClick={handleClickOpen} />
         أضف بوست
       </h3>
-      {state.postReducer.posts.length &&
-        state.postReducer.posts.map((info) => {
-          return (
-            <div key={info._id} className="prob-card">
-              <h2>
-                <Link to={`/post/${info._id}`}>{info.title}</Link>
-              </h2>
-             
-              <h6>بواسطة: {info.user.userName}</h6>
-              {state.signIn.id === info.user._id ||
-              state.signIn.userType === "admin" ? (
-                <button onClick={() => deleteProblem(info._id)}>حذف</button>
-              ) : (
-                <></>
-              )}
-              <Divider ariant="inset" />
-            </div>
-          );
-        })}
+      {state.postReducer.posts.length === 0 ? (
+        <h2>لا يوجد بوستات</h2>
+      ) : (
+        <>
+          {state.postReducer.posts.length &&
+            state.postReducer.posts.map((info) => {
+              return (
+                <div key={info._id} className="prob-card">
+                  <h2>
+                    <Link to={`/post/${info._id}`}>{info.title}</Link>
+                  </h2>
+
+                  <h6>بواسطة: {info.user.userName}</h6>
+                  {state.signIn.id === info.user._id ||
+                  state.signIn.userType === "admin" ? (
+                    <button onClick={() => deleteProblem(info._id)}>حذف</button>
+                  ) : (
+                    <></>
+                  )}
+                  <Divider ariant="inset" />
+                </div>
+              );
+            })}
+        </>
+      )}
+
       <Dialog open={open} onClose={handleClose}>
         <DialogContent>
           <FileBase
@@ -164,6 +171,7 @@ const Problems = () => {
             }
           />
           <TextField
+            fullWidth
             margin="dense"
             id="name"
             name="name"
@@ -176,6 +184,7 @@ const Problems = () => {
           />
 
           <TextField
+            fullWidth
             id="standard-textarea"
             label="اكتب مشكلتك هنا:"
             placeholder="Placeholder"

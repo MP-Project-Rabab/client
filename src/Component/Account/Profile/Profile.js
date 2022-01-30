@@ -47,7 +47,6 @@ const Profile = () => {
         }
       );
       setUserInfo(result.data);
-      // products.isApproved=== "true" ?
       setProducts(result.data.shop);
     } catch (error) {
       console.log(error);
@@ -81,7 +80,6 @@ const Profile = () => {
     userProfile();
     setOpen(false);
   };
-console.log(products.isApproved=== "true");
   return (
     <Container maxWidth="sm" className="profile">
       <div className="profile-item">

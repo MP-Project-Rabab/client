@@ -93,7 +93,7 @@ const Header = () => {
 
   return (
     <AppBar
-      position="sticky"
+      position="static"
       sx={{
         background: "white",
         color: "black",
@@ -331,11 +331,6 @@ const Header = () => {
                   </Typography>
                 </MenuItem>
               </Menu>
-              {/* <Typography textAlign="center" className="login-nav">
-                <Link to="/login">
-                  تسجيل الدخول <MdLogin />
-                </Link>
-              </Typography> */}
             </Box>
             {/* For large screen */}
             <Box
@@ -376,12 +371,12 @@ const Header = () => {
                 </Link>
               </Button>
             </Box>
-              <Button sx={{ my: 3, display: "block" }}>
+              <Button sx={{ my: 3, display: "block" }} className="nav-link">
                 <Link to="/register">
                   تسجيل جديد 
                 </Link>
               </Button>
-              <Button sx={{ my: 3, display: "block" }}>
+              <Button sx={{ my: 3, display: "block" }} className="nav-link">
                 <Link to="/login">
                   تسجيل الدخول <MdLogin />
                 </Link>
