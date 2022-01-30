@@ -24,11 +24,11 @@
 .products-card img {
   border-radius: 12px;
   height: 17rem;
+  align-self: center;
 }
 
 .products-card h2 {
-  font-size: 13px;
-  font-weight: bold;
+  font-size: 18px;
   word-wrap: break-word;
 }
 .products-card h5 {
@@ -52,8 +52,9 @@
 }
 
 .rate {
+  padding: 1.4rem 0;
   direction: ltr;
-  align-self: flex-start;
+  align-self: center;
 }
 
 .bttn {
@@ -113,7 +114,7 @@
   .products {
     width: 80vw;
     height: auto;
-    box-shadow: rgb(38, 57, 77) 0px 20px 30px -10px;
+   
   }
   .products-card {
     width: 6rem;
@@ -121,9 +122,8 @@
     padding: 5px;
     display: flex;
     flex-wrap: wrap;
-    justify-content: space-evenly;
-    flex-direction: row;
-    margin-left: 0.6rem;
+    justify-content: center;
+    flex-direction: column;
   }
 
   .products-card img {
@@ -134,7 +134,7 @@
   .products-card h2 {
     font-size: 13px;
     word-wrap: break-word;
-    text-align: center;
+   
   }
 
   .rate {
@@ -187,5 +187,8 @@
     cursor: pointer;
     display: flex;
     flex-direction: column;
+  }
+  .products-card a {
+font-size: 12px;
   }
 }

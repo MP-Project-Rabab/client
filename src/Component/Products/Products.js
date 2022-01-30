@@ -301,6 +301,7 @@ const Products = () => {
                 ) : (
                   <></>
                 )}
+                
                 <Rating
                   name="half-rating"
                   defaultValue={0}
@@ -311,10 +312,11 @@ const Products = () => {
                     setRates({ ...rates, rate: ev.target.defaultValue })
                   }
                 />
+                 <h2>{info.name}</h2>
                 <Link to={`/profile/${info.seller._id}`}>
                   <h5>البائع: {info.seller.userName}</h5>
                 </Link>
-                <h2>{info.name}</h2>
+               
                 <h4>{info.price} ر.س</h4>
                 {info.Quantity > 0 ? (
                   <>
