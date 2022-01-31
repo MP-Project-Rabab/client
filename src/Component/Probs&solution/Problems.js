@@ -131,10 +131,15 @@ const Problems = () => {
 
   return (
     <div className="problem">
-      <h3 className="add-product">
-        <BsPatchPlus className="add" onClick={handleClickOpen} />
-        أضف بوست
-      </h3>
+      {state.signIn.token ? (
+        <h3 className="add-product">
+          <BsPatchPlus className="add" onClick={handleClickOpen} />
+          أضف بوست
+        </h3>
+      ) : (
+        <></>
+      )}
+
       {state.postReducer.posts.length === 0 ? (
         <h2>لا يوجد بوستات</h2>
       ) : (

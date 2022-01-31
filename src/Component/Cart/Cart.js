@@ -189,7 +189,7 @@ const Cart = () => {
                           <IconButton onClick={(ev) => inc(info._id)}>
                             <BsPlus />
                           </IconButton>
-                          <h5 key={order[0]._id}>{order[0].Quantity}</h5>
+                          {/* <h5 key={order[0]._id}>{order[0].Quantity}</h5> */}
 
                           <IconButton onClick={dec}>
                             <BiMinus />
@@ -209,24 +209,26 @@ const Cart = () => {
               </TableBody>
             </Table>
           </TableContainer>
-          <Link to="/products" className="continue">
             <Button
               variant="outlined"
               color="success"
               style={{ marginRight: "54rem", marginTop: "3rem" }}
+              className="continue"
             >
+          <Link to="/store">
               متابعة التسوق
-            </Button>
           </Link>
-          <Link to="/products" className="check">
+            </Button>
             <Button
               variant="outlined"
               color="success"
-              style={{ marginRight: "4rem", marginTop: "3rem" }}
+              style={{ marginRight: "1rem", marginTop: "3rem" }}
+              className="check"
             >
-              متابعة الدفع
-            </Button>
+          <Link to="/products">
+            متابعة عملية الدفع
           </Link>
+            </Button>
         </>
       )}
     </>
