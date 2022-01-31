@@ -93,7 +93,7 @@ const Header = () => {
 
   return (
     <AppBar
-      position="static"
+      position="sticky"
       sx={{
         background: "white",
         color: "black",

@@ -9,19 +9,20 @@
     height: fit-content;
 } */
 
-.continue {
-    width: 10rem;
+.continue a, .check a {
+    width: 6rem;
     border-radius: 10px;
+    font-size: 15px;
+    color: #78b176;
     /* background: #000; */
 }
 
 
-.cart-card {
+/* .cart-card {
 display: flex;
 justify-content: space-evenly;
-/* background: rgb(216, 33, 33); */
 width: 40rem;
-}
+} */
 
 
 .cart-card img {

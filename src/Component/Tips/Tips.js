@@ -107,10 +107,15 @@ const Tips = () => {
     <div className="tips">
       <img src={nature2} alt="" className="nature" />
       <h2 className="h2">ستجد هنا كل ماتود معرفته عن طرق العنايه بنباتاتك</h2>
-      <h3 className="add-product">
-        <BsPatchPlus className="add" onClick={handleClickOpen} />
-        أضف بوست
-      </h3>
+      {state.signIn.token ? (
+        <h3 className="add-product">
+          <BsPatchPlus className="add" onClick={handleClickOpen} />
+          أضف بوست
+        </h3>
+      ) : (
+        <></>
+      )}
+
       <Container sx={{ py: 8 }} maxWidth="md">
         {state.postReducer.posts.length === 0 ? (
           <h2>لا يوجد بوستات</h2>

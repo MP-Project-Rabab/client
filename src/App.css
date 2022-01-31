@@ -13,12 +13,10 @@
 }
 
 @media screen and (max-width: 600px){
-  .App {
-    background: rgb(241, 141, 141);
-  }
+  
 
   .leaf {
-    height: 30rem;
+    height: 26rem;
     width: 100%;
   }
 }
