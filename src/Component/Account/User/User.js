@@ -6,6 +6,7 @@ import {
   TextField,
   DialogContent,
   DialogActions,
+  DialogTitle,
   Dialog,
   Button,
   Table,
@@ -29,6 +30,7 @@ const User = () => {
     allUser();
   }, []);
   const [open, setOpen] = useState(false);
+  const [alert, setAlert] = useState(false);
   const state = useSelector((state) => {
     return state;
   });
@@ -50,10 +52,10 @@ const User = () => {
       console.log(error);
     }
   };
-  const deleteUser = async (id) => {
+  const deleteUser = async () => {
     try {
       const result = await axios.delete(
-        `${process.env.REACT_APP_BASE_URL}/user/delete?_id=${id}`,
+        `${process.env.REACT_APP_BASE_URL}/user/delete?_id=${userId}`,
 
         {
           headers: {
@@ -65,6 +67,7 @@ const User = () => {
     } catch (error) {
       console.log(error);
     }
+    setAlert(false);
     allUser();
   };
 
@@ -98,18 +101,29 @@ const User = () => {
     allUser();
     setOpen(false);
   };
+
+  // Confirmation Alert for deleting user
+  const alertOpen = (id) => {
+    setAlert(true);
+    setUserId(id);
+  };
+
+  const alertClose = () => {
+    setAlert(false);
+  };
   return (
     <div className="users">
       <TableContainer
         component={Paper}
         style={{
           width: "auto",
+          height: "40rem",
           padding: "7px",
           margin: "auto",
         }}
       >
         <h1 className="h11">قائمة المستخدمين</h1>
-        <Table sx={{ minWidth: 650 }} aria-label="simple table">
+        <Table stickyHeader sx={{ minWidth: 650 }} aria-label="sticky table">
           <TableHead>
             <TableRow>
               <TableCell align="right"></TableCell>
@@ -151,7 +165,7 @@ const User = () => {
                         color="error"
                         component="span"
                         className="delete-icon"
-                        onClick={() => deleteUser(user._id)}
+                        onClick={() => alertOpen(user._id)}
                       >
                         <IoTrashOutline />
                       </IconButton>
@@ -163,6 +177,27 @@ const User = () => {
         </Table>
       </TableContainer>
 
+      {/* Confirmation Alert for deleting user */}
+      <Dialog
+        open={alert}
+        onClose={alertClose}
+        aria-labelledby="alert-dialog-title"
+        aria-describedby="alert-dialog-description"
+      >
+        <DialogTitle id="alert-dialog-title">
+          {"هل أنت متأكد من حذف هذا المستخدم؟"}
+        </DialogTitle>
+        <DialogActions>
+          <Button color="error" onClick={deleteUser}>
+            حذف
+          </Button>
+          <Button onClick={alertClose} autoFocus>
+            تراجع
+          </Button>
+        </DialogActions>
+      </Dialog>
+      {/* END */}
+      {/* Dialog form to change userType */}
       <Dialog open={open} onClose={handleClose}>
         <DialogContent>
           <TextField

@@ -68,13 +68,14 @@ const Product = () => {
         component={Paper}
         style={{
           width: "auto",
+          height: "40rem",
           padding: "7px",
           margin: "auto",
           marginTop: "1rem",
         }}
         >
         <h1 className="h11">قائمة المنتجات</h1>
-        <Table sx={{ minWidth: 650 }} aria-label="simple table">
+        <Table stickyHeader sx={{ minWidth: 650 }} aria-label="sticky table">
           <TableHead>
             <TableRow>
               <TableCell align="right">المنتج</TableCell>
@@ -108,7 +109,7 @@ const Product = () => {
                         component="span"
                         onClick={() => approved(item._id)}
                       >
-                       يعتمد
+                       موافقة
                       </Button>
                     </TableCell>
                   </TableRow>

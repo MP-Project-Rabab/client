@@ -12,11 +12,10 @@ function TabPanel(props) {
 
   return (
     <div
-      component="div"
       role="tabpanel"
       hidden={value !== index}
-      id={`vertical-tabpanel-${index}`}
-      aria-labelledby={`vertical-tab-${index}`}
+      id={`simple-tabpanel-${index}`}
+      aria-labelledby={`simple-tab-${index}`}
       {...other}
     >
       {value === index && (
@@ -36,8 +35,8 @@ TabPanel.propTypes = {
 
 function a11yProps(index) {
   return {
-    id: `vertical-tab-${index}`,
-    "aria-controls": `vertical-tabpanel-${index}`,
+    id: `simple-tab-${index}`,
+    "aria-controls": `simple-tabpanel-${index}`,
   };
 }
 
@@ -49,36 +48,30 @@ const Dashboard = () => {
   };
 
   return (
-    <div>
-      <Box
-        sx={{
-          flexGrow: 1,
-          bgcolor: "background.paper",
-          height: 324,
-          mt: "5rem",
-        }}
-      >
-        <Tabs
-          value={value}
-          onChange={handleChange}
-          sx={{ borderRight: 1, borderColor: "divider" }}
-          centered
-        >
-          <Tab label="منشورات تحتاج للموافقه" {...a11yProps(0)} />
-          <Tab label="منتجات تحتاج للموافقه" {...a11yProps(1)} />
-          <Tab label="المستخدمين" {...a11yProps(2)} />
-        </Tabs>
-        <TabPanel value={value} index={0}>
-          <Posts />
-        </TabPanel>
-        <TabPanel value={value} index={1}>
-          <Product />
-        </TabPanel>
-        <TabPanel value={value} index={2}>
-          <User />
-        </TabPanel>
-      </Box>
-    </div>
+    <Box
+      sx={{
+        width: "100%",
+        // bgcolor: "black",
+        mt: "5rem",
+        height: 90,
+      }}
+    >
+      <Tabs value={value} onChange={handleChange} centered>
+        <Tab label="منشورات تحتاج للموافقه" {...a11yProps(0)} />
+        <Tab label="منتجات تحتاج للموافقه" {...a11yProps(1)} />
+        <Tab label="المستخدمين" {...a11yProps(2)} />
+      </Tabs>
+
+      <TabPanel value={value} index={0}>
+        <Posts />
+      </TabPanel>
+      <TabPanel value={value} index={1}>
+        <Product />
+      </TabPanel>
+      <TabPanel value={value} index={2}>
+        <User />
+      </TabPanel>
+    </Box>
   );
 };
 
