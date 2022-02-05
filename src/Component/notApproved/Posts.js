@@ -63,13 +63,13 @@ const Posts = () => {
         component={Paper}
         style={{
           width: "auto",
+          height: "40rem",
           padding: "7px",
           margin: "auto",
-          marginTop: "13rem",
         }}
         >
         <h1 className="h11">قائمة البوستات</h1>
-        <Table sx={{ minWidth: 650 }} aria-label="simple table">
+        <Table stickyHeader sx={{ minWidth: 650 }} aria-label="sticky table">
           <TableHead>
             <TableRow>
               <TableCell align="right"></TableCell>
@@ -100,7 +100,7 @@ const Posts = () => {
                         component="span"
                         onClick={() => postApprove(item._id)}
                       >
-                       يعتمد
+                       موافقة
                       </Button>
                     </TableCell>
                   </TableRow>

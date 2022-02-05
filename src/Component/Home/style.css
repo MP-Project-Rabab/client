@@ -114,7 +114,6 @@
   align-items: center;
   position: relative;
   height: 100vh;
-  /* background: #000; */
 }
 
 .section4 h1 {
@@ -130,10 +129,6 @@
   width: 16rem;
   border-radius: 92px 92px 0px 0px / 81px 81px 0px 0px;
   padding: 8px;
-  /* position: absolute;
-  right: 45%;
-  bottom: 22.6%; */
-  /* box-shadow: rgb(38, 57, 77) 0px 20px 30px -10px; */
 }
 
 .box3 {
@@ -161,7 +156,7 @@
 
   .p1 {
     font-size: 25px;
-    width: 300px;
+    width: 20rem;
   }
 
   .section2 {
@@ -243,5 +238,10 @@
 
   .section4 {
     height: 100vh;
+  }
+
+  .section4 p {
+    width: 25rem;
+    text-align: center;
   }
 }
