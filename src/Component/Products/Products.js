@@ -255,7 +255,7 @@ const Products = () => {
     <>
       {MyComponent()}
 
-      <div className="products">
+      <Container sx={{p: 4, py: 8 }}>
         <Snackbar
           open={snackBar}
           autoHideDuration={3000}
@@ -269,78 +269,89 @@ const Products = () => {
             تم إضافة المنتج للسلة!
           </Alert>
         </Snackbar>
+        <Grid container spacing={4}>
+          {state.productsReducer.products.length &&
+            state.productsReducer.products.map((info) => {
+              return (
+      
+                <div key={info._id} className="products-card">
+                  {/* show the products that belong to the seller if is not deleted */}
+                  {info.seller.isDeleted === false ? (
+                    <>
+                      {/* show the delete bttn if the products belong to the seller or if it is admin */}
+                      {state.signIn.id === info.seller._id ||
+                      state.signIn.userType === "admin" ? (
+                        <IconButton
+                          color="error"
+                          component="span"
+                          className="delete"
+                          onClick={() => deleteProducts(info._id)}
+                        >
+                          <CgCloseO />
+                        </IconButton>
+                      ) : (
+                        <></>
+                      )}
+                      {/* End */}
+                      <img src={info.img} alt="" />
+                      {/* show the Edit bttn if the products belong to the seller */}
+                      {state.signIn.id === info.seller._id ? (
+                        <IconButton
+                          color="primary"
+                          aria-label="upload picture"
+                          component="span"
+                          onClick={() => handleUpdateOpen(info._id)}
+                        >
+                          <FiEdit3 />
+                        </IconButton>
+                      ) : (
+                        <></>
+                      )}
+                      {/* End */}
+                      <Rating
+                        name="half-rating"
+                        defaultValue={0}
+                        precision={0.5}
+                        className="rate"
+                        onClick={() => addRate(info._id)}
+                        onChange={(ev) =>
+                          setRates({ ...rates, rate: ev.target.defaultValue })
+                        }
+                      />
+                      <h2>{info.name}</h2>
+                      <Link to={`/profile/${info.seller._id}`}>
+                        <h5>البائع: {info.seller.userName}</h5>
+                      </Link>
 
-        {state.productsReducer.products.length &&
-          state.productsReducer.products.map((info) => {
-            return (
-              <div key={info._id} className="products-card">
-                {state.signIn.id === info.seller._id ||
-                state.signIn.userType === "admin" ? (
-                  <IconButton
-                    color="error"
-                    component="span"
-                    className="delete"
-                    onClick={() => deleteProducts(info._id)}
-                  >
-                    <CgCloseO />
-                  </IconButton>
-                ) : (
-                  <></>
-                )}
-
-                <img src={info.img} alt="" />
-                {state.signIn.id === info.seller._id ? (
-                  <IconButton
-                    color="primary"
-                    aria-label="upload picture"
-                    component="span"
-                    onClick={() => handleUpdateOpen(info._id)}
-                  >
-                    <FiEdit3 />
-                  </IconButton>
-                ) : (
-                  <></>
-                )}
-                
-                <Rating
-                  name="half-rating"
-                  defaultValue={0}
-                  precision={0.5}
-                  className="rate"
-                  onClick={() => addRate(info._id)}
-                  onChange={(ev) =>
-                    setRates({ ...rates, rate: ev.target.defaultValue })
-                  }
-                />
-                 <h2>{info.name}</h2>
-                <Link to={`/profile/${info.seller._id}`}>
-                  <h5>البائع: {info.seller.userName}</h5>
-                </Link>
-               
-                <h4>{info.price} ر.س</h4>
-                {info.Quantity > 0 ? (
-                  <>
-                    <h5 className="green">متوفر</h5>
-                    <button
-                      className="bttn"
-                      onClick={() => addToCart(info._id)}
-                    >
-                      <BsCartPlusFill />
-                      أضف للسله
-                    </button>
-                  </>
-                ) : (
-                  <>
-                    <h5 className="red">غير متوفر</h5>
-                    <button className="disabled-bttn" disabled>
-                      <BsCartPlusFill />
-                      أضف للسله
-                    </button>
-                  </>
-                )}
-              </div>
-            );
-          })}
+                      <h4>{info.price} ر.س</h4>
+                      {info.Quantity > 0 ? (
+                        <>
+                          <h5 className="green">متوفر</h5>
+                          <button
+                            className="bttn"
+                            onClick={() => addToCart(info._id)}
+                          >
+                            <BsCartPlusFill />
+                            أضف للسله
+                          </button>
+                        </>
+                      ) : (
+                        <>
+                          <h5 className="red">غير متوفر</h5>
+                          <button className="disabled-bttn" disabled>
+                            <BsCartPlusFill />
+                            أضف للسله
+                          </button>
+                        </>
+                      )}
+                    </>
+                  ) : (
+                    <></>
+                  )}
+                </div>
+              );
+            })}
+        </Grid>
         {state.signIn.userType === "seller" ? (
           <h3 className="add-product">
             <BsPatchPlus className="add" onClick={handleClickOpen} />
@@ -465,7 +476,7 @@ const Products = () => {
           </DialogContent>
         </Dialog>
         {/* End */}
-      </div>
+      </Container>
     </>
   );
 };

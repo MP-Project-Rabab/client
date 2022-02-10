@@ -15,7 +15,6 @@ import {
   Container,
 } from "@mui/material";
 import FileBase from "react-file-base64";
-import { CgCloseO } from "react-icons/cg";
 
 // End of import all dependencies
 import "./style.css";
@@ -119,6 +118,7 @@ const Post = () => {
         }
       );
       setcomment(result.data);
+      console.log(result.data);
     } catch (error) {
       console.log(error);
     }
@@ -199,24 +199,41 @@ const Post = () => {
                 comments.map((info, i) => {
                   return (
                     <div key={i} className="comment">
-                     <div className="userName">
-                     <img
-                        src={info.userId.avatar}
-                        alt=""
-                        className="comment-avatar"
-                      />
-                      <h5>{info.userId.userName}</h5>
-                     </div>
-                      <h6>{info.date}</h6>
-                      <h4>{info.comment}</h4>
-                      {state.signIn.id === info.userId._id ||
-                      state.signIn.userType === "admin" ? (
-                        <CgCloseO onClick={() => deleteComment(info._id)} />
-                      ) : (
-                        <></>
-                      )}
+                      <div className="userName">
+                        <img
+                          src={info.userId.avatar}
+                          alt=""
+                          className="comment-avatar"
+                        />
+                        <h5>{info.userId.userName}</h5>
+                        <h6>{info.date}</h6>
+                      </div>
+                      <h4>
+                        {info.comment}
 
-                      
+                        {state.signIn.id === info.userId._id ||
+                        state.signIn.userType === "admin" ? (
+                          <Button
+                            variant="outlined"
+                            color="error"
+                            sx={{ marginRight: "1rem" }}
+                            // className="delete-btn"
+                            onClick={() => deleteComment(info._id)}
+                          >
+                            حذف
+                          </Button>
+                        ) : (
+                          <></>
+                        )}
+                        <Button
+                          variant="outlined"
+                          sx={{ marginRight: "1rem" }}
+                          // className="edit-btn"
+                          onClick={() => updateComment(info._id)}
+                        >
+                          تعديل
+                        </Button>
+                      </h4>
                     </div>
                   );
                 })}
@@ -225,33 +242,33 @@ const Post = () => {
         </Box>
         {state.signIn.id ? (
           <>
-          <textarea
-          name=""
-          id=""
-          cols="30"
-          rows="10"
-          className="textarea"
-          defaultValue={comment}
-          placeholder="اكتب تعلقيك هنا"
-          onChange={(ev) => setcomment(ev.target.value)}
-        ></textarea>
-        <button onClick={() => addComment(post._id)} className="comment-bttn">
-          اضف تعليق
-        </button>
+            <textarea
+              name=""
+              id=""
+              cols="30"
+              rows="10"
+              className="textarea"
+              defaultValue={comment}
+              placeholder="اكتب تعلقيك هنا"
+              onChange={(ev) => setcomment(ev.target.value)}
+            ></textarea>
+            <button
+              onClick={() => addComment(post._id)}
+              className="comment-bttn"
+            >
+              اضف تعليق
+            </button>
           </>
         ) : (
           <>
-          <h1>
-         لإضافة تعليق سجل
-            <Link to="/login" className="register">
-           الدخول
-          </Link>
-          </h1>
+            <h1>
+              لإضافة تعليق سجل
+              <Link to="/login" className="register">
+                الدخول
+              </Link>
+            </h1>
           </>
-        )
-
-        }
-        
+        )}
       </Box>
 
       {/* To open a form For updating post */}
@@ -265,6 +282,7 @@ const Post = () => {
             }
           />
           <TextField
+            fullWidth
             margin="dense"
             id="name"
             name="name"
@@ -275,6 +293,7 @@ const Post = () => {
           />
 
           <TextField
+            fullWidth
             id="standard-textarea"
             label=""
             placeholder="Placeholder"

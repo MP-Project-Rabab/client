@@ -52,6 +52,7 @@ const User = () => {
       console.log(error);
     }
   };
+
   const deleteUser = async () => {
     try {
       const result = await axios.delete(
@@ -63,6 +64,7 @@ const User = () => {
           },
         }
       );
+      console.log(result.data);
       setUsers(result.data);
     } catch (error) {
       console.log(error);
