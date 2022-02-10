@@ -213,26 +213,28 @@ const Post = () => {
 
                         {state.signIn.id === info.userId._id ||
                         state.signIn.userType === "admin" ? (
-                          <Button
-                            variant="outlined"
-                            color="error"
-                            sx={{ marginRight: "1rem" }}
-                            // className="delete-btn"
-                            onClick={() => deleteComment(info._id)}
-                          >
-                            حذف
-                          </Button>
+                          <>
+                            <Button
+                              variant="outlined"
+                              color="error"
+                              sx={{ marginRight: "1rem" }}
+                              // className="delete-btn"
+                              onClick={() => deleteComment(info._id)}
+                            >
+                              حذف
+                            </Button>
+                            <Button
+                              variant="outlined"
+                              sx={{ marginRight: "1rem" }}
+                              // className="edit-btn"
+                              onClick={() => updateComment(info._id)}
+                            >
+                              تعديل
+                            </Button>
+                          </>
                         ) : (
                           <></>
                         )}
-                        <Button
-                          variant="outlined"
-                          sx={{ marginRight: "1rem" }}
-                          // className="edit-btn"
-                          onClick={() => updateComment(info._id)}
-                        >
-                          تعديل
-                        </Button>
                       </h4>
                     </div>
                   );
