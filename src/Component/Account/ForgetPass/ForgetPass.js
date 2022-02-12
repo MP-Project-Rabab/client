@@ -9,14 +9,13 @@ const ForgetPass = () => {
   const [email, setEmail] = useState("");
   const [msg, setMsg] = useState("");
   const forgetPass = async () => {
-    console.log(email);
     try {
+       // eslint-disable-next-line
       const result = await axios.put(
         `${process.env.REACT_APP_BASE_URL}/user/forget`,
         { email }
       );
 
-      console.log(result);
       setMsg("Check your Email for resetting your passowrd");
     } catch (error) {
       console.log(error);

@@ -28,7 +28,7 @@ const Post = () => {
   });
   const [comments, setComments] = useState({});
   const [user, setUser] = useState({});
-  const [comment, setcomment] = useState("");
+  const [comment, setComment] = useState("");
   const [post, setPost] = useState({
     img: "",
     desc: "",
@@ -42,6 +42,14 @@ const Post = () => {
     setValue(newValue);
   };
 
+  // Editing Comment
+  const [isEditing, setIsEditing] = useState(false);
+  const editingInput = (id) => {
+    setIsEditing(id);
+  };
+  const [text, setText] = useState(comment);
+  // End
+
   const onePost = async () => {
     try {
       const result = await axios.get(
@@ -53,9 +61,9 @@ const Post = () => {
           },
         }
       );
-
       setPost(result.data);
       setComments(result.data.commentes);
+      setComment(result.data.commentes.comment);
       setUser(result.data.user);
     } catch (error) {
       console.log(error);
@@ -78,8 +86,8 @@ const Post = () => {
         }
       );
 
-      setcomment(result.data);
-      setcomment("");
+      setComment(result.data);
+      setComment("");
     } catch (error) {
       console.log(error);
     }
@@ -98,18 +106,18 @@ const Post = () => {
           },
         }
       );
-      setcomment(result.data);
+      setComment(result.data);
     } catch (error) {
       console.log(error);
     }
     onePost();
   };
-  // delete comment function
-  // eslint-disable-next-line
+  // update comment function
+
   const updateComment = async (id) => {
     try {
       const result = await axios.put(
-        `${process.env.REACT_APP_BASE_URL}/comments/update?_id=${id}&comment=${comment}`,
+        `${process.env.REACT_APP_BASE_URL}/comments/update?_id=${id}&comment=${text}`,
 
         {
           headers: {
@@ -117,8 +125,9 @@ const Post = () => {
           },
         }
       );
-      setcomment(result.data);
+      setComment(result.data);
       console.log(result.data);
+      setIsEditing(false);
     } catch (error) {
       console.log(error);
     }
@@ -208,34 +217,61 @@ const Post = () => {
                         <h5>{info.userId.userName}</h5>
                         <h6>{info.date}</h6>
                       </div>
-                      <h4>
-                        {info.comment}
-
-                        {state.signIn.id === info.userId._id ||
-                        state.signIn.userType === "admin" ? (
-                          <>
-                            <Button
-                              variant="outlined"
-                              color="error"
-                              sx={{ marginRight: "1rem" }}
-                              // className="delete-btn"
-                              onClick={() => deleteComment(info._id)}
-                            >
-                              حذف
-                            </Button>
-                            <Button
-                              variant="outlined"
-                              sx={{ marginRight: "1rem" }}
-                              // className="edit-btn"
-                              onClick={() => updateComment(info._id)}
-                            >
-                              تعديل
-                            </Button>
-                          </>
-                        ) : (
-                          <></>
-                        )}
-                      </h4>
+                      {/* Editing Comment */}
+                      {isEditing ? (
+                        <div style={{ display: "flex", alignItems: "center" }}>
+                          <TextField
+                            multiline
+                            variant="standard"
+                            defaultValue={info.comment}
+                            onChange={(e) => setText(e.target.value)}
+                          />
+                          <Button
+                            size="small"
+                            onClick={() => setIsEditing(false)}
+                          >
+                            تراجع
+                          </Button>
+                          <Button
+                            size="small"
+                            onClick={() => updateComment(info._id)}
+                          >
+                            حفظ
+                          </Button>
+                        </div>
+                      ) : (
+                        <h4>
+                          {info.comment}
+                          {state.signIn.id === info.userId._id ||
+                          state.signIn.userType === "admin" ? (
+                            <>
+                              <Button
+                                variant="outlined"
+                                color="error"
+                                sx={{ marginRight: "1rem" }}
+                                // className="delete-btn"
+                                onClick={() => deleteComment(info._id)}
+                              >
+                                حذف
+                              </Button>
+                              <Button
+                                variant="outlined"
+                                sx={{ marginRight: "1rem" }}
+                                // className="edit-btn"
+                                onClick={(e) => {
+                                  setIsEditing(true);
+                                  console.log(info._id);
+                                }}
+                                // onClick={() => updateComment(info._id)}
+                              >
+                                تعديل
+                              </Button>
+                            </>
+                          ) : (
+                            <></>
+                          )}
+                        </h4>
+                      )}
                     </div>
                   );
                 })}
@@ -252,7 +288,7 @@ const Post = () => {
               className="textarea"
               defaultValue={comment}
               placeholder="اكتب تعلقيك هنا"
-              onChange={(ev) => setcomment(ev.target.value)}
+              onChange={(ev) => setComment(ev.target.value)}
             ></textarea>
             <button
               onClick={() => addComment(post._id)}

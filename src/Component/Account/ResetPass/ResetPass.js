@@ -3,18 +3,18 @@ import axios from "axios";
 import TextField from "@mui/material/TextField";
 import Button from "@mui/material/Button";
 const ResetPass = () => {
-  const [Password, setPass] = useState("");
+  const [password, setPassword] = useState("");
 
   const passReset = async () => {
-    console.log(Password);
+    console.log(password);
     try {
       const result = await axios.get(
         `${process.env.REACT_APP_BASE_URL}/user/reset-pass/:res-token`,
-        { Password }
+        { password }
       );
       console.log(result.data);
       //   navigate("/")
-      setPass("Password has been reset");
+      // setPassword("Password has been reset");
     } catch (error) {
       console.log(error);
     }
@@ -28,8 +28,8 @@ const ResetPass = () => {
         type="password"
         autoComplete="current-password"
         variant="standard"
-        value={Password.Password}
-        onChange={(ev) => setPass(ev.target.value)}
+        value={password.Password}
+        onChange={(ev) => setPassword(ev.target.value)}
       />
 
       <Button appearance="primary" onClick={passReset}>
