@@ -44,6 +44,7 @@ const Post = () => {
 
   // Editing Comment
   const [isEditing, setIsEditing] = useState(false);
+  // eslint-disable-next-line 
   const editingInput = (id) => {
     setIsEditing(id);
   };
