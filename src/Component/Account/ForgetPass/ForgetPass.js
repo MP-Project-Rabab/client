@@ -11,7 +11,7 @@ const ForgetPass = () => {
   const forgetPass = async () => {
     try {
        // eslint-disable-next-line
-      const result = await axios.put(
+      const result = await axios.post(
         `${process.env.REACT_APP_BASE_URL}/user/forget`,
         { email }
       );

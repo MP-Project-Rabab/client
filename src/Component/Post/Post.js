@@ -168,6 +168,15 @@ const Post = () => {
     setOpen(false);
   };
 
+  let date = comments.date
+  console.log(date);
+  // countdown date
+  const countdownD = new Date ();
+  // Get current date 
+  const nowDate = new Date();
+  const distance = countdownD - nowDate;
+  const days = Math.floor(distance / (1000 * 60 * 60 * 24));
+
   return (
     <Container component="div" className="one-post">
       <Box
@@ -300,12 +309,12 @@ const Post = () => {
           </>
         ) : (
           <>
-            <h1>
-              لإضافة تعليق سجل
-              <Link to="/login" className="register">
+            <h3 style={{color: "green"}}>
+             لإضافة تعليق يجب عليك تسجيل
+              <Link to="/login" className="register" style={{color: "white"}}>
                 الدخول
               </Link>
-            </h1>
+            </h3>
           </>
         )}
       </Box>

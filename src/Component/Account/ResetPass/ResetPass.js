@@ -1,16 +1,28 @@
 import React, { useState } from "react";
+import { useParams } from "react-router-dom";
+
 import axios from "axios";
-import TextField from "@mui/material/TextField";
-import Button from "@mui/material/Button";
+import { useSelector } from "react-redux";
+import {TextField, Button} from "@mui/material";
 const ResetPass = () => {
   const [password, setPassword] = useState("");
+  let { id } = useParams();
+  const state = useSelector((state) => {
+    return state;
+  });
+  // console.log(id);
 
   const passReset = async () => {
     console.log(password);
     try {
-      const result = await axios.get(
-        `${process.env.REACT_APP_BASE_URL}/user/reset-pass/:res-token`,
-        { password }
+      const result = await axios.put(
+        `${process.env.REACT_APP_BASE_URL}/user/reset-pass/${id}`,
+        { password },
+        {
+          headers: {
+            Authorization: `Bearer ${id}`,
+          },
+        }
       );
       console.log(result.data);
       //   navigate("/")

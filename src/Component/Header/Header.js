@@ -35,7 +35,7 @@ const Header = () => {
   let userType = localStorage.getItem("userType");
   const navigate = useNavigate();
   useEffect(() => {
-    userInfo();
+    // userInfo();
     log();
   }, []);
 
@@ -64,6 +64,7 @@ const Header = () => {
   let userid = localStorage.getItem("id");
   const log = () => {
     if (userid) {
+    userInfo();
       setIsLog(true);
     } else {
       setIsLog(false);
@@ -73,6 +74,7 @@ const Header = () => {
     localStorage.clear();
     setIsLog(false);
   };
+  // eslint-disable-next-line
   const userInfo = async () => {
     try {
       const result = await axios.get(
