@@ -7,6 +7,7 @@ import {TextField, Button} from "@mui/material";
 const ResetPass = () => {
   const [password, setPassword] = useState("");
   let { id } = useParams();
+  // eslint-disable-next-line
   const state = useSelector((state) => {
     return state;
   });

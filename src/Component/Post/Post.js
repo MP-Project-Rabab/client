@@ -171,11 +171,11 @@ const Post = () => {
   let date = comments.date
   console.log(date);
   // countdown date
-  const countdownD = new Date ();
+  // const countdownD = new Date ();
   // Get current date 
-  const nowDate = new Date();
-  const distance = countdownD - nowDate;
-  const days = Math.floor(distance / (1000 * 60 * 60 * 24));
+  // const nowDate = new Date();
+  // const distance = countdownD - nowDate;
+  // const days = Math.floor(distance / (1000 * 60 * 60 * 24));
 
   return (
     <Container component="div" className="one-post">
