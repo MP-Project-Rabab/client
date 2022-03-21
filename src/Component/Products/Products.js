@@ -18,11 +18,7 @@ import {
   Rating,
   IconButton,
   Snackbar,
-  // eslint-disable-next-line
   Container,
-  // eslint-disable-next-line
-  Box,
-  // eslint-disable-next-line
   Grid,
 } from "@mui/material";
 import MuiAlert from "@mui/material/Alert";
@@ -214,7 +210,7 @@ const Products = () => {
         {
           user: state.signIn.id,
           orders: id,
-          totalPrice: 44,
+          totalPrice: "",
         },
         {
           headers: {
@@ -255,7 +251,7 @@ const Products = () => {
     <>
       {MyComponent()}
 
-      <Container sx={{p: 4, py: 8 }}>
+      <Container sx={{ p: 4, py: 8 }}>
         <Snackbar
           open={snackBar}
           autoHideDuration={3000}
@@ -273,7 +269,6 @@ const Products = () => {
           {state.productsReducer.products.length &&
             state.productsReducer.products.map((info) => {
               return (
-      
                 <div key={info._id} className="products-card">
                   {/* show the products that belong to the seller if is not deleted */}
                   {info.seller.isDeleted === false ? (

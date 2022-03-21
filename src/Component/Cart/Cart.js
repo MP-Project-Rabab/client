@@ -16,7 +16,6 @@ import {
   TableRow,
   Paper,
   Box,
-  
 } from "@mui/material";
 // eslint-disable-next-line
 import Item from "./Item";
@@ -25,7 +24,7 @@ import "./style.css";
 
 const Cart = () => {
   const [cart, setCart] = useState([]);
-  const [quantity, setQuantity] = useState();
+  const [quantity, setQuantity] = useState(Number);
   const [order, setOrder] = useState({});
   // const [loading, setLoading] = useState(false)
   useEffect(() => {
@@ -112,6 +111,7 @@ const Cart = () => {
     getOrder();
   };
 
+  //  delete Order from the cart function
   const deleteOrder = async (id) => {
     try {
       // eslint-disable-next-line
@@ -127,12 +127,14 @@ const Cart = () => {
       console.log(error);
     }
   };
-
+  console.log(order);
+  // increase the Quantity of the order
   const inc = (id) => {
-    console.log(order);
     setOrder({ ...order, Quantity: order[0].Quantity + 1 });
     updateOrder(id);
   };
+
+  // decrease the Quantity of the order
   const dec = () => {
     setQuantity(quantity - 1);
     console.log(quantity);
@@ -162,6 +164,7 @@ const Cart = () => {
                   <TableCell align="right">السعر</TableCell>
                   <TableCell align="right">الكمية</TableCell>
                   <TableCell align="right">المجموع</TableCell>
+                  <TableCell align="right"></TableCell>
                 </TableRow>
               </TableHead>
               <TableBody>
@@ -189,46 +192,45 @@ const Cart = () => {
                           <IconButton onClick={(ev) => inc(info._id)}>
                             <BsPlus />
                           </IconButton>
-                          {/* <h5 key={order[0]._id}>{order[0].Quantity}</h5> */}
+                          <h5 key={order[0]._id}>{order[0].Quantity}</h5>
 
-                          <IconButton onClick={dec}>
+                          <IconButton onClick={() => dec(info._id)}>
                             <BiMinus />
                           </IconButton>
                         </TableCell>
 
                         <TableCell align="right">{info.price}</TableCell>
-                        <IconButton
-                          onClick={() => deleteItem(info._id)}
-                          className="delete-icon"
-                        >
-                          <IoTrashOutline />
-                        </IconButton>
+                        <TableCell align="right">
+                          <IconButton
+                            onClick={() => deleteItem(info._id)}
+                            className="delete-icon"
+                            color="error"
+                          >
+                            <IoTrashOutline />
+                          </IconButton>
+                        </TableCell>
                       </TableRow>
                     );
                   })}
               </TableBody>
             </Table>
           </TableContainer>
-            <Button
-              variant="outlined"
-              color="success"
-              style={{ marginRight: "54rem", marginTop: "3rem" }}
-              className="continue"
-            >
-          <Link to="/store">
-              متابعة التسوق
-          </Link>
-            </Button>
-            <Button
-              variant="outlined"
-              color="success"
-              style={{ marginRight: "1rem", marginTop: "3rem" }}
-              className="check"
-            >
-          <Link to="/products">
-            متابعة عملية الدفع
-          </Link>
-            </Button>
+          <Button
+            variant="outlined"
+            color="success"
+            style={{ marginRight: "54rem", marginTop: "3rem" }}
+            className="continue"
+          >
+            <Link to="/store">متابعة التسوق</Link>
+          </Button>
+          <Button
+            variant="outlined"
+            color="success"
+            style={{ marginRight: "1rem", marginTop: "3rem" }}
+            className="check"
+          >
+            <Link to="/products">متابعة عملية الدفع</Link>
+          </Button>
         </>
       )}
     </>

@@ -30,10 +30,10 @@ width: 40rem;
     height: 8rem;
 }
 
+
+.cart-card h5 {
+    text-align: center;
+}
 .delete-icon {
     font-size: 1.7rem;
-    position: absolute;
-    top: 63px;
-    /* padding-top: 2.1em; */
-    /* cursor: pointer; */
 }
