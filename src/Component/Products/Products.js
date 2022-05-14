@@ -15,6 +15,7 @@ import {
   DialogContent,
   DialogActions,
   Dialog,
+  // eslint-disable-next-line
   Rating,
   IconButton,
   Snackbar,
@@ -42,6 +43,7 @@ const Products = () => {
   // ///////////
   useEffect(() => {
     allProducts();
+    cartInfo();
   }, []);
   const state = useSelector((state) => {
     return state;
@@ -52,8 +54,9 @@ const Products = () => {
   const [productId, setProductId] = useState("");
   // eslint-disable-next-line
   const [sellerId, setSellerId] = useState({});
+  const [cartId, setCartId] = useState();
   const [snackBar, setSnackBar] = useState(false);
-
+  // eslint-disable-next-line
   const [rates, setRates] = useState({
     rate: 0,
     productId: "",
@@ -159,6 +162,7 @@ const Products = () => {
   };
 
   // Add rate to product function
+  // eslint-disable-next-line
   const addRate = async (id) => {
     try {
       const result = await axios.post(
@@ -222,6 +226,25 @@ const Products = () => {
       console.log(error);
     }
   };
+
+  const cartInfo = async () => {
+    try {
+      const result = await axios.get(
+        `${process.env.REACT_APP_BASE_URL}/user/profile?_id=${state.signIn.id}`,
+
+        {
+          headers: {
+            Authorization: `Bearer ${state.signIn.token}`,
+          },
+        }
+      );
+
+      setCartId(result.data.cart[0]._id);
+      // console.log(result.data.cart[0]._id);
+    } catch (error) {
+      console.log(error);
+    }
+  };
   const handleSnackBarClose = (event, reason) => {
     if (reason === "clickaway") {
       return;
@@ -247,11 +270,12 @@ const Products = () => {
     setUpdate(false);
   };
 
+  
   return (
     <>
       {MyComponent()}
 
-      <Container sx={{ p: 4, py: 8 }}>
+      <Container sx={{ p: 3, py: 10 }}>
         <Snackbar
           open={snackBar}
           autoHideDuration={3000}
@@ -288,7 +312,9 @@ const Products = () => {
                         <></>
                       )}
                       {/* End */}
-                      <img src={info.img} alt="" />
+                      <div className="products-img">
+                        <img src={info.img} alt="" />
+                      </div>
                       {/* show the Edit bttn if the products belong to the seller */}
                       {state.signIn.id === info.seller._id ? (
                         <IconButton
@@ -303,7 +329,7 @@ const Products = () => {
                         <></>
                       )}
                       {/* End */}
-                      <Rating
+                      {/* <Rating
                         name="half-rating"
                         defaultValue={0}
                         precision={0.5}
@@ -312,7 +338,7 @@ const Products = () => {
                         onChange={(ev) =>
                           setRates({ ...rates, rate: ev.target.defaultValue })
                         }
-                      />
+                      /> */}
                       <h2>{info.name}</h2>
                       <Link to={`/profile/${info.seller._id}`}>
                         <h5>البائع: {info.seller.userName}</h5>
@@ -322,13 +348,21 @@ const Products = () => {
                       {info.Quantity > 0 ? (
                         <>
                           <h5 className="green">متوفر</h5>
-                          <button
-                            className="bttn"
-                            onClick={() => addToCart(info._id)}
-                          >
-                            <BsCartPlusFill />
-                            أضف للسله
-                          </button>
+                          
+                          {cartId && info._id === cartId ? (
+                            <button className="disabled-bttn" disabled>
+                              <BsCartPlusFill />
+                              تم إضافة المنتج للسله
+                            </button>
+                          ) : (
+                            <button
+                              className="bttn"
+                              onClick={() => addToCart(info._id)}
+                            >
+                              <BsCartPlusFill />
+                              أضف للسله
+                            </button>
+                          )}
                         </>
                       ) : (
                         <>

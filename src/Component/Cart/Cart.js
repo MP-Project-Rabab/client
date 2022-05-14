@@ -127,7 +127,7 @@ const Cart = () => {
       console.log(error);
     }
   };
-  console.log(order);
+  
   // increase the Quantity of the order
   const inc = (id) => {
     setOrder({ ...order, Quantity: order[0].Quantity + 1 });

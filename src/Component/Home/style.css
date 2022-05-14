@@ -147,6 +147,11 @@
 }
 
 @media screen and (max-width: 600px) {
+
+  .home {
+    position: relative;
+    overflow: hidden;
+  }
   .section1 {
     display: flex;
     flex-direction: column;
@@ -169,8 +174,9 @@
   .section2 h1 {
     font-size: 18px;
     top: 100%;
-    right: -29%;
+    right: -36%;
     /* word-wrap: break-word; */
+    /* text-align: center; */
   }
   .section2 p {
     padding-top: 17rem;
