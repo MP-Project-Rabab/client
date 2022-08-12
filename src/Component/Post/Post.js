@@ -214,7 +214,8 @@ const Post = () => {
               </TabList>
             </Box>
             <TabPanel value="1">
-              {comments.length &&
+              {comments.length === 0 ? <h3>لا يوجد تعليقات</h3> : (
+                comments.length &&
                 comments.map((info, i) => {
                   return (
                     <div key={i} className="comment">
@@ -284,7 +285,8 @@ const Post = () => {
                       )}
                     </div>
                   );
-                })}
+                })
+              )}
             </TabPanel>
           </TabContext>
         </Box>

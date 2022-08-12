@@ -99,7 +99,7 @@ const Header = () => {
       sx={{
         background: "white",
         color: "black",
-        boxShadow: "rgba(0, 0, 0, 0.35) 0px 5px 15px",
+        boxShadow: "none",
         height:"fit-content",
       }}
     >

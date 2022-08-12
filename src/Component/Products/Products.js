@@ -41,13 +41,17 @@ const Alert = React.forwardRef(function Alert(props, ref) {
 });
 const Products = () => {
   // ///////////
-  useEffect(() => {
-    allProducts();
-    cartInfo();
-  }, []);
+
   const state = useSelector((state) => {
     return state;
   });
+
+  useEffect(() => {
+    allProducts();
+    if (state.signIn.token) {
+      cartInfo();
+    }
+  }, []);
   // All useStates
   const [open, setOpen] = useState(false);
   const [update, setUpdate] = useState(false);
@@ -239,7 +243,7 @@ const Products = () => {
         }
       );
 
-      setCartId(result.data.cart[0]._id);
+      setCartId(result.data.cart._id);
       // console.log(result.data.cart[0]._id);
     } catch (error) {
       console.log(error);
@@ -270,7 +274,6 @@ const Products = () => {
     setUpdate(false);
   };
 
-  
   return (
     <>
       {MyComponent()}
@@ -348,8 +351,8 @@ const Products = () => {
                       {info.Quantity > 0 ? (
                         <>
                           <h5 className="green">متوفر</h5>
-                          
-                          {cartId && info._id === cartId ? (
+
+                          {info._id === cartId ? (
                             <button className="disabled-bttn" disabled>
                               <BsCartPlusFill />
                               تم إضافة المنتج للسله
